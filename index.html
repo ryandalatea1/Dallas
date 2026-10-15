@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dalas Marketing — Sites, sistemas e tráfego que vendem</title>
+    <meta
+      name="description"
+      content="Agência de marketing e tecnologia. Criação de sites, painéis, sistemas sob medida e gestão de tráfego para marcas que querem crescer."
+    />
+    <meta name="theme-color" content="#03150c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dalas Marketing" />
+    <meta property="og:description" content="Sites, painéis, sistemas e tráfego para marcas que querem crescer." />
+    <meta property="og:image" content="https://ryandalatea1.github.io/Dallas/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Abertura -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <img class="preloader__logo" id="preloader-logo" src="./images/logo-full.png" alt="" width="845" height="760" />
+      <div class="preloader__meta">
+        <span class="preloader__count" id="preloader-count">0</span>
+        <span class="preloader__bar"><i id="preloader-bar"></i></span>
+      </div>
+    </div>
+
+    <!-- Cursor -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+      <div class="cursor__dot"></div>
+      <div class="cursor__ring"></div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Navegação -->
+    <header class="nav" id="nav">
+      <a class="nav__brand" href="#inicio" aria-label="Dalas Marketing, voltar ao início">
+        <img class="nav__mark" src="./images/logo-mark.png" alt="" width="533" height="495" />
+        <span class="nav__word">Dalas<small>Marketing</small></span>
+      </a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#processo">Como funciona</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="pill" id="nav-cta" href="#contato" data-magnetic><i class="pill__dot"></i>Fale conosco</a>
+        <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="menu" aria-hidden="true">
+      <nav class="menu__links" aria-label="Menu">
+        <a href="#processo">Como funciona</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <p class="menu__foot">Dalas Marketing. Sites, painéis, sistemas e tráfego.</p>
+    </div>
+
+    <main>
+      <!-- Abertura do site -->
+      <section class="hero" id="inicio">
+        <canvas class="hero__gl" id="hero-gl" aria-hidden="true"></canvas>
+        <img class="hero__fallback" src="./images/hero.webp" alt="" aria-hidden="true" />
+        <canvas class="hero__particles" id="hero-particles" aria-hidden="true"></canvas>
+
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">
+            <span class="line">Transformamos</span>
+            <span class="line">cliques em</span>
+            <span class="line">clientes.</span>
+          </h1>
+          <ul class="hero__captions" aria-label="O que a Dalas faz">
+            <li>Criação de sites</li>
+            <li>Painéis e sistemas</li>
+            <li>Gestão de tráfego</li>
+          </ul>
+          <p class="hero__lede">
+            Agência de marketing e tecnologia. Construímos sites, painéis e sistemas sob medida, e colocamos
+            sua marca na frente das pessoas certas.
+          </p>
+          <a class="hero__scroll" href="#processo"><span>Veja como funciona</span><i></i></a>
+        </div>
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marquee-track">
+          <span>Criação de sites</span><i>✦</i>
+          <span>Landing pages</span><i>✦</i>
+          <span>Painéis e dashboards</span><i>✦</i>
+          <span>Sistemas sob medida</span><i>✦</i>
+          <span>Tráfego pago</span><i>✦</i>
+          <span>Automações</span><i>✦</i>
+          <span>Identidade digital</span><i>✦</i>
+        </div>
+      </div>
+
+      <!-- Como funciona -->
+      <section class="section process" id="processo">
+        <div class="process__intro">
+          <p class="kicker">Como a Dalas funciona</p>
+          <h2 class="title" data-reveal>Um caminho claro, do primeiro contato ao resultado.</h2>
+          <p class="lead" data-fade>
+            Todo projeto passa pelas mesmas cinco etapas. Você sabe o que está acontecendo, quando e por quê.
+          </p>
+        </div>
+        <ol class="steps" id="steps">
+          <span class="steps__progress" aria-hidden="true"></span>
+          <li class="step">
+            <span class="step__num">01</span>
+            <div>
+              <h3>Diagnóstico</h3>
+              <p>Entendemos seu negócio, seu público e o que precisa acontecer para você vender mais.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <div>
+              <h3>Estratégia</h3>
+              <p>Definimos o caminho: canais, funil, posicionamento e o que será construído primeiro.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <div>
+              <h3>Criação</h3>
+              <p>Desenhamos e desenvolvemos seu site, painel ou sistema, sob medida e pronto para converter.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">04</span>
+            <div>
+              <h3>Tráfego</h3>
+              <p>Colocamos sua marca na frente das pessoas certas com campanhas no Meta, Google e TikTok.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">05</span>
+            <div>
+              <h3>Escala</h3>
+              <p>Acompanhamos os dados, otimizamos toda semana e ampliamos o que está dando resultado.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Serviços -->
+      <section class="section services" id="servicos">
+        <div class="services__head">
+          <p class="kicker">Serviços</p>
+          <h2 class="title" data-reveal>O que construímos para a sua marca.</h2>
+          <p class="lead" data-fade>Do primeiro pixel à primeira venda, tudo feito pela mesma equipe.</p>
+        </div>
+        <ul class="services__list" id="services-list">
+          <li class="service" data-preview="site">
+            <a class="service__row" href="#contato">
+              <h3 class="service__title">Criação de sites</h3>
+              <p class="service__desc">
+                Landing pages, sites institucionais e lojas. Rápidos, responsivos e feitos para transformar visitas em contato.
+              </p>
+              <span class="service__cta">Quero um site</span>
+            </a>
+          </li>
+          <li class="service" data-preview="painel">
+            <a class="service__row" href="#contato">
+              <h3 class="service__title">Painéis e dashboards</h3>
+              <p class="service__desc">
+                Vendas, leads e campanhas em um só lugar, em tempo real. Decisão com dado, não com achismo.
+              </p>
+              <span class="service__cta">Quero um painel</span>
+            </a>
+          </li>
+          <li class="service" data-preview="sistema">
+            <a class="service__row" href="#contato">
+              <h3 class="service__title">Sistemas sob medida</h3>
+              <p class="service__desc">
+                Automações, CRMs e plataformas internas construídas do jeito que a sua empresa trabalha.
+              </p>
+              <span class="service__cta">Quero um sistema</span>
+            </a>
+          </li>
+          <li class="service" data-preview="trafego">
+            <a class="service__row" href="#contato">
+              <h3 class="service__title">Gestão de tráfego</h3>
+              <p class="service__desc">
+                Meta Ads, Google Ads e TikTok Ads com estratégia, criativos e otimização contínua.
+              </p>
+              <span class="service__cta">Quero mais clientes</span>
+            </a>
+          </li>
+        </ul>
+        <div class="services__preview" id="services-preview" aria-hidden="true"></div>
+      </section>
+
+      <!-- Manifesto -->
+      <section class="section manifesto" aria-label="Nosso jeito">
+        <p class="manifesto__text" id="manifesto">
+          Não entregamos só um site bonito. Entregamos uma máquina de vendas: design que converte, sistemas que
+          organizam e tráfego que traz as pessoas certas até você.
+        </p>
+      </section>
+
+      <!-- Projetos -->
+      <section class="projects" id="projetos">
+        <div class="projects__head">
+          <div>
+            <p class="kicker">Projetos</p>
+            <h2 class="title" data-reveal>Tipos de projeto que entregamos.</h2>
+          </div>
+          <p class="lead" data-fade>Exemplos do que a Dalas constrói. Em breve, cases reais com resultados.</p>
+        </div>
+        <div class="projects__viewport">
+          <div class="projects__track" id="projects-track">
+            <article class="project" data-cursor="Ver">
+              <div class="project__visual" data-mock="site"></div>
+              <h3>Landing page de alta conversão</h3>
+              <p>Página única, rápida, com formulário e integração direta com o WhatsApp.</p>
+            </article>
+            <article class="project" data-cursor="Ver">
+              <div class="project__visual" data-mock="painel"></div>
+              <h3>Painel de vendas em tempo real</h3>
+              <p>Métricas de vendas, leads e campanhas atualizadas automaticamente.</p>
+            </article>
+            <article class="project" data-cursor="Ver">
+              <div class="project__visual" data-mock="sistema"></div>
+              <h3>Sistema de gestão interna</h3>
+              <p>Cadastro, pedidos e equipe em uma plataforma feita para a operação.</p>
+            </article>
+            <article class="project" data-cursor="Ver">
+              <div class="project__visual" data-mock="trafego"></div>
+              <h3>Campanhas de tráfego pago</h3>
+              <p>Criativos, públicos e otimização semanal para reduzir o custo por cliente.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contato -->
+      <section class="section cta" id="contato">
+        <h2 class="cta__title" data-reveal>Vamos construir o próximo nível da sua marca?</h2>
+        <p class="cta__lead" data-fade>Conte o que você precisa. Respondemos rápido e já voltamos com um caminho.</p>
+        <a class="pill pill--lg" id="cta-button" href="#contato" data-magnetic><i class="pill__dot"></i>Iniciar projeto</a>
+        <p class="cta__alt" id="cta-alt"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <img class="footer__logo" src="./images/logo-full.png" alt="Dalas Marketing" width="845" height="760" />
+      <div class="footer__row">
+        <nav class="footer__links" aria-label="Rodapé">
+          <a href="#processo">Como funciona</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <p>© 2026 Dalas Marketing. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
