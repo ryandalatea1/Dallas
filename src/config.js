@@ -2,7 +2,7 @@
 export const siteConfig = {
   // Contato (só números, com DDI e DDD: '5511999999999')
   whatsapp: '',
-  whatsappMessage: 'Olá! Quero iniciar um projeto com a Dallas Marketing.',
+  whatsappMessage: 'Olá! Quero iniciar um projeto com a Dalas Marketing.',
   email: '',
   instagram: '',
 

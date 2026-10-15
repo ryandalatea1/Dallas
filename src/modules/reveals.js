@@ -30,7 +30,8 @@ export function initReveals() {
   });
 
   document.querySelectorAll('[data-words]').forEach((block) => {
-    const split = new SplitText(block.querySelectorAll('p'), { type: 'words', wordsClass: 'word' });
+    const targets = block.matches('p') ? [block] : block.querySelectorAll('p');
+    const split = new SplitText(targets, { type: 'words', wordsClass: 'word' });
     gsap.to(split.words, {
       opacity: 1,
       ease: 'none',

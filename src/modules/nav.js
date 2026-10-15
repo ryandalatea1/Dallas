@@ -1,4 +1,4 @@
-/** Barra fixa: vidro ao rolar, some ao descer, volta ao subir. Menu em tela cheia no mobile. */
+/** Barra fixa: vidro ao rolar, some ao descer, volta ao subir. Menu em tela cheia no celular. */
 export function initNav(lenis) {
   const nav = document.getElementById('nav');
   const burger = document.getElementById('burger');
@@ -28,7 +28,6 @@ export function initNav(lenis) {
   });
   menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
 
-  // Âncoras internas rolam suave pelo Lenis.
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       const id = link.getAttribute('href');
@@ -36,7 +35,7 @@ export function initNav(lenis) {
       const target = document.querySelector(id);
       if (!target) return;
       event.preventDefault();
-      const run = () => lenis.scrollTo(target, { offset: -64, duration: 1.5 });
+      const run = () => lenis.scrollTo(target, { offset: id === '#inicio' ? 0 : -24, duration: 1.4 });
       if (open) {
         setMenu(false);
         setTimeout(run, 150);
