@@ -30,6 +30,8 @@ export const siteConfig = {
       muzzle: { desktop: [0.612, 0.325], mobile: [0.69, 0.33] }, // ponta do focinho (de onde sai o vapor)
       facing: 1, // 1 = o lobo olha para a direita do quadro
       breathEvery: 3.4,
+      // elipse que cobre o corpo do lobo no quadro final (x, y do centro, raio x, raio y; frações, y a partir do topo)
+      wolfMask: { desktop: [0.475, 0.47, 0.2, 0.36], mobile: [0.46, 0.47, 0.5, 0.36] },
     },
     // raios: o primeiro cai junto com o raio do próprio vídeo; os outros, aleatórios
     storm: {

@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
  * Tempestade: raios procedurais (ramificados, com brilho), flash no céu,
  * tremor sutil de câmera e relâmpagos difusos entre um raio e outro.
  */
-export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], reduceMotion = false } = {}) {
+export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], meteors = false, reduceMotion = false } = {}) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return { strike() {}, start() {}, stop() {}, setRunning() {} };
 
@@ -12,8 +12,10 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
   let h = 0;
   let dpr = 1;
   const bolts = [];
+  const stars = [];
   let running = true;
   let scheduled = null;
+  let meteorTimer = null;
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -73,10 +75,70 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
     ctx.stroke();
   }
 
+  function spawnMeteor() {
+    const dir = Math.random() < 0.6 ? 1 : -1;
+    const angle = (0.32 + Math.random() * 0.3) * dir;
+    const speed = (420 + Math.random() * 380) * (w / 1440);
+    stars.push({
+      x: (0.12 + Math.random() * 0.76) * w,
+      y: (0.04 + Math.random() * 0.26) * h,
+      vx: Math.cos(angle) * speed * (dir === 1 ? 1 : -1) * (dir === 1 ? 1 : -1),
+      vy: Math.abs(Math.sin(angle)) * speed,
+      len: 90 + Math.random() * 140,
+      born: performance.now(),
+      life: 650 + Math.random() * 450,
+    });
+  }
+
+  function scheduleMeteor() {
+    meteorTimer = gsap.delayedCall(4 + Math.random() * 7, () => {
+      if (!running) return;
+      spawnMeteor();
+      if (Math.random() < 0.25) gsap.delayedCall(0.35, spawnMeteor);
+      scheduleMeteor();
+    });
+  }
+
   function render() {
     if (!running) return;
     ctx.clearRect(0, 0, w, h);
     const now = performance.now();
+
+    // estrelas cadentes
+    for (let i = stars.length - 1; i >= 0; i -= 1) {
+      const s = stars[i];
+      const t = (now - s.born) / s.life;
+      if (t >= 1) {
+        stars.splice(i, 1);
+        continue;
+      }
+      const x = s.x + (s.vx * (now - s.born)) / 1000;
+      const y = s.y + (s.vy * (now - s.born)) / 1000;
+      const a = Math.sin(Math.PI * t);
+      const mag = Math.hypot(s.vx, s.vy);
+      const tx = x - (s.vx / mag) * s.len * a;
+      const ty = y - (s.vy / mag) * s.len * a;
+      const g = ctx.createLinearGradient(tx, ty, x, y);
+      g.addColorStop(0, 'rgba(255,255,255,0)');
+      g.addColorStop(1, `rgba(255,255,255,${0.9 * a})`);
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 1.6;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(200,225,255,0.9)';
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.fillStyle = `rgba(255,255,255,${a})`;
+      ctx.beginPath();
+      ctx.arc(x, y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
     for (let i = bolts.length - 1; i >= 0; i -= 1) {
       const b = bolts[i];
       const t = (now - b.born) / b.life;
@@ -148,10 +210,16 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
     start() {
       if (scheduled) scheduled.kill();
       schedule();
+      if (meteors && !reduceMotion) {
+        if (meteorTimer) meteorTimer.kill();
+        scheduleMeteor();
+      }
     },
     stop() {
       if (scheduled) scheduled.kill();
       scheduled = null;
+      if (meteorTimer) meteorTimer.kill();
+      meteorTimer = null;
     },
     setRunning(v) {
       running = v;

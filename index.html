@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&family=Marcellus&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Manrope:wght@300;400;500;600;700&family=Sora:wght@200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script type="application/ld+json">
@@ -58,7 +58,7 @@
           <a href="#contato">Contato</a>
         </nav>
         <div class="nav__actions">
-          <a class="btn btn--solid btn--sm" href="#contato" data-magnetic data-whatsapp>
+          <a class="btn btn--solid btn--sm" href="#contato" data-whatsapp>
             <span>Iniciar um projeto</span><i aria-hidden="true">↗</i>
           </a>
           <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
@@ -89,6 +89,7 @@
           <div class="hero__film" id="hero-film">
             <div class="hero__zoom" id="hero-zoom">
               <video class="hero__video" id="wolf-video" muted playsinline preload="auto" aria-hidden="true"></video>
+              <canvas class="hero__living" id="hero-living" aria-hidden="true"></canvas>
               <canvas class="hero__vapor" id="hero-vapor" aria-hidden="true"></canvas>
             </div>
           </div>
@@ -105,8 +106,8 @@
           <p class="hero__tagline" id="hero-tagline">Não seguimos o mercado. Criamos o próximo movimento.</p>
           <p class="hero__lede" id="hero-lede">Sites, sistemas, painéis, tráfego e automações para marcas que querem dominar o digital.</p>
           <div class="hero__actions" id="hero-actions">
-            <a class="btn btn--solid" href="#contato" data-magnetic data-whatsapp><span>Quero transformar minha empresa</span><i aria-hidden="true">↗</i></a>
-            <a class="btn btn--line" href="#solucoes" data-magnetic><span>Explorar nossas soluções</span><i aria-hidden="true">↓</i></a>
+            <a class="btn btn--solid" href="#contato" data-whatsapp><span>Quero transformar minha empresa</span><i aria-hidden="true">↗</i></a>
+            <a class="btn btn--line" href="#solucoes"><span>Explorar nossas soluções</span><i aria-hidden="true">↓</i></a>
           </div>
         </div>
 
@@ -121,172 +122,91 @@
       <div class="page">
         <div class="ticker" aria-hidden="true">
           <div class="ticker__track">
-            <span>Sites</span><i>✦</i>
-            <span>Sistemas</span><i>✦</i>
-            <span>Painéis</span><i>✦</i>
-            <span>Tráfego pago</span><i>✦</i>
-            <span>Automações e IA</span><i>✦</i>
-            <span>Estratégia digital</span><i>✦</i>
+            <span>Sites</span><i></i>
+            <span>Sistemas</span><i></i>
+            <span>Painéis</span><i></i>
+            <span>Tráfego pago</span><i></i>
+            <span>Automações e IA</span><i></i>
+            <span>Estratégia digital</span><i></i>
           </div>
         </div>
 
         <!-- ================= SOBRE ================= -->
-        <section class="section statement" id="sobre">
-          <img class="statement__mark" id="statement-mark" src="./images/logo-mark.png" alt="" aria-hidden="true" />
-          <div class="statement__inner">
-            <p class="kicker">Sobre a Dalas</p>
-            <h2 class="statement__title" data-reveal>
-              Não criamos apenas presença digital.<br />Criamos empresas preparadas para o futuro.
-            </h2>
-            <p class="statement__text" data-words>
-              Estratégia, tecnologia e criatividade em soluções feitas para o seu negócio. Sem fórmulas prontas.
-            </p>
-            <ul class="values" aria-label="O que nos move">
-              <li><span>Estratégia</span></li>
-              <li><span>Tecnologia</span></li>
-              <li><span>Criatividade</span></li>
+        <section class="section about" id="sobre">
+          <img class="about__mark" id="statement-mark" src="./images/logo-mark.png" alt="" aria-hidden="true" />
+          <div class="about__grid">
+            <div class="about__main">
+              <p class="eyebrow">Sobre a Dalas</p>
+              <h2 class="h2" data-reveal>Não criamos apenas presença digital. <em>Criamos empresas preparadas para o futuro.</em></h2>
+              <p class="about__text" data-words>Estratégia, tecnologia e criatividade em soluções feitas para o seu negócio. Sem fórmulas prontas.</p>
+            </div>
+            <ul class="pillars" aria-label="Nosso diferencial">
+              <li class="pillar" data-fade><span class="pillar__num">01</span><h3>Estratégia antes da execução</h3><p>Cada projeto começa pelos objetivos, desafios e oportunidades do negócio.</p></li>
+              <li class="pillar" data-fade><span class="pillar__num">02</span><h3>Tecnologia com propósito</h3><p>Soluções que resolvem problemas reais e criam experiências melhores.</p></li>
+              <li class="pillar" data-fade><span class="pillar__num">03</span><h3>Design que comunica autoridade</h3><p>Interfaces e identidades que valorizam a percepção da marca.</p></li>
+              <li class="pillar" data-fade><span class="pillar__num">04</span><h3>Feito para evoluir</h3><p>Estruturas que acompanham o crescimento da empresa.</p></li>
             </ul>
           </div>
         </section>
 
         <!-- ================= SOLUÇÕES ================= -->
         <section class="section solutions" id="solucoes">
-          <div class="solutions__head">
-            <p class="kicker">Soluções</p>
-            <h2 class="title title--caps" data-reveal>Tudo o que a sua empresa precisa para dominar o digital.</h2>
+          <div class="section__head">
+            <p class="eyebrow">Soluções</p>
+            <h2 class="h2" data-reveal>Tudo o que a sua empresa precisa para <em>dominar o digital.</em></h2>
           </div>
-
-          <div class="acc" id="acc">
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-1">
-                <span class="acc__num">01</span>
-                <span class="acc__name">Sites</span>
-                <span class="acc__line">Seu site não deve apenas existir. Ele precisa impressionar.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-1">
-                <div class="acc__inner">
-                  <p>Sites, landing pages e lojas rápidas, responsivas e feitas para transformar visitantes em clientes.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Explorar desenvolvimento web <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-2">
-                <span class="acc__num">02</span>
-                <span class="acc__name">Sistemas</span>
-                <span class="acc__line">Tecnologia desenvolvida para acompanhar sua ambição.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-2">
-                <div class="acc__inner">
-                  <p>Sistemas sob medida que organizam processos, integram operações e automatizam tarefas.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Conhecer soluções <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-3">
-                <span class="acc__num">03</span>
-                <span class="acc__name">Painéis</span>
-                <span class="acc__line">Transforme informações em decisões inteligentes.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-3">
-                <div class="acc__inner">
-                  <p>Dashboards e painéis de gestão com os indicadores que importam, em tempo real.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Explorar dashboards <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-4">
-                <span class="acc__num">04</span>
-                <span class="acc__name">Tráfego pago</span>
-                <span class="acc__line">Mais do que anúncios. Estratégias para crescer.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-4">
-                <div class="acc__inner">
-                  <p>Campanhas no Meta, Google e TikTok com dados, criativos e otimização contínua.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Acelerar meu negócio <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-5">
-                <span class="acc__num">05</span>
-                <span class="acc__name">Automações e IA</span>
-                <span class="acc__line">Automatize processos. Amplie possibilidades.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-5">
-                <div class="acc__inner">
-                  <p>Fluxos inteligentes e inteligência artificial para operações mais rápidas e eficientes.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Conhecer automações <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="acc__item" data-spot>
-              <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-6">
-                <span class="acc__num">06</span>
-                <span class="acc__name">Estratégia</span>
-                <span class="acc__line">Grandes marcas não surgem por acaso.</span>
-                <span class="acc__plus" aria-hidden="true"></span>
-              </button>
-              <div class="acc__body" id="acc-6">
-                <div class="acc__inner">
-                  <p>Posicionamento, identidade e comunicação para marcas mais relevantes e reconhecidas.</p>
-                  <a class="acc__cta" href="#contato" data-whatsapp>Fortalecer minha marca <i aria-hidden="true">↗</i></a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- ================= DIFERENCIAL ================= -->
-        <section class="section edge" id="diferencial">
-          <p class="kicker">Nosso diferencial</p>
-          <h2 class="title title--caps" data-reveal>O mercado evolui.<br />Sua empresa precisa estar à frente.</h2>
-          <div class="pillars" id="pillars">
-            <svg class="pillars__lines" id="pillars-lines" aria-hidden="true"><path d=""></path></svg>
-            <div class="pillar">
-              <span class="pillar__num">01</span>
-              <h3>Estratégia antes da execução</h3>
-              <p>Cada projeto começa pelos objetivos, desafios e oportunidades do negócio.</p>
-            </div>
-            <div class="pillar">
-              <span class="pillar__num">02</span>
-              <h3>Tecnologia com propósito</h3>
-              <p>Soluções que resolvem problemas reais e criam experiências melhores.</p>
-            </div>
-            <div class="pillar">
-              <span class="pillar__num">03</span>
-              <h3>Design que comunica autoridade</h3>
-              <p>Interfaces e identidades que valorizam a percepção da marca.</p>
-            </div>
-            <div class="pillar">
-              <span class="pillar__num">04</span>
-              <h3>Soluções feitas para evoluir</h3>
-              <p>Estruturas que acompanham o crescimento da empresa.</p>
-            </div>
+          <div class="bento" id="bento">
+            <a class="tile tile--a" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">01</span>
+              <h3>Sites</h3>
+              <p>Seu site não deve apenas existir. Ele precisa impressionar.</p>
+              <span class="tile__go">Quero um site<i aria-hidden="true">↗</i></span>
+            </a>
+            <a class="tile tile--b" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">02</span>
+              <h3>Sistemas</h3>
+              <p>Tecnologia desenvolvida para acompanhar sua ambição.</p>
+              <span class="tile__go">Quero um sistema<i aria-hidden="true">↗</i></span>
+            </a>
+            <a class="tile tile--c" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">03</span>
+              <h3>Painéis</h3>
+              <p>Transforme informações em decisões inteligentes.</p>
+              <span class="tile__go">Quero um painel<i aria-hidden="true">↗</i></span>
+            </a>
+            <a class="tile tile--d" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">04</span>
+              <h3>Tráfego pago</h3>
+              <p>Mais do que anúncios. Estratégias para crescer.</p>
+              <span class="tile__go">Quero mais clientes<i aria-hidden="true">↗</i></span>
+            </a>
+            <a class="tile tile--e" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">05</span>
+              <h3>Automações e IA</h3>
+              <p>Automatize processos. Amplie possibilidades.</p>
+              <span class="tile__go">Quero automatizar<i aria-hidden="true">↗</i></span>
+            </a>
+            <a class="tile tile--f" href="#contato" data-whatsapp data-spot>
+              <span class="tile__orb" aria-hidden="true"></span>
+              <span class="tile__num" aria-hidden="true">06</span>
+              <h3>Estratégia digital</h3>
+              <p>Grandes marcas não surgem por acaso.</p>
+              <span class="tile__go">Quero posicionar minha marca<i aria-hidden="true">↗</i></span>
+            </a>
           </div>
         </section>
 
         <!-- ================= PROCESSO ================= -->
         <section class="section process" id="processo">
           <div class="process__intro">
-            <p class="kicker">Processo de trabalho</p>
-            <h2 class="title title--caps" data-reveal>Da primeira ideia à próxima grande conquista.</h2>
-            <p class="lead" data-fade>
-              Grandes projetos começam com uma visão clara. Planejamento, criatividade, desenvolvimento e evolução
-              contínua, do objetivo à solução.
-            </p>
+            <p class="eyebrow">Processo de trabalho</p>
+            <h2 class="h2" data-reveal>Da primeira ideia à <em>próxima grande conquista.</em></h2>
+            <p class="lead" data-fade>Grandes projetos começam com uma visão clara. Planejamento, criatividade, desenvolvimento e evolução contínua.</p>
           </div>
           <ol class="steps" id="steps">
             <span class="steps__progress" aria-hidden="true"></span>
@@ -302,24 +222,20 @@
         <section class="finale" id="contato">
           <div class="finale__scene" aria-hidden="true">
             <div class="finale__sky"></div>
-            <div class="finale__trees"></div>
-            <div class="finale__wolf" id="finale-wolf">
-              <div class="finale__eyes"><i></i><i></i></div>
-            </div>
-            <div class="finale__fog"><i></i><i></i><i></i><i></i></div>
+            <div class="finale__wolf" id="finale-wolf"></div>
+            <div class="finale__fog"><i></i><i></i><i></i></div>
             <div class="finale__light"></div>
             <canvas class="finale__storm" id="finale-storm"></canvas>
             <div class="finale__flash" id="finale-flash"></div>
           </div>
           <div class="finale__content">
-            <p class="kicker">O próximo movimento</p>
-            <h2 class="title title--caps finale__title" data-reveal>O futuro da sua marca começa com uma decisão.</h2>
+            <p class="eyebrow">O próximo movimento</p>
+            <h2 class="h2 finale__title" data-reveal>O futuro da sua marca começa com <em>uma decisão.</em></h2>
             <div class="finale__text" data-words>
               <p>Enquanto o mercado continua mudando, novas oportunidades surgem para empresas que estão preparadas para evoluir.</p>
-              <p>A Dalas Marketing une estratégia, tecnologia e criatividade para transformar ideias em soluções digitais e ajudar negócios a construir uma presença mais forte, moderna e competitiva.</p>
-              <p>Seu próximo grande projeto pode começar agora.</p>
+              <p>A Dalas une estratégia, tecnologia e criatividade para transformar ideias em soluções digitais e ajudar negócios a construir uma presença mais forte, moderna e competitiva.</p>
             </div>
-            <a class="btn btn--solid btn--lg" id="cta-button" href="#contato" data-magnetic data-whatsapp><span>Vamos construir algo extraordinário</span><i aria-hidden="true">↗</i></a>
+            <a class="btn btn--solid btn--lg" id="cta-button" href="#contato" data-whatsapp><span>Vamos construir algo extraordinário</span><i aria-hidden="true">↗</i></a>
             <p class="finale__alt" id="cta-alt"></p>
           </div>
         </section>

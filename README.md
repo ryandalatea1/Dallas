@@ -31,17 +31,18 @@ A direção da cena fica em `src/config.js` (`timeline`):
 | Textos de todas as seções | `index.html` |
 | Cores, tipografia, espaçamentos | `src/styles/main.css` (bloco `:root`) |
 | Abertura e transição de scroll | `src/main.js` |
-| Raios e vapor | `src/modules/storm.js`, `src/modules/vapor.js` |
+| Raios, estrelas cadentes e vapor | `src/modules/storm.js`, `src/modules/vapor.js` |
+| Quadro vivo (pelos, árvores, nuvens, estrelas) | `src/modules/living.js`; máscara do lobo em `src/config.js` (`wolfMask`) |
 | Logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
 
 Política de privacidade e termos de uso: os links do rodapé apontam para `#` até você ter as páginas.
 
 ## Experiência
 
-- Abertura: o site aparece na hora (marca, frase, botões) com o lobo correndo ao fundo. Raio junto com o olhar, zoom lento no rosto, vapor da respiração, novos raios de tempos em tempos.
+- Abertura: o site aparece na hora (marca, frase, botões) com o lobo correndo ao fundo. Raio junto com o olhar, zoom lento no rosto e vapor da respiração. O último frame vira um quadro vivo em WebGL: pelos ao vento, árvores balançando, nuvens respirando, estrelas piscando, estrelas cadentes e novos raios de tempos em tempos.
 - Scroll: o lobo fica preso ao fundo e a página desliza por cima dele, enquanto ele aproxima e escurece.
-- Faixa com os serviços, declaração da marca com o símbolo em parallax, soluções em lista tipográfica (abre ao passar o mouse), diferenciais ligados por uma linha de luz, processo em linha do tempo, chamada final com o lobo encarando e tempestade ao longe, rodapé com DALAS em grande escala.
-- Luz que acompanha o cursor, linha de progresso no topo, botões magnéticos, menu em tela cheia no celular.
+- Faixa com os serviços, Sobre com os quatro diferenciais ao lado, soluções em grade bento com luz que segue o cursor, processo em linha do tempo, chamada final com o lobo encarando e tempestade ao longe, rodapé com DALAS em grande escala.
+- Luz que acompanha o cursor, linha de progresso no topo, menu em tela cheia no celular. Tipografia: Sora nos títulos, Manrope no texto, Cinzel só na marca. Paleta azul-noite e prata.
 - Performance: só canvases 2D durante o hero, tudo pausado fora da tela, sem WebGL por padrão, `prefers-reduced-motion` respeitado.
 
 ## Publicação

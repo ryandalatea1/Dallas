@@ -12,12 +12,10 @@ import { initVapor } from './modules/vapor.js';
 import { initAmbience } from './modules/ambience.js';
 import { initNav } from './modules/nav.js';
 import { initReveals } from './modules/reveals.js';
-import { initEdge } from './modules/edge.js';
 import { initProcess } from './modules/process.js';
-import { initMagnetic } from './modules/magnetic.js';
 import { initSpotlight } from './modules/spotlight.js';
 import { initContact } from './modules/contact.js';
-import { initSolutions } from './modules/solutions.js';
+import { initLiving } from './modules/living.js';
 import { initTicker } from './modules/ticker.js';
 import { initLight } from './modules/light.js';
 
@@ -42,10 +40,8 @@ window.scrollTo(0, 0);
 initContact(siteConfig);
 initNav(lenis);
 initTicker();
-initSolutions();
 initSpotlight();
 initLight(lenis);
-if (finePointer) initMagnetic();
 
 // ---------- abertura ----------
 const hero = document.querySelector('.hero');
@@ -68,8 +64,13 @@ const storm = initStorm(document.getElementById('hero-storm'), {
   shake: film,
   origin: stormOrigin,
   every: T.storm.every,
+  meteors: true,
   reduceMotion,
 });
+const livingCanvas = document.getElementById('hero-living');
+const living = reduceMotion
+  ? null
+  : initLiving(livingCanvas, { video, wolf: pick(T.hold.wolfMask), quality: lowPower ? 'low' : 'high' });
 const vapor = initVapor(document.getElementById('hero-vapor'), { every: T.hold.breathEvery, reduceMotion });
 
 function coverPoint(fx, fy) {
@@ -132,6 +133,11 @@ function hold() {
     ease: 'sine.inOut',
   });
   if (reduceMotion) tl.progress(1).pause();
+  // o último frame vira um quadro vivo: pelos, árvores, nuvens e estrelas em movimento
+  if (living && living.capture()) {
+    livingCanvas.classList.add('is-live');
+    living.start();
+  }
   gsap.delayedCall(0.5, () => vapor.start());
   storm.start();
 }
@@ -212,6 +218,7 @@ function setHeroActive(active) {
   storm.setRunning(active);
   vapor.setRunning(active);
   if (forest) forest.setRunning(active);
+  if (living) living.setRunning(active && holding);
   if (!active) {
     video.pause();
     storm.stop();
@@ -264,15 +271,17 @@ ScrollTrigger.create({
 });
 if (!reduceMotion) {
   gsap.to('#finale-wolf', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '#contato', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.utils.toArray('.tile').forEach((tile, i) => {
+    gsap.from(tile, { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: (i % 3) * 0.08, scrollTrigger: { trigger: tile, start: 'top 90%', once: true } });
+  });
   gsap.to('#statement-mark', { yPercent: 28, rotate: 6, ease: 'none', scrollTrigger: { trigger: '#sobre', start: 'top bottom', end: 'bottom top', scrub: true } });
 }
 
 // ---------- demais seções ----------
 document.fonts.ready.then(() => {
   initReveals();
-  initEdge();
   initProcess();
   ScrollTrigger.refresh();
 });
 window.addEventListener('load', () => ScrollTrigger.refresh());
-window.__dalas = { storm, vapor, forest: null };
+window.__dalas = { storm, vapor, living, forest: null };
