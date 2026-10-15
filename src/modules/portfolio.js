@@ -1,6 +1,4 @@
-import { mockHTML } from './mocks.js';
-
-/** Portfólio: clique abre os detalhes num diálogo nativo, com a mesma miniatura. */
+/** Portfólio: clique abre os detalhes num diálogo nativo, com o mesmo pôster. */
 export function initPortfolio() {
   const modal = document.getElementById('modal');
   if (!modal || typeof modal.showModal !== 'function') return;
@@ -11,14 +9,14 @@ export function initPortfolio() {
   const tech = document.getElementById('modal-tech');
 
   document.querySelectorAll('[data-piece]').forEach((piece) => {
+    const poster = piece.querySelector('.poster');
     const open = () => {
       title.textContent = piece.dataset.title;
       cat.textContent = piece.dataset.cat;
       desc.textContent = piece.dataset.desc;
       tech.textContent = piece.dataset.tech;
-      const mock = piece.querySelector('[data-mock]');
-      visual.innerHTML = mock ? mockHTML(mock.dataset.mock) : '';
-      visual.querySelectorAll('.mock').forEach((m) => m.classList.add('is-active'));
+      visual.innerHTML = '';
+      if (poster) visual.appendChild(poster.cloneNode(true));
       modal.showModal();
       document.documentElement.classList.add('modal-open');
     };
@@ -32,4 +30,19 @@ export function initPortfolio() {
     if (e.target === modal) close();
   });
   modal.addEventListener('close', () => document.documentElement.classList.remove('modal-open'));
+
+  // imagens reais: data-image no article troca o pôster pela foto do projeto
+  document.querySelectorAll('[data-piece][data-image]').forEach((piece) => {
+    const src = piece.dataset.image;
+    if (!src) return;
+    const img = new Image();
+    img.onload = () => {
+      const p = piece.querySelector('.poster');
+      if (p) {
+        p.classList.add('poster--image');
+        p.style.backgroundImage = `url("${src}")`;
+      }
+    };
+    img.src = src;
+  });
 }

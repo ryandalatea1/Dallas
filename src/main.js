@@ -19,7 +19,7 @@ import { initMagnetic } from './modules/magnetic.js';
 import { initSpotlight } from './modules/spotlight.js';
 import { initContact } from './modules/contact.js';
 import { initConstellation } from './modules/constellation.js';
-import { mountMocks } from './modules/mocks.js';
+import { initShowcase } from './modules/showcase.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -38,7 +38,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
 // ---------- estrutura ----------
-mountMocks();
 initContact(siteConfig);
 initNav(lenis);
 initSpotlight();
@@ -131,7 +130,7 @@ if (siteConfig.media.wolfStill) {
 }
 
 // ---------- travessia: o scroll atravessa a floresta até a luz verde ----------
-const pinLength = isMobile ? 130 : 170;
+const pinLength = isMobile ? 140 : 180;
 const travel = gsap.timeline({
   scrollTrigger: {
     trigger: hero,
@@ -140,7 +139,12 @@ const travel = gsap.timeline({
     pin: true,
     scrub: 1,
     anticipatePin: 1,
-    onUpdate: (self) => forest && forest.setProgress(self.progress),
+    onUpdate: (self) => {
+      if (forest) forest.setProgress(self.progress);
+      const gone = self.progress > 0.04;
+      document.getElementById('hero-hint').classList.toggle('is-gone', gone);
+      document.getElementById('sound').classList.toggle('is-gone', gone);
+    },
     onToggle: (self) => {
       if (forest) forest.setRunning(self.isActive);
       if (!self.isActive && hero.classList.contains('has-video')) video.pause();
@@ -148,13 +152,14 @@ const travel = gsap.timeline({
     },
   },
 });
+gsap.set('#hero-clearing', { opacity: 0, scale: 0.94, yPercent: 6 });
 travel
-  .to('#hero-content', { yPercent: -18, opacity: 0, ease: 'power1.in', duration: 0.3 }, 0)
-  .to(['#hero-hint', '#sound'], { opacity: 0, duration: 0.15 }, 0)
+  .to('#hero-content', { yPercent: -18, opacity: 0, ease: 'power1.in', duration: 0.28 }, 0)
   .to(video, { scale: 1.42, xPercent: -14, ease: 'power1.inOut', duration: 0.9 }, 0)
-  .to(video, { opacity: 0, duration: 0.3 }, 0.55)
-  .to('.hero__grade', { opacity: 0.4, duration: 0.5 }, 0.4)
-  .to(curtain, { opacity: 1, duration: 0.3 }, 0.72);
+  .to(video, { opacity: 0, duration: 0.3 }, 0.5)
+  .to('.hero__grade', { opacity: 0.5, duration: 0.5 }, 0.4)
+  .to(curtain, { opacity: 0.72, duration: 0.4 }, 0.55)
+  .to('#hero-clearing', { opacity: 1, scale: 1, yPercent: 0, ease: 'power2.out', duration: 0.3 }, 0.6);
 
 // ---------- demais seções ----------
 document.fonts.ready.then(() => {
@@ -163,6 +168,7 @@ document.fonts.ready.then(() => {
   initEdge();
   initPortfolio();
   initProcess();
+  initShowcase(document.getElementById('showcase'), { reduceMotion, finePointer, quality: lowPower ? 'low' : 'high' });
   const net = document.getElementById('about-net');
   if (net) {
     const about = initConstellation(net, { reduceMotion, finePointer, rgb: '32,232,154', count: lowPower ? 50 : 80, full: true });
