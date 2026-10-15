@@ -311,7 +311,8 @@ button {
 .nav__links a {
   position: relative;
   padding: 6px 0;
-  opacity: 0.82;
+  opacity: 0.9;
+  text-shadow: 0 1px 14px rgba(3, 21, 12, 0.7);
   transition: opacity 0.3s;
 }
 
@@ -1039,7 +1040,7 @@ button {
   inset: 0;
   container-type: size;
   display: flex;
-  padding: 8cqw;
+  padding: 8%;
   overflow: hidden;
   background: linear-gradient(150deg, #0d4224 0%, #061e11 55%, #03150c 100%);
   --ink: rgba(236, 247, 236, 0.85);
@@ -1530,23 +1531,21 @@ button {
   }
 
   .hero__title {
-    font-size: clamp(3rem, 15vw, 6rem);
+    font-size: clamp(2.6rem, 11.5vw, 6rem);
   }
 
   .hero__captions {
     justify-self: start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px 18px;
+    gap: 8px;
     text-align: left;
     font-size: 0.9rem;
     padding-top: 0;
     color: var(--lime-soft);
   }
 
-  .hero__captions li + li::before {
+  .hero__captions li::before {
     content: '✦';
-    margin-right: 18px;
+    margin-right: 10px;
     color: var(--lime);
     font-size: 0.7em;
   }

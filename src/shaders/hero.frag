@@ -99,12 +99,18 @@ void main() {
   // meios-tons vão para o esmeralda, altas luzes para o lima e depois gelo.
   vec3 lit = mix(EMERALD, LIME, smoothstep(0.12, 0.68, l));
   lit = mix(lit, ICE, smoothstep(0.66, 1.0, l));
-  float imgMix = smoothstep(0.05, 0.6, l) * mix(0.4, 1.0, mask);
+  // Fora da silhueta (o corredor da foto) fica só um fantasma esmeralda, para a fumaça mandar.
+  vec3 ghost = mix(FOREST, EMERALD, smoothstep(0.1, 0.9, l));
+  lit = mix(ghost, lit, mask);
+  float imgMix = smoothstep(0.05, 0.6, l) * mix(0.22, 1.0, mask);
   vec3 col = mix(base, lit, imgMix);
 
   // Bordas um pouco mais calmas para o título e as legendas.
   float side = smoothstep(0.0, 0.28, uv.x) * smoothstep(1.0, 0.72, uv.x);
   col = mix(col * 0.72, col, side);
+
+  // Topo mais escuro para a navegação ler bem.
+  col = mix(col, DEEP, smoothstep(0.78, 1.0, uv.y) * 0.72);
 
   // Funde com a página embaixo.
   col = mix(DEEP, col, smoothstep(0.0, 0.3, uv.y));
