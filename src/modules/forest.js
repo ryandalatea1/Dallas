@@ -386,10 +386,20 @@ export function initForest(canvas, { withBackground = true, quality = 'high', re
   scene.add(greenFill);
 
   // ---------- modo ----------
+  // Com o vídeo do lobo, a cena vira só atmosfera por cima: névoa leve e poeira.
   function setVideoMode(hasVideo) {
     background.visible = !hasVideo;
-    farTrees.forEach((t) => {
+    trees.forEach((t) => {
       t.visible = !hasVideo;
+    });
+    rays.forEach((r) => {
+      r.visible = !hasVideo;
+    });
+    leaves.forEach((l) => {
+      l.visible = !hasVideo;
+    });
+    fogs.forEach((f) => {
+      f.userData.base = (f.userData.full || (f.userData.full = f.userData.base)) * (hasVideo ? 0.4 : 1);
     });
   }
   setVideoMode(!withBackground);

@@ -13,21 +13,18 @@ npm run build    # gera dist/
 npm run preview  # testa a build
 ```
 
-## O lobo: o que depende de você
+## O lobo
 
-O lobo hiper-realista (correndo, parando e respirando) entra como **vídeo**. O player já está pronto; basta colocar os arquivos em `public/media/`:
+O vídeo do lobo já está incluído em `public/media/` (`wolf-intro.mp4` em 1080p, `wolf-intro-mobile.mp4` na vertical, pôsteres e `wolf-still.jpg` com o olhar final). Para trocar por outro vídeo, basta substituir os arquivos mantendo os nomes, ou apontar novos caminhos em `src/config.js`.
 
-| Arquivo | O que é |
-| --- | --- |
-| `wolf-intro.mp4` | 16:9, 10 a 12 s. Floresta noturna, o lobo corre em direção à câmera, para, olha e respira (vapor). H.264, 1080p ou 4K, sem áudio. |
-| `wolf-intro-mobile.mp4` | 9:16, mesma sequência enquadrada na vertical. |
-| `wolf-poster.jpg` | Primeiro frame, usado enquanto o vídeo carrega (opcional). |
-| `wolf-still.jpg` | Lobo parado na névoa, para a chamada final (opcional). |
-| `ambience.mp3` | Vento e floresta. Só toca se o visitante clicar em "Som ambiente" (opcional). |
+A direção da cena fica em `src/config.js` (`timeline`):
 
-Em `src/config.js`, ajuste os tempos do vídeo: `brandAt` (segundo em que o nome aparece) e `breathLoop` (trecho da respiração que repete para sempre).
+- `brandAt`: segundo do vídeo em que o lobo para e a marca aparece.
+- `hold`: depois do fim do vídeo, a câmera avança devagar no rosto dele (`zoom`, `duration`) e o vapor da respiração sai do focinho (`muzzle`, `breathEvery`). As posições são frações do quadro do vídeo.
+- `storm`: o primeiro raio cai no mesmo instante do raio do vídeo (`firstStrikeAt`); depois, raios aleatórios entre `every` segundos, com flash no céu e tremor sutil de câmera.
+- `ambience.mp3` (opcional): vento e trovão ao longe, ativado só pelo visitante.
 
-Enquanto os vídeos não existem, a abertura roda só com a floresta em WebGL (céu estrelado, lua, árvores em profundidade, névoa, raios de luar, poeira e folhas) e o nome da marca aparece aos 3 segundos. Nada quebra.
+Se o vídeo não carregar, a abertura roda com a floresta em WebGL e os raios por cima dela.
 
 ## Onde editar
 

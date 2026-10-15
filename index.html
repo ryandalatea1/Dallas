@@ -85,8 +85,15 @@
       <!-- ================= ABERTURA: A FLORESTA E O LOBO ================= -->
       <section class="hero" id="inicio" aria-label="Abertura cinematográfica">
         <div class="hero__stage" id="hero-stage">
-          <video class="hero__video" id="wolf-video" muted playsinline preload="auto" aria-hidden="true"></video>
+          <div class="hero__film" id="hero-film">
+            <div class="hero__zoom" id="hero-zoom">
+              <video class="hero__video" id="wolf-video" muted playsinline preload="auto" aria-hidden="true"></video>
+              <canvas class="hero__vapor" id="hero-vapor" aria-hidden="true"></canvas>
+            </div>
+          </div>
           <canvas class="hero__scene" id="forest" aria-hidden="true"></canvas>
+          <canvas class="hero__storm" id="hero-storm" aria-hidden="true"></canvas>
+          <div class="hero__flash" id="hero-flash" aria-hidden="true"></div>
           <div class="hero__fog" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="hero__grade" aria-hidden="true"></div>
           <div class="hero__curtain" id="hero-curtain" aria-hidden="true"></div>
@@ -392,6 +399,8 @@
           </div>
           <div class="finale__fog"><i></i><i></i><i></i><i></i></div>
           <div class="finale__light"></div>
+          <canvas class="finale__storm" id="finale-storm"></canvas>
+          <div class="finale__flash" id="finale-flash"></div>
         </div>
         <div class="finale__content">
           <p class="kicker">O próximo movimento</p>

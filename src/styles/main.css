@@ -521,14 +521,52 @@ button {
   inset: 0;
 }
 
+.hero__film,
+.hero__zoom {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.hero__zoom {
+  transform-origin: var(--face-x, 59%) var(--face-y, 27%);
+}
+
 .hero__video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 1.2s;
-  transform-origin: 55% 50%;
-  will-change: transform, opacity;
+}
+
+.hero__vapor,
+.hero__storm {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__vapor {
+  mix-blend-mode: normal;
+}
+
+/* flash do raio: nasce no ponto do céu onde ele caiu */
+.hero__flash {
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    55% 45% at var(--fx, 80%) var(--fy, 25%),
+    rgba(225, 240, 255, 0.95),
+    rgba(170, 210, 255, 0.35) 38%,
+    rgba(120, 180, 255, 0.08) 60%,
+    transparent 78%
+  );
 }
 
 .hero.has-video .hero__video {
@@ -751,6 +789,10 @@ button {
   to {
     top: 100%;
   }
+}
+
+.sound[hidden] {
+  display: none;
 }
 
 .sound {
@@ -1447,12 +1489,14 @@ button {
 
 .finale__wolf.has-still {
   background-size: cover;
-  background-position: center;
-  width: clamp(320px, 46vw, 760px);
+  background-position: 62% 30%;
+  right: -4vw;
+  bottom: 0;
+  width: clamp(380px, 60vw, 980px);
   aspect-ratio: 16 / 10;
-  -webkit-mask-image: radial-gradient(65% 65% at 50% 55%, #000 40%, transparent 100%);
-  mask-image: radial-gradient(65% 65% at 50% 55%, #000 40%, transparent 100%);
-  opacity: 0.85;
+  -webkit-mask-image: radial-gradient(60% 75% at 56% 50%, #000 36%, transparent 100%);
+  mask-image: radial-gradient(60% 75% at 56% 50%, #000 36%, transparent 100%);
+  opacity: 0.95;
 }
 
 /* o lobo observa da névoa: dois olhos que piscam devagar */
@@ -1526,6 +1570,21 @@ button {
 
 .finale__light {
   background: radial-gradient(40% 45% at 72% 72%, rgba(0, 168, 107, 0.28), transparent 70%);
+}
+
+.finale__storm {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+.finale__flash {
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(45% 45% at var(--fx, 86%) var(--fy, 50%), rgba(200, 230, 255, 0.7), rgba(120, 180, 255, 0.12) 50%, transparent 75%);
 }
 
 .finale__content {
@@ -2019,9 +2078,13 @@ button {
   }
 
   .finale__wolf.has-still {
-    width: 100%;
-    right: 0;
-    bottom: 42%;
+    top: 6%;
+    bottom: auto;
+    right: -10%;
+    width: 120%;
+    aspect-ratio: 16 / 10;
+    background-position: 62% 30%;
+    opacity: 0.8;
   }
 
   .footer__grid {
