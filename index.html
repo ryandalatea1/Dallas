@@ -2,55 +2,62 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dalas Marketing — Sites, sistemas e tráfego que vendem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Dallas Marketing — Estratégia, tecnologia e crescimento</title>
     <meta
       name="description"
-      content="Agência de marketing e tecnologia. Criação de sites, painéis, sistemas sob medida e gestão de tráfego para marcas que querem vender mais."
+      content="Dallas Marketing: sites, sistemas, painéis, tráfego pago, automações e estratégia digital para transformar negócios em marcas fortes, modernas e competitivas."
     />
-    <meta name="theme-color" content="#050506" />
+    <meta name="theme-color" content="#050807" />
+    <link rel="canonical" href="https://ryandalatea1.github.io/Dallas/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Dalas Marketing" />
-    <meta property="og:description" content="Do clique à venda. Sites, painéis, sistemas e tráfego para marcas que querem crescer." />
+    <meta property="og:site_name" content="Dallas Marketing" />
+    <meta property="og:title" content="Dallas Marketing — Não seguimos o mercado. Criamos o próximo movimento." />
+    <meta property="og:description" content="Sites, sistemas, painéis, tráfego pago, automações e estratégia digital para empresas preparadas para o futuro." />
     <meta property="og:image" content="https://ryandalatea1.github.io/Dallas/og.jpg" />
+    <meta property="og:locale" content="pt_BR" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&family=Marcellus&display=swap"
       rel="stylesheet"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Dallas Marketing",
+        "url": "https://ryandalatea1.github.io/Dallas/",
+        "logo": "https://ryandalatea1.github.io/Dallas/apple-touch-icon.png",
+        "description": "Soluções digitais: sites, sistemas, painéis, tráfego pago, automações e estratégia digital.",
+        "areaServed": "BR"
+      }
+    </script>
   </head>
   <body>
-    <!-- Abertura -->
-    <div class="preloader" id="preloader" aria-hidden="true">
-      <img class="preloader__logo" id="preloader-logo" src="./images/logo-full.png" alt="" width="960" height="820" />
-      <div class="preloader__meta">
-        <span class="preloader__count" id="preloader-count">0</span>
-        <span class="preloader__bar"><i id="preloader-bar"></i></span>
-      </div>
-    </div>
-
+    <a class="skip" href="#sobre">Pular a abertura</a>
     <div class="grain" aria-hidden="true"></div>
 
     <!-- Navegação -->
     <header class="nav" id="nav">
       <div class="nav__bar">
-        <a class="nav__brand" href="#inicio" aria-label="Dalas Marketing, voltar ao início">
+        <a class="nav__brand" href="#inicio" aria-label="Dallas Marketing, voltar ao início">
           <img class="nav__mark" src="./images/logo-mark.png" alt="" width="590" height="540" />
-          <span class="nav__word">Dalas</span>
+          <span class="nav__word">Dallas<small>Marketing</small></span>
         </a>
         <nav class="nav__links" aria-label="Principal">
-          <a href="#processo">Como funciona</a>
-          <a href="#servicos">Serviços</a>
+          <a href="#inicio">Início</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#solucoes">Soluções</a>
           <a href="#projetos">Projetos</a>
           <a href="#contato">Contato</a>
         </nav>
         <div class="nav__actions">
-          <a class="btn btn--light" id="nav-cta" href="#contato" data-magnetic>
-            Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
+          <a class="btn btn--solid btn--sm" id="nav-cta" href="#contato" data-magnetic data-whatsapp>
+            <span>Iniciar um projeto</span><i aria-hidden="true">↗</i>
           </a>
           <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
             <span></span><span></span>
@@ -61,249 +68,370 @@
 
     <div class="menu" id="menu" aria-hidden="true">
       <nav class="menu__links" aria-label="Menu">
-        <a href="#processo">Como funciona</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#contato">Contato</a>
+        <a href="#inicio"><small>01</small>Início</a>
+        <a href="#sobre"><small>02</small>Sobre</a>
+        <a href="#solucoes"><small>03</small>Soluções</a>
+        <a href="#projetos"><small>04</small>Projetos</a>
+        <a href="#contato"><small>05</small>Contato</a>
       </nav>
-      <p class="menu__foot">Dalas Marketing. Sites, painéis, sistemas e tráfego.</p>
+      <div class="menu__foot">
+        <a class="btn btn--solid" href="#contato" data-whatsapp><span>Iniciar um projeto</span><i aria-hidden="true">↗</i></a>
+        <p>Inteligência, estratégia e tecnologia para transformar negócios.</p>
+      </div>
     </div>
 
     <main>
-      <!-- Primeira dobra -->
-      <section class="hero" id="inicio">
-        <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
-        <canvas class="hero__3d" id="hero-3d" aria-hidden="true"></canvas>
-        <div class="hero__glow" aria-hidden="true"></div>
-
-        <div class="hero__content">
-          <h1 class="hero__title" id="hero-title">
-            <span class="line line--light">Do clique</span>
-            <span class="line line--bold">à venda.</span>
-          </h1>
-          <p class="hero__lede">
-            Sites, painéis, sistemas e tráfego pago, feitos pela mesma equipe para transformar atenção em clientes.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--light btn--lg" href="#contato" data-magnetic>
-              Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
-            </a>
-            <a class="btn btn--ghost btn--lg" href="#processo">
-              Ver como funciona<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></i>
-            </a>
-          </div>
-          <p class="hero__flow" aria-hidden="true">Anúncio → Site → WhatsApp → Painel → Venda</p>
+      <!-- ================= ABERTURA: A FLORESTA E O LOBO ================= -->
+      <section class="hero" id="inicio" aria-label="Abertura cinematográfica">
+        <div class="hero__stage" id="hero-stage">
+          <video class="hero__video" id="wolf-video" muted playsinline preload="auto" aria-hidden="true"></video>
+          <canvas class="hero__scene" id="forest" aria-hidden="true"></canvas>
+          <div class="hero__fog" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="hero__grade" aria-hidden="true"></div>
+          <div class="hero__curtain" id="hero-curtain" aria-hidden="true"></div>
+          <div class="hero__bars" aria-hidden="true"><i></i><i></i></div>
         </div>
 
-        <ul class="hero__chips" id="hero-chips" aria-label="O caminho do cliente até a venda">
-          <li class="chip" style="--x: 57%; --y: 16%">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/></svg>Anúncio no Meta
-          </li>
-          <li class="chip" style="--x: 83%; --y: 31%">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M2 6h12"/></svg>Visita no site
-          </li>
-          <li class="chip" style="--x: 64%; --y: 50%">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v8H6l-3 2.5z"/></svg>Lead no WhatsApp
-          </li>
-          <li class="chip" style="--x: 86%; --y: 67%">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13V8M8 13V4M13 13V7"/></svg>Painel atualizado
-          </li>
-          <li class="chip chip--done" style="--x: 61%; --y: 85%">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="m5.5 8 2 2 3.5-4"/></svg>Venda fechada
-          </li>
-        </ul>
+        <div class="hero__content" id="hero-content">
+          <p class="hero__kicker"><span>Soluções digitais</span><span>Estratégia</span><span>Crescimento</span></p>
+          <h1 class="hero__brand" id="hero-brand"><span class="w">Dallas</span> <span class="w w--thin">Marketing</span></h1>
+          <p class="hero__tagline" id="hero-tagline">Não seguimos o mercado. Criamos o próximo movimento.</p>
+          <p class="hero__text" id="hero-text">
+            Transformamos ideias em experiências digitais, negócios em marcas de autoridade e estratégias em resultados
+            reais. Unimos tecnologia, criatividade e inteligência para construir o futuro da sua empresa.
+          </p>
+          <div class="hero__actions" id="hero-actions">
+            <a class="btn btn--solid" href="#contato" data-magnetic data-whatsapp><span>Quero transformar minha empresa</span><i aria-hidden="true">↗</i></a>
+            <a class="btn btn--line" href="#solucoes" data-magnetic><span>Explorar nossas soluções</span><i aria-hidden="true">↓</i></a>
+          </div>
+        </div>
+
+        <div class="hero__hint" id="hero-hint" aria-hidden="true"><i></i><span>Role para entrar na floresta</span></div>
+        <button class="sound" id="sound" type="button" aria-pressed="false" hidden>
+          <i aria-hidden="true"><b></b><b></b><b></b><b></b></i><span>Som ambiente</span>
+        </button>
+        <div class="hero__black" id="hero-black" aria-hidden="true"></div>
       </section>
 
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track" id="marquee-track">
-          <span>Criação de sites</span><i>✦</i>
-          <span>Landing pages</span><i>✦</i>
-          <span>Painéis e dashboards</span><i>✦</i>
-          <span>Sistemas sob medida</span><i>✦</i>
-          <span>Meta Ads</span><i>✦</i>
-          <span>Google Ads</span><i>✦</i>
-          <span>Automações</span><i>✦</i>
-          <span>CRM</span><i>✦</i>
+      <!-- ================= SOBRE ================= -->
+      <section class="section about" id="sobre">
+        <canvas class="about__net" id="about-net" aria-hidden="true"></canvas>
+        <div class="about__inner">
+          <p class="kicker">Sobre a Dallas</p>
+          <h2 class="title title--caps" data-reveal>
+            Não criamos apenas presença digital.<br />Criamos empresas preparadas para o futuro.
+          </h2>
+          <div class="about__text" data-words>
+            <p>
+              Em um mercado onde todos disputam atenção, destacar-se deixou de ser uma opção e se tornou uma
+              necessidade. Na Dallas Marketing, combinamos estratégia, tecnologia e criatividade para desenvolver
+              soluções que vão muito além do convencional.
+            </p>
+            <p>
+              Não acreditamos em fórmulas prontas ou estratégias iguais para negócios diferentes. Cada empresa possui
+              sua própria identidade, seus desafios e seu potencial de crescimento.
+            </p>
+            <p>
+              Por isso, desenvolvemos experiências digitais personalizadas, sistemas inteligentes e estratégias de
+              marketing orientadas por dados, sempre com um objetivo: transformar oportunidades em crescimento
+              sustentável.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Como funciona -->
+      <!-- ================= SOLUÇÕES ================= -->
+      <section class="section solutions" id="solucoes">
+        <div class="solutions__head">
+          <p class="kicker">Nossas soluções</p>
+          <h2 class="title title--caps" data-reveal>Tudo o que a sua empresa precisa para dominar o digital.</h2>
+          <p class="lead" data-fade>Seis frentes que trabalham juntas. Cada uma com um objetivo claro: fazer a sua marca crescer.</p>
+        </div>
+
+        <div class="cards" id="cards">
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="site"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 14h5"/></svg></i>01 — Desenvolvimento de sites</p>
+              <h3>Seu site não deve apenas existir. Ele precisa impressionar.</h3>
+              <p>
+                Desenvolvemos sites profissionais, landing pages e experiências digitais que combinam design, velocidade,
+                tecnologia e estratégia. Cada detalhe é pensado para transmitir autoridade, fortalecer sua marca e
+                transformar visitantes em oportunidades de negócio.
+              </p>
+              <p>Criamos plataformas modernas, responsivas e personalizadas, preparadas para oferecer uma experiência excepcional em qualquer dispositivo.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Explorar desenvolvimento web <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="sistema"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg></i>02 — Sistemas personalizados</p>
+              <h3>Tecnologia desenvolvida para acompanhar sua ambição.</h3>
+              <p>
+                Transformamos necessidades empresariais em soluções tecnológicas inteligentes. Desenvolvemos sistemas
+                personalizados capazes de organizar processos, integrar operações, automatizar tarefas e proporcionar
+                mais controle sobre o seu negócio.
+              </p>
+              <p>Da ideia inicial à implementação, construímos ferramentas digitais adaptadas à realidade e aos objetivos de cada empresa.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Conhecer soluções <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="painel"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/></svg></i>03 — Painéis e dashboards</p>
+              <h3>Transforme informações em decisões inteligentes.</h3>
+              <p>
+                Criamos painéis administrativos, dashboards interativos e plataformas de gestão que centralizam
+                informações importantes em interfaces intuitivas e modernas.
+              </p>
+              <p>Tenha mais visibilidade sobre indicadores, acompanhe o desempenho da operação e tome decisões com base em informações organizadas e acessíveis.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Explorar dashboards <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="trafego"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg></i>04 — Gestão de tráfego pago</p>
+              <h3>Mais do que anúncios. Estratégias para crescer.</h3>
+              <p>
+                Planejamos, estruturamos e gerenciamos campanhas digitais com foco em alcançar o público certo e gerar
+                oportunidades comerciais.
+              </p>
+              <p>Utilizamos análise de dados, inteligência de mercado, otimização contínua e estratégias de aquisição para ajudar empresas a ampliar sua presença e melhorar seus resultados.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Acelerar meu negócio <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="automacao"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 11l10-4M7 13l10 4"/></svg></i>05 — Automações e inteligência artificial</p>
+              <h3>Automatize processos. Amplie possibilidades.</h3>
+              <p>
+                Desenvolvemos soluções de automação e inteligência artificial para simplificar atividades, melhorar
+                fluxos de trabalho e tornar operações mais eficientes.
+              </p>
+              <p>Integramos ferramentas, criamos processos inteligentes e ajudamos empresas a utilizar a tecnologia como uma vantagem competitiva.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Conhecer automações <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+
+          <article class="card" data-spot data-tilt>
+            <div class="card__visual" data-mock="estrategia"></div>
+            <div class="card__body">
+              <p class="card__meta"><i class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.3l6.1-.7z"/></svg></i>06 — Estratégia e posicionamento digital</p>
+              <h3>Grandes marcas não surgem por acaso.</h3>
+              <p>
+                Construímos estratégias de posicionamento que conectam empresas ao seu público e fortalecem sua
+                presença no mercado.
+              </p>
+              <p>Combinamos identidade visual, comunicação, experiência digital e planejamento estratégico para desenvolver marcas mais relevantes, reconhecidas e preparadas para crescer.</p>
+              <a class="card__cta" href="#contato" data-whatsapp>Fortalecer minha marca <i aria-hidden="true">↗</i></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= DIFERENCIAL ================= -->
+      <section class="section edge" id="diferencial">
+        <div class="edge__head">
+          <p class="kicker">Nosso diferencial</p>
+          <h2 class="title title--caps" data-reveal>O mercado evolui.<br />Sua empresa precisa estar à frente.</h2>
+          <div class="edge__text" data-words>
+            <p>
+              A transformação digital não acontece apenas quando uma empresa adota novas ferramentas. Ela acontece
+              quando tecnologia, estratégia e criatividade trabalham juntas para construir novas possibilidades.
+            </p>
+            <p>
+              Na Dallas Marketing, enxergamos cada projeto como uma oportunidade de desenvolver algo relevante,
+              funcional e preparado para o futuro. Nosso compromisso é entender os desafios de cada negócio e
+              transformar ideias em soluções que façam sentido na prática.
+            </p>
+          </div>
+        </div>
+        <div class="pillars" id="pillars">
+          <svg class="pillars__lines" id="pillars-lines" aria-hidden="true"><path d=""></path></svg>
+          <div class="pillar">
+            <span class="pillar__num">01</span>
+            <h3>Estratégia antes da execução</h3>
+            <p>Cada projeto começa com a compreensão dos objetivos, desafios e oportunidades do negócio.</p>
+          </div>
+          <div class="pillar">
+            <span class="pillar__num">02</span>
+            <h3>Tecnologia com propósito</h3>
+            <p>Utilizamos soluções tecnológicas para resolver problemas reais e criar experiências melhores.</p>
+          </div>
+          <div class="pillar">
+            <span class="pillar__num">03</span>
+            <h3>Design que comunica autoridade</h3>
+            <p>Desenvolvemos interfaces e identidades digitais que valorizam a percepção da marca.</p>
+          </div>
+          <div class="pillar">
+            <span class="pillar__num">04</span>
+            <h3>Soluções feitas para evoluir</h3>
+            <p>Criamos estruturas digitais que podem acompanhar o crescimento e as novas necessidades de cada empresa.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PORTFÓLIO ================= -->
+      <section class="section work" id="projetos">
+        <div class="work__head">
+          <div>
+            <p class="kicker">Projetos</p>
+            <h2 class="title title--caps" data-reveal>Projetos que transformam ideias em experiências.</h2>
+          </div>
+          <p class="lead" data-fade>
+            Cada projeto representa uma combinação de estratégia, criatividade e tecnologia. Conheça algumas das soluções
+            desenvolvidas para transformar necessidades em experiências digitais relevantes.
+          </p>
+        </div>
+        <p class="work__note">Os projetos abaixo são exemplos demonstrativos da estrutura. Serão substituídos por cases reais.</p>
+
+        <div class="work__grid" id="work-grid">
+          <article class="piece" data-piece data-title="Plataforma de vendas premium" data-cat="Desenvolvimento de site" data-tech="Design responsivo, animações, integração com WhatsApp" data-desc="Site institucional com landing pages de campanha, páginas rápidas e um caminho claro do primeiro clique ao contato comercial.">
+            <div class="piece__visual"><div class="piece__frame" data-mock="site"></div></div>
+            <div class="piece__info">
+              <p class="piece__cat">Desenvolvimento de site <span class="tag">exemplo demonstrativo</span></p>
+              <h3>Plataforma de vendas premium</h3>
+              <p>Site institucional com landing pages de campanha e um caminho claro até o contato comercial.</p>
+              <button class="piece__btn" type="button">Visualizar projeto <i aria-hidden="true">↗</i></button>
+            </div>
+          </article>
+          <article class="piece" data-piece data-title="Painel de operação em tempo real" data-cat="Painel e dashboard" data-tech="Dashboard web, integrações de dados, alertas" data-desc="Centro de controle com indicadores de vendas, leads e campanhas atualizados automaticamente, com acesso para toda a equipe.">
+            <div class="piece__visual"><div class="piece__frame" data-mock="painel"></div></div>
+            <div class="piece__info">
+              <p class="piece__cat">Painel e dashboard <span class="tag">exemplo demonstrativo</span></p>
+              <h3>Painel de operação em tempo real</h3>
+              <p>Indicadores de vendas, leads e campanhas em um centro de controle acessível para toda a equipe.</p>
+              <button class="piece__btn" type="button">Visualizar projeto <i aria-hidden="true">↗</i></button>
+            </div>
+          </article>
+          <article class="piece" data-piece data-title="Sistema de gestão sob medida" data-cat="Sistema personalizado" data-tech="Aplicação web, automações, controle de acesso" data-desc="Plataforma interna para cadastro, pedidos e equipe, construída do jeito que a operação funciona.">
+            <div class="piece__visual"><div class="piece__frame" data-mock="sistema"></div></div>
+            <div class="piece__info">
+              <p class="piece__cat">Sistema personalizado <span class="tag">exemplo demonstrativo</span></p>
+              <h3>Sistema de gestão sob medida</h3>
+              <p>Cadastro, pedidos e equipe em uma plataforma construída do jeito que a operação funciona.</p>
+              <button class="piece__btn" type="button">Visualizar projeto <i aria-hidden="true">↗</i></button>
+            </div>
+          </article>
+          <article class="piece" data-piece data-title="Automação de atendimento com IA" data-cat="Automação e inteligência artificial" data-tech="Fluxos automatizados, IA conversacional, integrações" data-desc="Fluxo que recebe, qualifica e encaminha contatos automaticamente, com relatórios para a equipe comercial.">
+            <div class="piece__visual"><div class="piece__frame" data-mock="automacao"></div></div>
+            <div class="piece__info">
+              <p class="piece__cat">Automação e IA <span class="tag">exemplo demonstrativo</span></p>
+              <h3>Automação de atendimento com IA</h3>
+              <p>Fluxo que recebe, qualifica e encaminha contatos automaticamente para a equipe comercial.</p>
+              <button class="piece__btn" type="button">Visualizar projeto <i aria-hidden="true">↗</i></button>
+            </div>
+          </article>
+        </div>
+
+        <dialog class="modal" id="modal">
+          <div class="modal__box">
+            <button class="modal__close" id="modal-close" type="button" aria-label="Fechar">×</button>
+            <div class="modal__visual" id="modal-visual"></div>
+            <div class="modal__body">
+              <p class="piece__cat" id="modal-cat"></p>
+              <h3 id="modal-title"></h3>
+              <p id="modal-desc"></p>
+              <p class="modal__tech"><span>Tecnologias</span><em id="modal-tech"></em></p>
+              <p class="modal__note">Exemplo demonstrativo. Cases reais serão publicados aqui.</p>
+              <a class="btn btn--solid" href="#contato" data-whatsapp><span>Quero um projeto assim</span><i aria-hidden="true">↗</i></a>
+            </div>
+          </div>
+        </dialog>
+      </section>
+
+      <!-- ================= PROCESSO ================= -->
       <section class="section process" id="processo">
         <div class="process__intro">
-          <p class="kicker">Como a Dalas funciona</p>
-          <h2 class="title" data-reveal>Um caminho claro, do primeiro contato ao resultado.</h2>
+          <p class="kicker">Processo de trabalho</p>
+          <h2 class="title title--caps" data-reveal>Da primeira ideia à próxima grande conquista.</h2>
           <p class="lead" data-fade>
-            Todo projeto passa pelas mesmas cinco etapas. Você sabe o que está acontecendo, quando e por quê.
+            Grandes projetos começam com uma visão clara. Nosso processo combina planejamento, criatividade,
+            desenvolvimento e evolução contínua para transformar objetivos empresariais em soluções digitais.
           </p>
         </div>
         <ol class="steps" id="steps">
           <span class="steps__progress" aria-hidden="true"></span>
-          <li class="step">
-            <span class="step__num">01</span>
-            <div>
-              <h3>Diagnóstico</h3>
-              <p>Entendemos seu negócio, seu público e o que precisa acontecer para você vender mais.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step__num">02</span>
-            <div>
-              <h3>Estratégia</h3>
-              <p>Definimos o caminho: canais, funil, posicionamento e o que será construído primeiro.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step__num">03</span>
-            <div>
-              <h3>Criação</h3>
-              <p>Desenhamos e desenvolvemos seu site, painel ou sistema, sob medida e pronto para converter.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step__num">04</span>
-            <div>
-              <h3>Tráfego</h3>
-              <p>Colocamos sua marca na frente das pessoas certas com campanhas no Meta, Google e TikTok.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step__num">05</span>
-            <div>
-              <h3>Escala</h3>
-              <p>Acompanhamos os dados, otimizamos toda semana e ampliamos o que está dando resultado.</p>
-            </div>
-          </li>
+          <li class="step"><span class="step__num">01</span><div><h3>Imersão</h3><p>Entendemos o negócio, seus desafios, seu público e suas oportunidades.</p></div></li>
+          <li class="step"><span class="step__num">02</span><div><h3>Estratégia</h3><p>Definimos os caminhos, as tecnologias e as soluções mais adequadas para o projeto.</p></div></li>
+          <li class="step"><span class="step__num">03</span><div><h3>Criação</h3><p>Transformamos conceitos em interfaces, experiências e estruturas digitais.</p></div></li>
+          <li class="step"><span class="step__num">04</span><div><h3>Desenvolvimento</h3><p>Construímos e integramos as funcionalidades necessárias, priorizando qualidade, segurança e desempenho.</p></div></li>
+          <li class="step"><span class="step__num">05</span><div><h3>Entrega e evolução</h3><p>Validamos a solução, realizamos os ajustes necessários e preparamos o projeto para sua utilização e evolução.</p></div></li>
         </ol>
       </section>
 
-      <!-- Serviços -->
-      <section class="section services" id="servicos">
-        <div class="services__head">
-          <p class="kicker">Serviços</p>
-          <h2 class="title" data-reveal>Tudo o que a sua marca precisa para vender, feito por uma equipe só.</h2>
-          <p class="lead" data-fade>Site, painel, sistema e tráfego conversando entre si. Sem retrabalho, sem fornecedor que não se fala.</p>
-        </div>
-
-        <div class="bento">
-          <article class="bento__item bento__item--wide" data-spot>
-            <div class="bento__visual" data-mock="site"></div>
-            <div class="bento__body">
-              <h3>Criação de sites</h3>
-              <p>Landing pages, sites institucionais e lojas que carregam rápido e levam o visitante até o contato.</p>
-              <ul class="bento__list">
-                <li>Landing pages de alta conversão</li>
-                <li>Sites institucionais e e-commerce</li>
-                <li>Integração com WhatsApp e CRM</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="bento__item" data-spot>
-            <div class="bento__visual" data-mock="painel"></div>
-            <div class="bento__body">
-              <h3>Painéis e dashboards</h3>
-              <p>Vendas, leads e campanhas em um só lugar, em tempo real.</p>
-              <ul class="bento__list">
-                <li>Métricas atualizadas sozinhas</li>
-                <li>Metas e alertas</li>
-                <li>Acesso para toda a equipe</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="bento__item" data-spot>
-            <div class="bento__visual" data-mock="sistema"></div>
-            <div class="bento__body">
-              <h3>Sistemas sob medida</h3>
-              <p>Ferramentas feitas do jeito que a sua empresa trabalha.</p>
-              <ul class="bento__list">
-                <li>CRMs e automações</li>
-                <li>Plataformas internas</li>
-                <li>Integrações entre ferramentas</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="bento__item bento__item--wide" data-spot>
-            <div class="bento__visual" data-mock="trafego"></div>
-            <div class="bento__body">
-              <h3>Gestão de tráfego</h3>
-              <p>Campanhas que trazem as pessoas certas, com criativos, públicos e otimização toda semana.</p>
-              <ul class="bento__list">
-                <li>Meta Ads, Google Ads e TikTok Ads</li>
-                <li>Criativos e públicos testados</li>
-                <li>Relatório semanal com o custo por cliente</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Manifesto -->
-      <section class="section manifesto" aria-label="Nosso jeito">
-        <p class="manifesto__text" id="manifesto">
-          Não entregamos só um site bonito. Entregamos uma máquina de vendas: design que converte, sistemas que
-          organizam e tráfego que traz as pessoas certas até você.
-        </p>
-      </section>
-
-      <!-- Projetos -->
-      <section class="projects" id="projetos">
-        <div class="projects__head">
-          <div>
-            <p class="kicker">Projetos</p>
-            <h2 class="title" data-reveal>Tipos de projeto que entregamos.</h2>
+      <!-- ================= CHAMADA FINAL ================= -->
+      <section class="finale" id="contato">
+        <div class="finale__scene" aria-hidden="true">
+          <div class="finale__sky"></div>
+          <div class="finale__trees"></div>
+          <div class="finale__wolf" id="finale-wolf">
+            <div class="finale__eyes"><i></i><i></i></div>
           </div>
-          <p class="lead" data-fade>Exemplos do que a Dalas constrói. Em breve, cases reais com resultados.</p>
+          <div class="finale__fog"><i></i><i></i><i></i><i></i></div>
+          <div class="finale__light"></div>
         </div>
-        <div class="projects__viewport">
-          <div class="projects__track" id="projects-track">
-            <article class="project">
-              <div class="project__visual" data-mock="site"></div>
-              <h3>Landing page de alta conversão</h3>
-              <p>Página única, rápida, com formulário e integração direta com o WhatsApp.</p>
-            </article>
-            <article class="project">
-              <div class="project__visual" data-mock="painel"></div>
-              <h3>Painel de vendas em tempo real</h3>
-              <p>Métricas de vendas, leads e campanhas atualizadas automaticamente.</p>
-            </article>
-            <article class="project">
-              <div class="project__visual" data-mock="sistema"></div>
-              <h3>Sistema de gestão interna</h3>
-              <p>Cadastro, pedidos e equipe em uma plataforma feita para a operação.</p>
-            </article>
-            <article class="project">
-              <div class="project__visual" data-mock="trafego"></div>
-              <h3>Campanhas de tráfego pago</h3>
-              <p>Criativos, públicos e otimização semanal para reduzir o custo por cliente.</p>
-            </article>
+        <div class="finale__content">
+          <p class="kicker">O próximo movimento</p>
+          <h2 class="title title--caps finale__title" data-reveal>O futuro da sua marca começa com uma decisão.</h2>
+          <div class="finale__text" data-words>
+            <p>Enquanto o mercado continua mudando, novas oportunidades surgem para empresas que estão preparadas para evoluir.</p>
+            <p>A Dallas Marketing une estratégia, tecnologia e criatividade para transformar ideias em soluções digitais e ajudar negócios a construir uma presença mais forte, moderna e competitiva.</p>
+            <p>Seu próximo grande projeto pode começar agora.</p>
           </div>
+          <a class="btn btn--solid btn--lg" id="cta-button" href="#contato" data-magnetic data-whatsapp><span>Vamos construir algo extraordinário</span><i aria-hidden="true">↗</i></a>
+          <p class="finale__alt" id="cta-alt"></p>
         </div>
-      </section>
-
-      <!-- Contato -->
-      <section class="section cta" id="contato">
-        <canvas class="cta__3d" id="cta-3d" aria-hidden="true"></canvas>
-        <h2 class="cta__title" data-reveal>Pronto para transformar cliques em clientes?</h2>
-        <p class="cta__lead" data-fade>Conte o que você precisa. Respondemos rápido e já voltamos com um caminho.</p>
-        <a class="btn btn--light btn--lg" id="cta-button" href="#contato" data-magnetic>
-          Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
-        </a>
-        <p class="cta__alt" id="cta-alt"></p>
       </section>
     </main>
 
+    <!-- ================= RODAPÉ ================= -->
     <footer class="footer">
-      <img class="footer__logo" src="./images/logo-full.png" alt="Dalas Marketing" width="960" height="820" />
-      <div class="footer__row">
-        <nav class="footer__links" aria-label="Rodapé">
-          <a href="#processo">Como funciona</a>
-          <a href="#servicos">Serviços</a>
+      <div class="footer__big" aria-hidden="true">Dallas</div>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img class="footer__logo" src="./images/logo-mark.png" alt="" width="590" height="540" />
+          <p class="footer__name">Dallas Marketing</p>
+          <p class="footer__claim">Inteligência, estratégia e tecnologia para transformar negócios em marcas preparadas para o futuro.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Serviços</h4>
+          <a href="#solucoes">Desenvolvimento de sites</a>
+          <a href="#solucoes">Sistemas personalizados</a>
+          <a href="#solucoes">Painéis e dashboards</a>
+          <a href="#solucoes">Tráfego pago</a>
+          <a href="#solucoes">Automações e IA</a>
+          <a href="#solucoes">Estratégia digital</a>
+        </div>
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <a href="#inicio">Início</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#solucoes">Soluções</a>
           <a href="#projetos">Projetos</a>
+          <a href="#processo">Processo</a>
           <a href="#contato">Contato</a>
-        </nav>
-        <p>© 2026 Dalas Marketing. Todos os direitos reservados.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a href="#contato" id="footer-whatsapp" data-whatsapp>WhatsApp</a>
+          <a href="#contato" id="footer-instagram">Instagram</a>
+          <a href="#contato" id="footer-email">E-mail comercial</a>
+          <a href="#" id="footer-privacy">Política de privacidade</a>
+          <a href="#" id="footer-terms">Termos de uso</a>
+        </div>
+      </div>
+      <div class="footer__row">
+        <p>© 2026 Dallas Marketing. Todos os direitos reservados.</p>
+        <p>Feito para empresas que escolhem estar à frente.</p>
       </div>
     </footer>
 

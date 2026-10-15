@@ -1,65 +1,64 @@
-# Dalas Marketing — site oficial
+# Dallas Marketing — site oficial
 
-Site institucional e portfólio da **Dalas Marketing**: criação de sites, painéis, sistemas sob medida e gestão de tráfego.
+Experiência cinematográfica para a **Dallas Marketing**: a floresta noturna desperta, o lobo aparece, a marca se revela, e o scroll atravessa a mata até a luz verde onde o site começa.
 
-Feito com [Vite](https://vite.dev), [GSAP](https://gsap.com) (ScrollTrigger + SplitText), [Lenis](https://lenis.darkroom.engineering) e [Three.js](https://threejs.org) para os objetos 3D.
+Stack: [Vite](https://vite.dev) + JavaScript moderno em módulos, [Three.js](https://threejs.org) (floresta em WebGL), [GSAP](https://gsap.com) (ScrollTrigger e SplitText) e [Lenis](https://lenis.darkroom.engineering) (scroll suave). Sem framework pesado: o site é estático, carrega rápido e publica em qualquer hospedagem.
 
 ## Rodando localmente
 
 ```bash
 npm install
-npm run dev      # abre em http://localhost:5173
-npm run build    # gera a pasta dist/
+npm run dev      # http://localhost:5173
+npm run build    # gera dist/
 npm run preview  # testa a build
 ```
+
+## O lobo: o que depende de você
+
+O lobo hiper-realista (correndo, parando e respirando) entra como **vídeo**. O player já está pronto; basta colocar os arquivos em `public/media/`:
+
+| Arquivo | O que é |
+| --- | --- |
+| `wolf-intro.mp4` | 16:9, 10 a 12 s. Floresta noturna, o lobo corre em direção à câmera, para, olha e respira (vapor). H.264, 1080p ou 4K, sem áudio. |
+| `wolf-intro-mobile.mp4` | 9:16, mesma sequência enquadrada na vertical. |
+| `wolf-poster.jpg` | Primeiro frame, usado enquanto o vídeo carrega (opcional). |
+| `wolf-still.jpg` | Lobo parado na névoa, para a chamada final (opcional). |
+| `ambience.mp3` | Vento e floresta. Só toca se o visitante clicar em "Som ambiente" (opcional). |
+
+Em `src/config.js`, ajuste os tempos do vídeo: `brandAt` (segundo em que o nome aparece) e `breathLoop` (trecho da respiração que repete para sempre).
+
+Enquanto os vídeos não existem, a abertura roda só com a floresta em WebGL (céu estrelado, lua, árvores em profundidade, névoa, raios de luar, poeira e folhas) e o nome da marca aparece aos 3 segundos. Nada quebra.
 
 ## Onde editar
 
 | O quê | Onde |
 | --- | --- |
-| Textos, títulos e seções | `index.html` |
-| WhatsApp, e-mail e Instagram dos botões | `src/config.js` |
-| Cores, fontes e espaçamentos | `src/styles/main.css` (bloco `:root`) |
+| WhatsApp, e-mail, Instagram, caminhos de mídia, tempos do vídeo | `src/config.js` |
+| Textos de todas as seções | `index.html` |
+| Cores, tipografia, espaçamentos | `src/styles/main.css` (bloco `:root`) |
+| Cena da floresta (quantidade de árvores, névoa, luz verde, câmera) | `src/modules/forest.js` |
+| Direção da abertura e da travessia no scroll | `src/main.js` |
+| Miniaturas de interface dos cards e do portfólio | `src/modules/mocks.js` |
 | Logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
-| Objetos 3D (formas, posições, materiais) | `src/modules/floaters.js` (lista `presets`) |
-| Etiquetas do caminho do cliente no hero | `index.html` (lista `.hero__chips`, posição em `--x`/`--y`) |
-| Miniaturas de interface (serviços e projetos) | `src/modules/mocks.js` |
 
-Preencha `src/config.js` para os botões **Iniciar projeto** e os links do rodapé funcionarem:
+Política de privacidade e termos de uso: os links do rodapé (`#footer-privacy`, `#footer-terms`) apontam para `#` até você ter as páginas.
 
-```js
-export const siteConfig = {
-  whatsapp: '5511999999999',
-  whatsappMessage: 'Olá! Quero iniciar um projeto com a Dalas Marketing.',
-  email: 'contato@dalasmarketing.com.br',
-  instagram: '@dalasmarketing',
-};
-```
+## Experiência
 
-## Efeitos
-
-- Abertura com logo, contador e cortina (mais curta a partir da segunda visita).
-- Objetos 3D cromados flutuando no hero e na seção de contato (Three.js), com parallax de mouse e rotação com o scroll.
-- Rede de pontos e linhas no hero, com as etiquetas do caminho do cliente ligadas em sequência e um pulso percorrendo o trajeto.
-- Título revelado letra a letra, com a segunda linha em degradê prata.
-- Barra de navegação em pílula de vidro que some ao descer e volta ao subir.
-- Scroll suave (Lenis) e faixa contínua de serviços.
-- Linha do processo que se preenche com o scroll e acende cada etapa.
-- Grade de serviços com miniaturas de interface em CSS e borda que acompanha o cursor.
-- Manifesto que acende palavra por palavra.
-- Projetos em rolagem horizontal fixada na tela.
-- Botões magnéticos e menu em tela cheia no celular.
-- Tudo respeita `prefers-reduced-motion` e tem foco visível por teclado.
+- Abertura: tela escura, a lua revela a floresta, a câmera avança devagar. Com o vídeo, o lobo corre, para e respira; o nome DALLAS MARKETING surge letra a letra com luz verde discreta. Barras de cinema saem quando a marca aparece.
+- Scroll: o hero fica fixo enquanto a câmera atravessa as árvores, a névoa adensa, a luz esmeralda cresce no fim do caminho e revela a próxima seção.
+- Sobre: texto acende palavra por palavra, com uma rede de conexões verde ao fundo.
+- Soluções: seis cards grandes com miniatura de interface própria, entrada em sequência, inclinação 3D leve e borda luminosa que acompanha o cursor.
+- Diferencial: os quatro números surgem e uma linha luminosa os conecta conforme o scroll.
+- Projetos: cards com animação na imagem e detalhes em um diálogo. Exemplos marcados como demonstrativos.
+- Processo: linha do tempo que se ilumina etapa por etapa.
+- Chamada final: silhueta do lobo (ou o seu `wolf-still.jpg`) na névoa, luz verde discreta e o botão para o WhatsApp.
+- Rodapé com o nome DALLAS em grande escala ao fundo.
+- Performance: WebGL em qualidade reduzida em celulares e máquinas fracas, cena pausada fora da tela, fallback em CSS sem WebGL, `prefers-reduced-motion` respeitado, SEO técnico, Open Graph e dados estruturados.
 
 ## Publicação
 
-- **GitHub Pages**: o workflow em `.github/workflows/deploy.yml` publica a cada push na `main`. Em *Settings → Pages*, escolha **GitHub Actions** como fonte.
-- **Vercel / Netlify**: importe o repositório; o build é `npm run build` e a saída é `dist/`.
+- **GitHub Pages**: o workflow em `.github/workflows/deploy.yml` publica a cada push na `main` (fonte: GitHub Actions).
+- **Vercel / Netlify**: importe o repositório; build `npm run build`, saída `dist/`.
 
-Os caminhos da build são relativos (`base: './'`), então a mesma build funciona em subpasta (`/Dallas/`) ou em domínio próprio.
-Ao ter um domínio, atualize a tag `og:image` no `index.html`.
-
-## Próximos passos
-
-- Substituir os projetos de exemplo por cases reais (imagens em `public/images/`, cards em `index.html`).
-- Adicionar os efeitos das próximas referências.
+Caminhos relativos (`base: './'`), então a mesma build funciona em subpasta ou em domínio próprio. Com domínio, atualize `og:image` e `canonical` no `index.html`.

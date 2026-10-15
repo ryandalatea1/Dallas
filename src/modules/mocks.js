@@ -67,6 +67,26 @@ const MOCKS = {
         </div>
       </div>
     </div>`,
+  automacao: `
+    <div class="mock mock--automacao">
+      <div class="m-flow">
+        <div class="m-node m-node--in"><i></i><span></span></div>
+        <div class="m-link"></div>
+        <div class="m-node m-node--ai"><b></b><span></span></div>
+        <div class="m-link"></div>
+        <div class="m-node"><i></i><span></span></div>
+        <div class="m-branch"><div class="m-node m-node--sm"><span></span></div><div class="m-node m-node--sm"><span></span></div></div>
+      </div>
+    </div>`,
+  estrategia: `
+    <div class="mock mock--estrategia">
+      <div class="m-radar">
+        <i></i><i></i><i></i>
+        <b class="m-sweep"></b>
+        <em style="--a:20%;--b:28%"></em><em style="--a:62%;--b:40%"></em><em style="--a:48%;--b:70%"></em>
+      </div>
+      <div class="m-legend"><span></span><span></span><span></span></div>
+    </div>`,
 };
 
 export function mockHTML(type) {
@@ -78,6 +98,4 @@ export function mountMocks() {
   document.querySelectorAll('[data-mock]').forEach((el) => {
     el.innerHTML = mockHTML(el.dataset.mock);
   });
-  const preview = document.getElementById('services-preview');
-  if (preview) preview.innerHTML = Object.keys(MOCKS).map((k) => mockHTML(k)).join('');
 }
