@@ -6,12 +6,12 @@
     <title>Dalas Marketing — Sites, sistemas e tráfego que vendem</title>
     <meta
       name="description"
-      content="Agência de marketing e tecnologia. Criação de sites, painéis, sistemas sob medida e gestão de tráfego para marcas que querem crescer."
+      content="Agência de marketing e tecnologia. Criação de sites, painéis, sistemas sob medida e gestão de tráfego para marcas que querem vender mais."
     />
-    <meta name="theme-color" content="#03150c" />
+    <meta name="theme-color" content="#050506" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Dalas Marketing" />
-    <meta property="og:description" content="Sites, painéis, sistemas e tráfego para marcas que querem crescer." />
+    <meta property="og:description" content="Do clique à venda. Sites, painéis, sistemas e tráfego para marcas que querem crescer." />
     <meta property="og:image" content="https://ryandalatea1.github.io/Dallas/og.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" href="./favicon.png" />
@@ -19,45 +19,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <!-- Abertura -->
     <div class="preloader" id="preloader" aria-hidden="true">
-      <img class="preloader__logo" id="preloader-logo" src="./images/logo-full.png" alt="" width="845" height="760" />
+      <img class="preloader__logo" id="preloader-logo" src="./images/logo-full.png" alt="" width="960" height="820" />
       <div class="preloader__meta">
         <span class="preloader__count" id="preloader-count">0</span>
         <span class="preloader__bar"><i id="preloader-bar"></i></span>
       </div>
     </div>
 
-    <!-- Cursor -->
-    <div class="cursor" id="cursor" aria-hidden="true">
-      <div class="cursor__dot"></div>
-      <div class="cursor__ring"></div>
-    </div>
-
     <div class="grain" aria-hidden="true"></div>
 
     <!-- Navegação -->
     <header class="nav" id="nav">
-      <a class="nav__brand" href="#inicio" aria-label="Dalas Marketing, voltar ao início">
-        <img class="nav__mark" src="./images/logo-mark.png" alt="" width="533" height="495" />
-        <span class="nav__word">Dalas<small>Marketing</small></span>
-      </a>
-      <nav class="nav__links" aria-label="Principal">
-        <a href="#processo">Como funciona</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <div class="nav__actions">
-        <a class="pill" id="nav-cta" href="#contato" data-magnetic><i class="pill__dot"></i>Fale conosco</a>
-        <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-          <span></span><span></span>
-        </button>
+      <div class="nav__bar">
+        <a class="nav__brand" href="#inicio" aria-label="Dalas Marketing, voltar ao início">
+          <img class="nav__mark" src="./images/logo-mark.png" alt="" width="590" height="540" />
+          <span class="nav__word">Dalas</span>
+        </a>
+        <nav class="nav__links" aria-label="Principal">
+          <a href="#processo">Como funciona</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <div class="nav__actions">
+          <a class="btn btn--light" id="nav-cta" href="#contato" data-magnetic>
+            Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
+          </a>
+          <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+            <span></span><span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -72,29 +70,48 @@
     </div>
 
     <main>
-      <!-- Abertura do site -->
+      <!-- Primeira dobra -->
       <section class="hero" id="inicio">
-        <canvas class="hero__gl" id="hero-gl" aria-hidden="true"></canvas>
-        <img class="hero__fallback" src="./images/hero.webp" alt="" aria-hidden="true" />
-        <canvas class="hero__particles" id="hero-particles" aria-hidden="true"></canvas>
+        <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
+        <canvas class="hero__3d" id="hero-3d" aria-hidden="true"></canvas>
+        <div class="hero__glow" aria-hidden="true"></div>
 
         <div class="hero__content">
           <h1 class="hero__title" id="hero-title">
-            <span class="line">Transformamos</span>
-            <span class="line">cliques em</span>
-            <span class="line">clientes.</span>
+            <span class="line line--light">Do clique</span>
+            <span class="line line--bold">à venda.</span>
           </h1>
-          <ul class="hero__captions" aria-label="O que a Dalas faz">
-            <li>Criação de sites</li>
-            <li>Painéis e sistemas</li>
-            <li>Gestão de tráfego</li>
-          </ul>
           <p class="hero__lede">
-            Agência de marketing e tecnologia. Construímos sites, painéis e sistemas sob medida, e colocamos
-            sua marca na frente das pessoas certas.
+            Sites, painéis, sistemas e tráfego pago, feitos pela mesma equipe para transformar atenção em clientes.
           </p>
-          <a class="hero__scroll" href="#processo"><span>Veja como funciona</span><i></i></a>
+          <div class="hero__actions">
+            <a class="btn btn--light btn--lg" href="#contato" data-magnetic>
+              Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#processo">
+              Ver como funciona<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></i>
+            </a>
+          </div>
+          <p class="hero__flow" aria-hidden="true">Anúncio → Site → WhatsApp → Painel → Venda</p>
         </div>
+
+        <ul class="hero__chips" id="hero-chips" aria-label="O caminho do cliente até a venda">
+          <li class="chip" style="--x: 57%; --y: 16%">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/></svg>Anúncio no Meta
+          </li>
+          <li class="chip" style="--x: 83%; --y: 31%">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M2 6h12"/></svg>Visita no site
+          </li>
+          <li class="chip" style="--x: 64%; --y: 50%">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v8H6l-3 2.5z"/></svg>Lead no WhatsApp
+          </li>
+          <li class="chip" style="--x: 86%; --y: 67%">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13V8M8 13V4M13 13V7"/></svg>Painel atualizado
+          </li>
+          <li class="chip chip--done" style="--x: 61%; --y: 85%">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="m5.5 8 2 2 3.5-4"/></svg>Venda fechada
+          </li>
+        </ul>
       </section>
 
       <div class="marquee" aria-hidden="true">
@@ -103,9 +120,10 @@
           <span>Landing pages</span><i>✦</i>
           <span>Painéis e dashboards</span><i>✦</i>
           <span>Sistemas sob medida</span><i>✦</i>
-          <span>Tráfego pago</span><i>✦</i>
+          <span>Meta Ads</span><i>✦</i>
+          <span>Google Ads</span><i>✦</i>
           <span>Automações</span><i>✦</i>
-          <span>Identidade digital</span><i>✦</i>
+          <span>CRM</span><i>✦</i>
         </div>
       </div>
 
@@ -162,48 +180,63 @@
       <section class="section services" id="servicos">
         <div class="services__head">
           <p class="kicker">Serviços</p>
-          <h2 class="title" data-reveal>O que construímos para a sua marca.</h2>
-          <p class="lead" data-fade>Do primeiro pixel à primeira venda, tudo feito pela mesma equipe.</p>
+          <h2 class="title" data-reveal>Tudo o que a sua marca precisa para vender, feito por uma equipe só.</h2>
+          <p class="lead" data-fade>Site, painel, sistema e tráfego conversando entre si. Sem retrabalho, sem fornecedor que não se fala.</p>
         </div>
-        <ul class="services__list" id="services-list">
-          <li class="service" data-preview="site">
-            <a class="service__row" href="#contato">
-              <h3 class="service__title">Criação de sites</h3>
-              <p class="service__desc">
-                Landing pages, sites institucionais e lojas. Rápidos, responsivos e feitos para transformar visitas em contato.
-              </p>
-              <span class="service__cta">Quero um site</span>
-            </a>
-          </li>
-          <li class="service" data-preview="painel">
-            <a class="service__row" href="#contato">
-              <h3 class="service__title">Painéis e dashboards</h3>
-              <p class="service__desc">
-                Vendas, leads e campanhas em um só lugar, em tempo real. Decisão com dado, não com achismo.
-              </p>
-              <span class="service__cta">Quero um painel</span>
-            </a>
-          </li>
-          <li class="service" data-preview="sistema">
-            <a class="service__row" href="#contato">
-              <h3 class="service__title">Sistemas sob medida</h3>
-              <p class="service__desc">
-                Automações, CRMs e plataformas internas construídas do jeito que a sua empresa trabalha.
-              </p>
-              <span class="service__cta">Quero um sistema</span>
-            </a>
-          </li>
-          <li class="service" data-preview="trafego">
-            <a class="service__row" href="#contato">
-              <h3 class="service__title">Gestão de tráfego</h3>
-              <p class="service__desc">
-                Meta Ads, Google Ads e TikTok Ads com estratégia, criativos e otimização contínua.
-              </p>
-              <span class="service__cta">Quero mais clientes</span>
-            </a>
-          </li>
-        </ul>
-        <div class="services__preview" id="services-preview" aria-hidden="true"></div>
+
+        <div class="bento">
+          <article class="bento__item bento__item--wide" data-spot>
+            <div class="bento__visual" data-mock="site"></div>
+            <div class="bento__body">
+              <h3>Criação de sites</h3>
+              <p>Landing pages, sites institucionais e lojas que carregam rápido e levam o visitante até o contato.</p>
+              <ul class="bento__list">
+                <li>Landing pages de alta conversão</li>
+                <li>Sites institucionais e e-commerce</li>
+                <li>Integração com WhatsApp e CRM</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="bento__item" data-spot>
+            <div class="bento__visual" data-mock="painel"></div>
+            <div class="bento__body">
+              <h3>Painéis e dashboards</h3>
+              <p>Vendas, leads e campanhas em um só lugar, em tempo real.</p>
+              <ul class="bento__list">
+                <li>Métricas atualizadas sozinhas</li>
+                <li>Metas e alertas</li>
+                <li>Acesso para toda a equipe</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="bento__item" data-spot>
+            <div class="bento__visual" data-mock="sistema"></div>
+            <div class="bento__body">
+              <h3>Sistemas sob medida</h3>
+              <p>Ferramentas feitas do jeito que a sua empresa trabalha.</p>
+              <ul class="bento__list">
+                <li>CRMs e automações</li>
+                <li>Plataformas internas</li>
+                <li>Integrações entre ferramentas</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="bento__item bento__item--wide" data-spot>
+            <div class="bento__visual" data-mock="trafego"></div>
+            <div class="bento__body">
+              <h3>Gestão de tráfego</h3>
+              <p>Campanhas que trazem as pessoas certas, com criativos, públicos e otimização toda semana.</p>
+              <ul class="bento__list">
+                <li>Meta Ads, Google Ads e TikTok Ads</li>
+                <li>Criativos e públicos testados</li>
+                <li>Relatório semanal com o custo por cliente</li>
+              </ul>
+            </div>
+          </article>
+        </div>
       </section>
 
       <!-- Manifesto -->
@@ -225,22 +258,22 @@
         </div>
         <div class="projects__viewport">
           <div class="projects__track" id="projects-track">
-            <article class="project" data-cursor="Ver">
+            <article class="project">
               <div class="project__visual" data-mock="site"></div>
               <h3>Landing page de alta conversão</h3>
               <p>Página única, rápida, com formulário e integração direta com o WhatsApp.</p>
             </article>
-            <article class="project" data-cursor="Ver">
+            <article class="project">
               <div class="project__visual" data-mock="painel"></div>
               <h3>Painel de vendas em tempo real</h3>
               <p>Métricas de vendas, leads e campanhas atualizadas automaticamente.</p>
             </article>
-            <article class="project" data-cursor="Ver">
+            <article class="project">
               <div class="project__visual" data-mock="sistema"></div>
               <h3>Sistema de gestão interna</h3>
               <p>Cadastro, pedidos e equipe em uma plataforma feita para a operação.</p>
             </article>
-            <article class="project" data-cursor="Ver">
+            <article class="project">
               <div class="project__visual" data-mock="trafego"></div>
               <h3>Campanhas de tráfego pago</h3>
               <p>Criativos, públicos e otimização semanal para reduzir o custo por cliente.</p>
@@ -251,15 +284,18 @@
 
       <!-- Contato -->
       <section class="section cta" id="contato">
-        <h2 class="cta__title" data-reveal>Vamos construir o próximo nível da sua marca?</h2>
+        <canvas class="cta__3d" id="cta-3d" aria-hidden="true"></canvas>
+        <h2 class="cta__title" data-reveal>Pronto para transformar cliques em clientes?</h2>
         <p class="cta__lead" data-fade>Conte o que você precisa. Respondemos rápido e já voltamos com um caminho.</p>
-        <a class="pill pill--lg" id="cta-button" href="#contato" data-magnetic><i class="pill__dot"></i>Iniciar projeto</a>
+        <a class="btn btn--light btn--lg" id="cta-button" href="#contato" data-magnetic>
+          Diagnóstico gratuito<i class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></i>
+        </a>
         <p class="cta__alt" id="cta-alt"></p>
       </section>
     </main>
 
     <footer class="footer">
-      <img class="footer__logo" src="./images/logo-full.png" alt="Dalas Marketing" width="845" height="760" />
+      <img class="footer__logo" src="./images/logo-full.png" alt="Dalas Marketing" width="960" height="820" />
       <div class="footer__row">
         <nav class="footer__links" aria-label="Rodapé">
           <a href="#processo">Como funciona</a>

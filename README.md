@@ -2,7 +2,7 @@
 
 Site institucional e portfólio da **Dalas Marketing**: criação de sites, painéis, sistemas sob medida e gestão de tráfego.
 
-Feito com [Vite](https://vite.dev), [GSAP](https://gsap.com) (ScrollTrigger + SplitText), [Lenis](https://lenis.darkroom.engineering) e WebGL próprio (sem bibliotecas 3D).
+Feito com [Vite](https://vite.dev), [GSAP](https://gsap.com) (ScrollTrigger + SplitText), [Lenis](https://lenis.darkroom.engineering) e [Three.js](https://threejs.org) para os objetos 3D.
 
 ## Rodando localmente
 
@@ -20,8 +20,9 @@ npm run preview  # testa a build
 | Textos, títulos e seções | `index.html` |
 | WhatsApp, e-mail e Instagram dos botões | `src/config.js` |
 | Cores, fontes e espaçamentos | `src/styles/main.css` (bloco `:root`) |
-| Foto do hero, logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
-| Cores da luz verde do retrato | `src/shaders/hero.frag` (constantes `DEEP`, `EMERALD`, `LIME`...) |
+| Logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
+| Objetos 3D (formas, posições, materiais) | `src/modules/floaters.js` (lista `presets`) |
+| Etiquetas do caminho do cliente no hero | `index.html` (lista `.hero__chips`, posição em `--x`/`--y`) |
 | Miniaturas de interface (serviços e projetos) | `src/modules/mocks.js` |
 
 Preencha `src/config.js` para os botões **Iniciar projeto** e os links do rodapé funcionarem:
@@ -38,18 +39,16 @@ export const siteConfig = {
 ## Efeitos
 
 - Abertura com logo, contador e cortina (mais curta a partir da segunda visita).
-- Retrato em WebGL: duotone na luz verde da marca, lente líquida que segue o cursor, grão de filme, parallax de cursor e de scroll.
-- Partículas de luz (as faíscas da logo) reagindo ao cursor.
-- Título do hero revelado letra a letra; legendas e navegação orquestradas na mesma sequência.
-- Cursor próprio (ponto + anel) que cresce sobre links e vira etiqueta nos projetos.
-- Scroll suave (Lenis) e barra que vira vidro ao rolar, some ao descer e volta ao subir.
-- Faixa contínua de serviços.
+- Objetos 3D cromados flutuando no hero e na seção de contato (Three.js), com parallax de mouse e rotação com o scroll.
+- Rede de pontos e linhas no hero, com as etiquetas do caminho do cliente ligadas em sequência e um pulso percorrendo o trajeto.
+- Título revelado letra a letra, com a segunda linha em degradê prata.
+- Barra de navegação em pílula de vidro que some ao descer e volta ao subir.
+- Scroll suave (Lenis) e faixa contínua de serviços.
 - Linha do processo que se preenche com o scroll e acende cada etapa.
-- Lista de serviços com miniatura de interface seguindo o cursor.
+- Grade de serviços com miniaturas de interface em CSS e borda que acompanha o cursor.
 - Manifesto que acende palavra por palavra.
 - Projetos em rolagem horizontal fixada na tela.
-- Botões magnéticos.
-- Menu em tela cheia no celular.
+- Botões magnéticos e menu em tela cheia no celular.
 - Tudo respeita `prefers-reduced-motion` e tem foco visível por teclado.
 
 ## Publicação
