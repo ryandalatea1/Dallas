@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dalas CRM — Pipeline de vendas integrado ao WhatsApp</title>
+<meta name="description" content="Demonstração do Dalas CRM: painel de vendas da Dalas Marketing com pipeline em kanban, conversas do WhatsApp, automações de atendimento e relatórios de campanhas. Dados fictícios.">
+<meta name="theme-color" content="#05070B">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Dalas CRM — do anúncio à conversa, tudo em um painel">
+<meta property="og:description" content="Pipeline em kanban, conversas do WhatsApp, automações e relatórios de campanhas. Demonstração da Dalas Marketing.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%239EC5FF'/%3E%3Cpath d='M10 8h6.4c4.6 0 7.6 3.1 7.6 8s-3 8-7.6 8H10z' fill='%2305070B'/%3E%3Cpath d='M10 22v5.5l5-5.5z' fill='%2305070B'/%3E%3C/svg%3E">
+<style>
+/* ==========================================================================
+   DALAS CRM — demonstração de produto
+   Sistema escuro da Dalas: fundos #05070B / #0A0E15, painéis #10151F,
+   acento azul-gelo (#9EC5FF / #DBE9FF), verde apenas para ganho/online.
+   Tipografia: Sora (títulos e números) + Manrope (texto).
+   ========================================================================== */
+:root{
+  --bg0:#05070B;
+  --bg1:#0A0E15;
+  --panel:#10151F;
+  --panel-2:#151B27;
+  --panel-3:#1A2130;
+  --line:rgba(200,214,235,.12);
+  --line-2:rgba(200,214,235,.2);
+  --line-soft:rgba(200,214,235,.07);
+  --text:#F2F5F9;
+  --muted:rgba(242,245,249,.64);
+  --dim:rgba(242,245,249,.44);
+  --ice:#9EC5FF;
+  --ice-2:#DBE9FF;
+  --ice-12:rgba(158,197,255,.12);
+  --ice-20:rgba(158,197,255,.2);
+  --green:#22C55E;
+  --green-12:rgba(34,197,94,.14);
+  --amber:#F0B35B;
+  --amber-12:rgba(240,179,91,.14);
+  --chart-a:#4A88F0;
+  --chart-b:#C98226;
+  --sora:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --manrope:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --sb:236px;
+  --tb:64px;
+  --chat-w:392px;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.75);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--bg0)}
+body{margin:0;background:var(--bg0);color:var(--text);font:400 14px/1.5 var(--manrope);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;min-height:100vh}
+body.lock{overflow:hidden}
+h1,h2,h3,h4{margin:0;font-family:var(--sora);font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+ul,ol{margin:0;padding:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0;-webkit-tap-highlight-color:transparent}
+svg{display:block}
+.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px;border-radius:6px}
+::selection{background:rgba(158,197,255,.3)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+::-webkit-scrollbar{height:8px;width:8px}
+::-webkit-scrollbar-thumb{background:rgba(200,214,235,.16);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
+.js [data-reveal]{opacity:0;transform:translateY(10px);transition:opacity .55s var(--ease),transform .55s var(--ease);transition-delay:var(--d,0ms)}
+.js [data-reveal].is-in{opacity:1;transform:none}
+
+/* ---------- casca do app ---------- */
+.app{display:grid;grid-template-columns:var(--sb) minmax(0,1fr);min-height:100vh;transition:grid-template-columns .3s var(--ease)}
+.app.rail{grid-template-columns:76px minmax(0,1fr)}
+.sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:20px 16px 18px;background:var(--bg0);border-right:1px solid var(--line);overflow:hidden auto;min-width:0}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 6px;text-decoration:none;min-width:0}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand-name{font:600 17px/1 var(--sora);letter-spacing:-.02em;white-space:nowrap}
+.brand-name b{font-weight:600;color:var(--ice)}
+.rail-btn{margin-left:auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--dim);transition:.18s}
+.rail-btn:hover{background:rgba(200,214,235,.07);color:var(--text)}
+.rail-btn .ico{width:16px;height:16px}
+.ws{margin:18px 0 6px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;align-items:center;gap:9px;font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden}
+.ws small{margin-left:auto;font-weight:500;color:var(--dim);font-size:11.5px}
+.ws-dot{width:8px;height:8px;border-radius:50%;background:var(--ice);box-shadow:0 0 0 3px var(--ice-12);flex:none}
+.nav{display:flex;flex-direction:column;gap:2px;margin-top:14px}
+.nav-i{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;color:var(--muted);font-weight:500;text-decoration:none;position:relative;transition:color .18s,background .18s;white-space:nowrap;width:100%;text-align:left}
+.nav-i .ico{width:19px;height:19px;color:var(--dim);transition:color .18s}
+.nav-i:hover{color:var(--text);background:rgba(200,214,235,.05)}
+.nav-i:hover .ico{color:var(--text)}
+.nav-i.is-active{color:var(--text);background:var(--ice-12)}
+.nav-i.is-active .ico{color:var(--ice)}
+.nav-i.is-active::before{content:"";position:absolute;left:-16px;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--ice)}
+.nav-b{margin-left:auto;font:600 11px/1 var(--sora);padding:4px 7px;border-radius:999px;background:rgba(200,214,235,.08);color:var(--muted)}
+.nav-b:empty{display:none}
+.nav-i.is-active .nav-b{background:rgba(158,197,255,.2);color:var(--ice-2)}
+.nav-b.green{background:var(--green-12);color:var(--green)}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.wa{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;border:1px solid rgba(34,197,94,.22);background:linear-gradient(180deg,rgba(34,197,94,.1),rgba(34,197,94,.03));min-width:0}
+.wa .ico{color:var(--green);width:20px;height:20px}
+.wa div{min-width:0}
+.wa strong{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa span{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.pulse{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--green);position:relative;flex:none}
+.pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--green);opacity:0;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.5);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+.demo-note{font-size:11.5px;line-height:1.45;color:var(--dim);padding:0 4px}
+.me{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;min-width:0}
+.me div{min-width:0}
+.me strong{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.me span{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.app.rail .sidebar{padding-left:12px;padding-right:12px}
+.app.rail .brand-name,.app.rail .ws small,.app.rail .ws span,.app.rail .nav-i span,.app.rail .nav-b,.app.rail .wa div,.app.rail .wa .pulse,.app.rail .demo-note,.app.rail .me div{display:none}
+.app.rail .brand{justify-content:center;padding:0}
+.app.rail .rail-btn{position:absolute;right:-14px;top:24px;background:var(--panel);border:1px solid var(--line);z-index:2}
+.app.rail .ws{justify-content:center;padding:10px 0}
+.app.rail .nav-i{justify-content:center;padding:11px 0}
+.app.rail .nav-i.is-active::before{left:-12px}
+.app.rail .wa{justify-content:center;padding:11px 0}
+.app.rail .me{justify-content:center;padding:4px 0}
+.app.rail .sidebar{overflow:visible}
+
+/* avatares */
+.avatar{--h:214;width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;font:600 12px/1 var(--sora);letter-spacing:.02em;color:hsl(var(--h) 90% 88%);background:linear-gradient(145deg,hsl(var(--h) 55% 30%),hsl(var(--h) 50% 17%));border:1px solid hsl(var(--h) 50% 40% / .5)}
+.avatar.sm{width:30px;height:30px;font-size:11px}
+.avatar.lg{width:42px;height:42px;font-size:13.5px}
+.avatar.me-av{background:linear-gradient(145deg,#DBE9FF,#8FB8F7);color:#05070B;border-color:transparent}
+
+/* ---------- topo ---------- */
+.shell{min-width:0;display:flex;flex-direction:column;background:var(--bg1);position:relative}
+.topbar{position:sticky;top:0;z-index:30;height:var(--tb);display:flex;align-items:center;gap:14px;padding:0 28px;background:rgba(10,14,21,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.tb-logo{display:none;width:30px;height:30px}
+.tb-title{display:flex;flex-direction:column;min-width:0}
+.tb-title strong{font:600 15px/1.2 var(--sora);white-space:nowrap}
+.tb-title span{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search{margin-left:auto;display:flex;align-items:center;gap:9px;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);width:min(400px,100%);transition:border-color .18s,box-shadow .18s}
+.search:focus-within{border-color:var(--ice-20);box-shadow:0 0 0 3px var(--ice-12)}
+.search .ico{color:var(--dim)}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:13.5px}
+.search input::placeholder{color:var(--dim)}
+.search kbd{font:500 11px/1 var(--manrope);color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:3px 5px;white-space:nowrap}
+.tb-actions{display:flex;align-items:center;gap:8px;flex:none}
+.icon-btn{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--muted);border:1px solid transparent;position:relative;transition:background .18s,color .18s,border-color .18s;flex:none}
+.icon-btn:hover{background:var(--panel);color:var(--text);border-color:var(--line)}
+.icon-btn .dot{position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:var(--ice);box-shadow:0 0 0 2px var(--bg1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;font-weight:600;font-size:13.5px;border:1px solid transparent;transition:transform .18s var(--ease),background .18s,border-color .18s,box-shadow .18s,color .18s;white-space:nowrap;text-decoration:none}
+.btn .ico{width:17px;height:17px}
+.btn-primary{background:var(--ice);color:#05070B;box-shadow:0 10px 26px -12px rgba(158,197,255,.7)}
+.btn-primary:hover{background:var(--ice-2);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line);color:var(--muted);background:transparent}
+.btn-ghost:hover{color:var(--text);border-color:var(--line-2);background:rgba(200,214,235,.04)}
+.btn-sm{height:34px;padding:0 12px;font-size:12.5px;border-radius:8px}
+
+/* ---------- corpo ---------- */
+.body{display:grid;grid-template-columns:minmax(0,1fr);flex:1;align-items:start}
+.main{min-width:0;padding:26px 28px 28px;container-type:inline-size;position:relative;z-index:1}
+.main::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(900px 420px at 14% -8%,rgba(158,197,255,.11),transparent 62%)}
+.view{display:none}
+.view.is-active{display:block;animation:viewIn .35s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* cabeçalho do pipeline */
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.hero h1{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.hero p{margin-top:8px;color:var(--muted);font-size:14.5px;max-width:62ch}
+.hero p b{color:var(--text);font-weight:600}
+.hero-act{display:flex;gap:8px;flex:none}
+.page-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.page-h h1{font-size:26px;letter-spacing:-.02em;line-height:1.15}
+.page-h p{margin-top:6px;color:var(--muted);font-size:14px;max-width:64ch}
+.page-h .hero-act{flex-wrap:wrap}
+
+/* métricas */
+.kpis{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;margin-bottom:24px}
+.kpi-panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.kpi{padding:18px 20px 16px;border-right:1px solid var(--line-soft);position:relative;min-width:0}
+.kpi:last-child{border-right:0}
+.kpi-l{display:block;font-size:12.5px;color:var(--muted);font-weight:500;white-space:nowrap}
+.kpi-v{display:block;margin-top:8px;font:600 30px/1 var(--sora);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpi-v small{font-size:16px;color:var(--muted);font-weight:500;margin-left:1px}
+.kpi-d{display:flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;color:var(--dim);white-space:nowrap}
+.kpi-d .ico{width:14px;height:14px}
+.kpi-d.up{color:var(--ice)}
+.kpi.won .kpi-v{color:var(--green)}
+.kpi.won::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(34,197,94,.09),transparent 70%);pointer-events:none}
+.kpi.won .kpi-d{color:rgba(34,197,94,.85)}
+.chart-panel{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:16px 18px 10px;display:flex;flex-direction:column;min-width:0;position:relative}
+.chart-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.chart-h strong{font:600 13px/1.2 var(--sora)}
+.chart-h span{font-size:12px;color:var(--dim);white-space:nowrap}
+.chart-panel svg{width:100%;height:auto;margin-top:6px}
+.chart-panel .hit{fill:transparent;cursor:crosshair}
+.bar{fill:var(--ice);opacity:.42;transition:opacity .15s}
+.bar.today{opacity:1}
+.hit:hover + .bar,.bar.is-hover{opacity:.85}
+.axis{stroke:var(--line-2);stroke-width:1}
+.lbl{font:500 9.5px var(--manrope);fill:rgba(242,245,249,.44)}
+.lbl.strong{font:600 10.5px var(--sora);fill:#F2F5F9}
+.tip{position:absolute;pointer-events:none;background:#1A2130;border:1px solid var(--line-2);border-radius:8px;padding:6px 9px;font-size:12px;line-height:1.3;white-space:nowrap;transform:translate(-50%,calc(-100% - 10px));opacity:0;transition:opacity .12s;z-index:5;color:var(--muted)}
+.tip b{font-family:var(--sora);font-weight:600;color:var(--text)}
+.tip.on{opacity:1}
+
+/* quadro */
+.board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.board-head h2{font-size:16px;font-weight:600}
+.board-head p{font-size:12.5px;color:var(--dim);margin-top:2px}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--green);margin-left:10px;vertical-align:middle}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--muted);background:transparent;transition:.18s;white-space:nowrap}
+.chip .ico{width:14px;height:14px}
+.chip:hover{color:var(--text);border-color:var(--line-2);background:rgba(200,214,235,.05)}
+.chip.is-on{color:var(--ice-2);border-color:var(--ice-20);background:var(--ice-12)}
+.board{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.col{flex:1 0 222px;min-width:222px;max-width:330px;display:flex;flex-direction:column;scroll-snap-align:start}
+.col-h{display:flex;align-items:center;gap:8px;padding:6px 6px 10px}
+.col-dot{width:8px;height:8px;border-radius:50%;background:var(--ice);opacity:.5;flex:none}
+.col[data-stage="conversa"] .col-dot{opacity:.68}
+.col[data-stage="proposta"] .col-dot{opacity:.86}
+.col[data-stage="negociacao"] .col-dot{opacity:1;box-shadow:0 0 0 3px var(--ice-12)}
+.col[data-stage="fechado"] .col-dot{background:var(--green);opacity:1;box-shadow:0 0 0 3px var(--green-12)}
+.col-h h3{font:600 13.5px/1 var(--sora);letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.col-n{font:600 11px/1 var(--sora);padding:4px 7px;border-radius:999px;background:rgba(200,214,235,.08);color:var(--muted);flex:none}
+.col-sum{margin-left:auto;font:600 12px/1 var(--sora);color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.col[data-stage="fechado"] .col-sum{color:var(--green)}
+.col-rail{height:2px;margin:0 6px 12px;background:var(--line-soft);border-radius:2px;overflow:hidden}
+.col-rail i{display:block;height:100%;width:var(--p);background:var(--ice);border-radius:2px;transition:width .7s var(--ease)}
+.col[data-stage="fechado"] .col-rail i{background:var(--green)}
+.col-body{flex:1;display:flex;flex-direction:column;gap:10px;min-height:150px;padding:6px;margin:-6px;border-radius:16px;transition:background .18s,box-shadow .18s}
+.col-body.over{background:var(--ice-12);box-shadow:inset 0 0 0 1px var(--ice-20)}
+.col-empty{display:none;border:1px dashed var(--line);border-radius:12px;padding:24px 12px;text-align:center;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.col-body.is-empty .col-empty{display:block}
+.col-add{margin-top:12px;height:36px;border:1px dashed var(--line);border-radius:10px;color:var(--dim);font-size:12.5px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:6px;transition:.18s}
+.col-add .ico{width:15px;height:15px}
+.col-add:hover{color:var(--text);border-color:var(--line-2);background:rgba(200,214,235,.04)}
+
+/* cards de lead */
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 12px 11px;cursor:grab;transition:transform .2s var(--ease),border-color .2s,box-shadow .2s,opacity .2s;user-select:none;-webkit-user-select:none}
+.card::before{content:"";position:absolute;left:-1px;top:16px;bottom:16px;width:2px;border-radius:2px;background:var(--ice);opacity:0;transition:opacity .2s}
+.card.is-hot::before{opacity:1;background:var(--amber)}
+.card.is-won::before{opacity:1;background:var(--green)}
+.card.is-sel{border-color:var(--ice-20);box-shadow:0 0 0 1px var(--ice-20)}
+.card:hover{transform:translateY(-2px);border-color:var(--line-2);box-shadow:0 16px 32px -18px rgba(0,0,0,.85),0 0 0 1px rgba(158,197,255,.06)}
+.card:active{cursor:grabbing}
+.card.dragging{opacity:.4;transform:rotate(1.2deg) scale(1.02);box-shadow:0 24px 40px -18px rgba(0,0,0,.9)}
+.card.is-new{animation:cardIn .6s var(--ease) both;box-shadow:0 0 0 1px var(--ice-20),0 0 34px -6px rgba(158,197,255,.5)}
+@keyframes cardIn{from{opacity:0;transform:translateY(-12px) scale(.98)}to{opacity:1;transform:none}}
+.card[hidden]{display:none}
+.card-top{display:flex;align-items:center;gap:10px}
+.who{min-width:0;flex:1}
+.who strong{display:block;font:600 13.5px/1.25 var(--sora);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who span{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.card-more{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--dim);opacity:0;transition:.18s;flex:none;margin-right:-6px}
+.card:hover .card-more,.card:focus-within .card-more,.card-more:focus-visible{opacity:1}
+.card-more:hover{background:rgba(200,214,235,.08);color:var(--text)}
+.card-more .ico{width:16px;height:16px}
+.card-mid{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px}
+.origin{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--muted);padding:4px 8px 4px 6px;border-radius:7px;background:rgba(200,214,235,.06);border:1px solid var(--line-soft);white-space:nowrap}
+.origin .ico{width:13px;height:13px;color:var(--ice)}
+.value{font:600 13.5px/1 var(--sora);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.card-bot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line-soft)}
+.ago{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);white-space:nowrap}
+.ago .ico{width:13px;height:13px}
+.ago.late{color:var(--amber)}
+.tag{font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--ice-12);color:var(--ice-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+.tag.hot{background:var(--amber-12);color:var(--amber)}
+.tag.won{background:var(--green-12);color:var(--green)}
+@media (hover:none){.card-more{opacity:1}}
+
+/* ---------- conversa (WhatsApp) ---------- */
+.chat{display:none;flex-direction:column;background:var(--bg0);border-left:1px solid var(--line);position:sticky;top:var(--tb);height:calc(100vh - var(--tb));min-width:0}
+.shell.chat-open .body{grid-template-columns:minmax(0,1fr) var(--chat-w)}
+.shell.chat-open .chat{display:flex}
+.chat-h{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel)}
+.chat-h .who strong{font-size:14px}
+.chat-h .who span{font-size:12px;color:var(--muted);margin-top:1px}
+.online{display:inline-flex;align-items:center;gap:5px;color:var(--green)!important}
+.online i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.chat-back{display:none}
+.chat-tools{display:flex;gap:2px;margin-left:auto}
+.chat-tools .icon-btn{width:36px;height:36px}
+.chat-meta{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg1)}
+.meta-chip{font-size:11.5px;color:var(--muted);padding:4px 9px;border-radius:999px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.meta-chip b{color:var(--text);font-weight:600}
+.meta-chip .ico{width:12px;height:12px;color:var(--ice)}
+.chat-body{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:6px;background-image:radial-gradient(rgba(200,214,235,.07) 1px,transparent 1.2px);background-size:18px 18px}
+.day{align-self:center;font-size:11px;color:var(--dim);padding:4px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line);margin:2px 0 8px}
+.msg{max-width:86%;padding:8px 10px 6px;border-radius:14px;font-size:13.5px;line-height:1.45;position:relative;animation:msgIn .3s var(--ease) both;overflow-wrap:anywhere}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.msg.in{align-self:flex-start;background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.out{align-self:flex-end;background:rgba(158,197,255,.15);border:1px solid rgba(158,197,255,.2);border-bottom-right-radius:4px}
+.msg-t{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-top:3px;font-size:10.5px;color:var(--dim)}
+.msg-t .ico{width:14px;height:14px;stroke-width:1.8}
+.msg-t .ico.read{color:var(--ice)}
+.auto-l{display:inline-flex;align-items:center;gap:4px;margin-right:auto;color:var(--ice);font-weight:600;font-size:10.5px}
+.auto-l .ico{width:11px;height:11px;stroke-width:2}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:11px 12px;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;border-bottom-left-radius:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:ty 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes ty{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.chat-empty{margin:auto;text-align:center;color:var(--dim);font-size:13px;max-width:28ch;line-height:1.5}
+.quick{display:flex;gap:6px;padding:10px 14px 0;overflow-x:auto;scrollbar-width:none}
+.quick::-webkit-scrollbar{display:none}
+.quick button{flex:none;font-size:12px;font-weight:500;color:var(--ice-2);padding:6px 10px;border-radius:999px;border:1px solid var(--ice-20);background:var(--ice-12);transition:.18s;white-space:nowrap}
+.quick button:hover{background:rgba(158,197,255,.24)}
+.chat-f{display:flex;align-items:center;gap:8px;padding:10px 14px 14px;background:var(--bg0)}
+.chat-f .field{flex:1;display:flex;align-items:center;gap:6px;height:44px;padding:0 6px 0 6px;border:1px solid var(--line);border-radius:12px;background:var(--panel);transition:.18s;min-width:0}
+.chat-f .field:focus-within{border-color:var(--ice-20);box-shadow:0 0 0 3px var(--ice-12)}
+.chat-f input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:13.5px}
+.chat-f input::placeholder{color:var(--dim)}
+.attach{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;color:var(--dim);transition:.18s;flex:none}
+.attach:hover{color:var(--text);background:rgba(200,214,235,.07)}
+.send{width:44px;height:44px;border-radius:12px;background:var(--ice);color:#05070B;display:grid;place-items:center;transition:.18s;flex:none}
+.send:hover{background:var(--ice-2);transform:translateY(-1px)}
+.send .ico{width:18px;height:18px;stroke-width:1.9}
+.chat-backdrop{display:none}
+
+/* ---------- conversas (tela) ---------- */
+.convs{display:grid;grid-template-columns:340px minmax(0,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);height:clamp(620px,calc(100vh - var(--tb) - 150px),900px)}
+.conv-list{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;background:var(--bg1)}
+.conv-list-h{padding:14px 14px 12px;border-bottom:1px solid var(--line)}
+.conv-list-h .search{margin:0;width:100%;height:38px}
+.conv-filters{display:flex;gap:6px;margin-top:10px}
+.conv-items{overflow-y:auto;flex:1}
+.conv-i{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line-soft);transition:background .15s}
+.conv-i:hover{background:rgba(200,214,235,.04)}
+.conv-i.is-active{background:var(--ice-12)}
+.conv-i .who strong{font-size:13.5px}
+.conv-i .who span{font-size:12px}
+.conv-r{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none}
+.conv-r time{font-size:11px;color:var(--dim);white-space:nowrap}
+.unread{min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--green);color:#05070B;font:700 11px/18px var(--sora);text-align:center}
+.conv-none{padding:30px 16px;text-align:center;color:var(--dim);font-size:13px}
+.conv-pane{display:flex;flex-direction:column;min-width:0;background:var(--bg0);position:relative}
+.chat-inline{display:flex;position:static;height:100%;border-left:0}
+.conv-empty{margin:auto;text-align:center;color:var(--dim);max-width:30ch;padding:40px 20px;font-size:13.5px;line-height:1.5}
+.conv-empty .ico{width:42px;height:42px;margin:0 auto 14px;color:var(--ice);opacity:.7;stroke-width:1.3}
+.conv-empty strong{display:block;color:var(--text);font-family:var(--sora);font-size:15px;margin-bottom:6px}
+
+/* ---------- automações ---------- */
+.auto-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.rules{display:flex;flex-direction:column;gap:12px}
+.rule{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:start;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel);transition:border-color .2s,background .2s}
+.rule.is-on{border-color:rgba(158,197,255,.22);background:linear-gradient(180deg,rgba(158,197,255,.06),var(--panel) 60%)}
+.rule-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(200,214,235,.06);color:var(--muted);border:1px solid var(--line);transition:.2s}
+.rule-ico .ico{width:20px;height:20px}
+.rule.is-on .rule-ico{color:var(--ice);background:var(--ice-12);border-color:var(--ice-20)}
+.rule h3{font-size:15px;font-weight:600}
+.rule p{margin-top:5px;color:var(--muted);font-size:13.5px;line-height:1.5;max-width:56ch}
+.rule-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--dim)}
+.rule-meta b{color:var(--text);font-weight:600}
+.rule-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.rule-state{font-size:12px;font-weight:600;color:var(--dim);white-space:nowrap}
+.rule.is-on .rule-state{color:var(--ice)}
+.switch{width:46px;height:26px;border-radius:999px;background:rgba(200,214,235,.14);position:relative;transition:background .2s,border-color .2s;border:1px solid var(--line);flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .22s var(--ease),background .2s;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.switch[aria-checked="true"]{background:var(--ice);border-color:var(--ice)}
+.switch[aria-checked="true"]::after{transform:translateX(20px);background:#05070B}
+.log{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px}
+.log h2{font-size:15px}
+.log .sub{font-size:12.5px;color:var(--dim);margin-top:3px}
+.log ol{list-style:none;margin:12px 0 0;display:flex;flex-direction:column}
+.log li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13px;line-height:1.45;animation:msgIn .3s var(--ease)}
+.log time{font:600 11.5px/1.7 var(--sora);color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.log b{font-weight:600}
+.log .ok{color:var(--green)}
+.auto-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.mini{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel);min-width:0}
+.mini span{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini strong{display:block;margin-top:6px;font:600 22px/1 var(--sora);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.mini strong small{font-size:13px;color:var(--muted);font-weight:500}
+
+/* ---------- relatórios ---------- */
+.rep-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.rep{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px;min-width:0;position:relative}
+.rep h2{font-size:14px;font-weight:600}
+.rep .sub{font-size:12px;color:var(--dim);margin-top:3px}
+.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-12{grid-column:span 12}.span-4{grid-column:span 4}.span-8{grid-column:span 8}
+.funnel{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.frow{display:grid;grid-template-columns:150px minmax(0,1fr) 92px;align-items:center;gap:12px;font-size:13px}
+.frow .fl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frow .bar-w{height:12px;background:rgba(200,214,235,.05);border-radius:0 4px 4px 0}
+.frow .fbar{height:12px;border-radius:0 4px 4px 0;background:var(--ice);opacity:var(--o);width:0;transition:width .9s var(--ease)}
+.is-in .frow .fbar,.view.is-active .rep.is-in .fbar{width:var(--w)}
+.frow .n{text-align:right;font:600 13px var(--sora);font-variant-numeric:tabular-nums;white-space:nowrap}
+.frow .n small{font:500 11.5px var(--manrope);color:var(--dim);margin-left:4px}
+.frow.loss .fbar{background:var(--muted)}
+.donut{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center;margin-top:14px}
+.donut svg{width:150px;height:150px}
+.legend-l{display:flex;flex-direction:column;gap:10px;list-style:none}
+.legend-l li{display:flex;align-items:center;gap:9px;font-size:13px}
+.legend-l i{width:10px;height:10px;border-radius:3px;flex:none}
+.legend-l b{margin-left:auto;font-family:var(--sora);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.legend-l small{color:var(--dim);font-size:11.5px}
+.rep svg.chart{width:100%;height:auto;margin-top:10px}
+.line{fill:none;stroke:var(--ice);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.area{fill:url(#areaGrad)}
+.pt{fill:var(--bg0);stroke:var(--ice);stroke-width:2}
+.tbl-wrap{overflow-x:auto;margin-top:12px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--dim);font-size:12px;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 10px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(200,214,235,.03)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td.num{font-family:var(--sora);font-weight:600}
+td .camp{display:flex;align-items:center;gap:10px}
+td .camp strong{display:block;font-weight:600;font-size:13px}
+td .camp span{display:block;font-size:11.5px;color:var(--dim)}
+.plat{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
+.plat .ico{width:14px;height:14px;color:var(--ice)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.st i{width:7px;height:7px;border-radius:50%;background:var(--dim)}
+.st.on{color:var(--green)}
+.st.on i{background:var(--green);box-shadow:0 0 0 3px var(--green-12)}
+.st.rev{color:var(--amber)}
+.st.rev i{background:var(--amber)}
+.camp-top{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+
+/* ---------- rodapé ---------- */
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+.foot a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-2);transition:.18s}
+.foot a:hover{color:var(--text);border-color:var(--ice)}
+
+/* ---------- popovers, modal, toasts ---------- */
+.pop{position:fixed;z-index:70;min-width:210px;background:#161C28;border:1px solid var(--line-2);border-radius:12px;padding:6px;box-shadow:var(--shadow);display:none;animation:viewIn .18s var(--ease)}
+.pop.is-open{display:block}
+.pop-h{font-size:11.5px;color:var(--dim);padding:7px 10px 5px;font-weight:600}
+.pop button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--text);transition:background .15s}
+.pop button:hover{background:rgba(200,214,235,.07)}
+.pop button .ico{width:15px;height:15px;color:var(--muted)}
+.pop button.won{color:var(--green)}
+.pop button.won .ico{color:var(--green)}
+.pop hr{border:0;border-top:1px solid var(--line);margin:6px 0}
+.notif{width:min(340px,calc(100vw - 24px))}
+.n-i{display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+.n-i p{font-size:12.5px;line-height:1.4;white-space:normal}
+.n-i time{display:block;font-size:11px;color:var(--dim);margin-top:3px}
+.n-dot{width:8px;height:8px;border-radius:50%;background:var(--ice);margin-top:6px}
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,7,11,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal.is-open{display:flex}
+.dialog{width:min(540px,100%);background:var(--panel);border:1px solid var(--line-2);border-radius:18px;padding:22px;box-shadow:var(--shadow);animation:viewIn .25s var(--ease);max-height:calc(100vh - 40px);overflow:auto}
+.dialog h2{font-size:18px}
+.dialog p{color:var(--muted);font-size:13.5px;margin-top:4px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.field-g{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field-g.full{grid-column:1/-1}
+.field-g label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.field-g input,.field-g select{height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg1);outline:0;transition:.18s;min-width:0;width:100%;-webkit-appearance:none;appearance:none}
+.field-g select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23F2F5F9' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.field-g input:focus,.field-g select:focus{border-color:var(--ice-20);box-shadow:0 0 0 3px var(--ice-12)}
+.field-g select option{background:#10151F}
+.dialog-act{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.toasts{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;flex-direction:column;gap:8px;pointer-events:none;align-items:flex-end}
+.toast{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;background:#161C28;border:1px solid var(--line-2);box-shadow:var(--shadow);font-size:13px;animation:toastIn .3s var(--ease);max-width:min(380px,100%);transition:opacity .3s,transform .3s}
+.toast .ico{color:var(--ice);width:18px;height:18px}
+.toast.ok .ico{color:var(--green)}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.toast.bye{opacity:0;transform:translateY(6px)}
+
+/* ---------- mobile: barra inferior e botão flutuante ---------- */
+.tabbar{display:none}
+.fab{display:none}
+
+/* ---------- responsivo ---------- */
+@container (max-width:1040px){
+  .kpis{grid-template-columns:1fr}
+}
+@container (max-width:720px){
+  .kpi-panel{grid-template-columns:1fr 1fr}
+  .kpi:nth-child(2){border-right:0}
+  .kpi:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}
+}
+@media (max-width:1199px){
+  .shell.chat-open .body{grid-template-columns:minmax(0,1fr)}
+  .shell.chat-open .chat{position:fixed;top:0;right:0;bottom:0;height:100dvh;width:min(440px,100%);z-index:72;box-shadow:-20px 0 60px rgba(0,0,0,.55)}
+  .shell.chat-open .chat-backdrop{display:block;position:fixed;inset:0;z-index:71;background:rgba(5,7,11,.55);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .chat-back{display:grid}
+}
+@media (max-width:1023px){
+  .auto-grid{grid-template-columns:1fr}
+  .span-7,.span-5,.span-6,.span-4,.span-8{grid-column:span 12}
+  .convs{grid-template-columns:1fr;height:auto;min-height:0}
+  .conv-list{border-right:0}
+  .conv-pane{display:none}
+  .conv-items{max-height:none}
+}
+@media (max-width:899px){
+  :root{--tb:56px}
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .tb-logo{display:block}
+  .main{padding:18px 16px 112px}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(5,7,11,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 2px 6px;border-radius:10px;font-size:10.5px;font-weight:600;color:var(--dim);position:relative}
+  .tab .ico{width:21px;height:21px}
+  .tab.is-active{color:var(--ice)}
+  .tab .nav-b{position:absolute;top:2px;right:calc(50% - 22px);margin:0;padding:2px 5px;font-size:10px;background:var(--green);color:#05070B}
+  .fab{position:fixed;right:16px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:61;width:54px;height:54px;border-radius:16px;background:var(--ice);color:#05070B;display:grid;place-items:center;box-shadow:0 16px 30px -10px rgba(158,197,255,.6)}
+  .fab .ico{width:24px;height:24px;stroke-width:2}
+  .toasts{bottom:calc(88px + env(safe-area-inset-bottom));right:12px;left:12px;align-items:stretch}
+  .toast{max-width:none}
+  .foot{margin-top:28px}
+}
+@media (max-width:759px){
+  .topbar{height:auto;flex-wrap:wrap;padding:10px 16px;gap:10px}
+  .search{order:5;flex-basis:100%;margin-left:0;height:38px;width:100%}
+  .search kbd{display:none}
+  .tb-actions .btn-primary{display:none}
+  .hero{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:18px}
+  .hero h1{font-size:26px}
+  .hero p{font-size:14px}
+  .hero-act{width:100%}
+  .hero-act .btn{flex:1}
+  .page-h{flex-direction:column;align-items:flex-start}
+  .kpi{padding:14px 16px 13px}
+  .kpi-v{font-size:26px}
+  .col{flex:0 0 min(82vw,320px);min-width:0}
+  .board{scroll-snap-type:x mandatory;padding-bottom:10px;margin:0 -16px;padding-left:16px;padding-right:16px}
+  .shell.chat-open .chat{width:100%;box-shadow:none}
+  .camp-top{grid-template-columns:1fr 1fr}
+  .auto-sum{grid-template-columns:1fr 1fr}
+  .form{grid-template-columns:1fr}
+  .frow{grid-template-columns:104px 1fr 78px}
+  .donut{grid-template-columns:120px 1fr}
+  .donut svg{width:120px;height:120px}
+  .rule{grid-template-columns:40px minmax(0,1fr);padding:16px}
+  .rule-ico{width:40px;height:40px}
+  .rule-side{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line-soft)}
+  .dialog{padding:18px}
+  .foot{flex-direction:column;gap:6px}
+}
+@media (max-width:420px){
+  .camp-top{grid-template-columns:1fr}
+  .auto-sum{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js [data-reveal]{opacity:1;transform:none}
+  .frow .fbar{width:var(--w)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DBE9FF"/><stop offset="1" stop-color="#7FB0FF"/></linearGradient>
+    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9EC5FF" stop-opacity=".28"/><stop offset="1" stop-color="#9EC5FF" stop-opacity="0"/></linearGradient>
+    <symbol id="i-pipeline" viewBox="0 0 24 24"><rect x="3.5" y="4" width="4.5" height="16" rx="1.4"/><rect x="9.75" y="4" width="4.5" height="10" rx="1.4"/><rect x="16" y="4" width="4.5" height="13" rx="1.4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6.5L6 20.5V17H7a3 3 0 0 1-3-3z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15.5 15.5 4.5 4.5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6.5 16.5v-5a5.5 5.5 0 0 1 11 0v5l1.5 2h-14z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5v3a1.5 1.5 0 0 1-1.5 1.5C10.5 20 4 13.5 4 5.5A1.5 1.5 0 0 1 5.5 4z"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 11.5 20 4l-7.5 16-2-7z"/><path d="m10.5 13 9.5-9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m6 12.5 4 4L18 8"/></symbol>
+    <symbol id="i-dcheck" viewBox="0 0 24 24"><path d="m3 12.5 4 4L15 8"/><path d="m11.5 16 1 1L21 8"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="18" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M15 5.5 8.5 12l6.5 6.5"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6.5h16M7 12h10M10 17.5h4"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><path d="m8 12.5 6.5-6.5a3 3 0 0 1 4.3 4.3l-8 8a5 5 0 0 1-7-7L11.5 3.5"/></symbol>
+    <symbol id="i-meta" viewBox="0 0 24 24"><path d="M8 8.5c-2.2 0-4 1.6-4 3.5s1.8 3.5 4 3.5c3.5 0 4.5-7 8-7 2.2 0 4 1.6 4 3.5s-1.8 3.5-4 3.5c-3.5 0-4.5-7-8-7z"/></symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 4.5 19 10l-6 2-2 6z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3.5 16.5 5.5-5.5 4 4 7.5-7.5"/><path d="M14.5 7.5h6v6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 12h5M10 15.5h5"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5M9.5 3.5h5M18 6.5l1.5-1.5"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><path d="M4 8h12M12 4l4 4-4 4M20 16H8M12 12l-4 4 4 4"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><path d="M12 3.5 14.5 6l3.5.3.3 3.5 2.5 2.5-2.5 2.5-.3 3.5-3.5.3L12 20.5 9.5 18 6 17.7l-.3-3.5L3.2 12l2.5-2.5L6 6l3.5-.3z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.2A8.5 8.5 0 1 0 12 3.5z"/><path d="M9.3 8.6c.3-.4.8-.4 1.1 0l.7 1.3c.2.3.1.6-.1.9l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.3-.2.6-.3.9-.1l1.3.7c.4.3.4.8 0 1.1l-.5.6c-.5.5-1.3.6-2 .3a9.4 9.4 0 0 1-4.7-4.7c-.3-.7-.2-1.5.3-2z"/></symbol>
+    <symbol id="i-rail" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9.5 4.5v15"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="13" rx="2.5"/><path d="M3.5 10h17M15.5 14.5h2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5v4M12 16.5v4M3.5 12h4M16.5 12h4M6 6l2.8 2.8M15.2 15.2 18 18M18 6l-2.8 2.8M8.8 15.2 6 18"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app">
+  <aside class="sidebar" aria-label="Navegação principal">
+    <a class="brand" href="#pipeline" data-view-link="pipeline" aria-label="Dalas CRM, início">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#markGrad)"/><path d="M10 8h6.4c4.6 0 7.6 3.1 7.6 8s-3 8-7.6 8H10z" fill="#05070B"/><path d="M10 22v5.5l5-5.5z" fill="#05070B"/></svg>
+      <span class="brand-name">Dalas <b>CRM</b></span>
+      <span class="rail-btn" id="rail-btn" role="button" tabindex="0" aria-label="Recolher menu"><svg class="ico"><use href="#i-rail"/></svg></span>
+    </a>
+    <div class="ws"><span class="ws-dot"></span><span>Dalas Marketing</span><small>Agência</small></div>
+    <nav class="nav">
+      <button class="nav-i is-active" type="button" data-view-link="pipeline" aria-current="page"><svg class="ico"><use href="#i-pipeline"/></svg><span>Pipeline</span><span class="nav-b" id="nav-count"></span></button>
+      <button class="nav-i" type="button" data-view-link="conversas"><svg class="ico"><use href="#i-chat"/></svg><span>Conversas</span><span class="nav-b green" id="nav-unread"></span></button>
+      <button class="nav-i" type="button" data-view-link="automacoes"><svg class="ico"><use href="#i-bolt"/></svg><span>Automações</span><span class="nav-b" id="nav-auto"></span></button>
+      <button class="nav-i" type="button" data-view-link="relatorios"><svg class="ico"><use href="#i-chart"/></svg><span>Relatórios</span></button>
+      <button class="nav-i" type="button" data-view-link="campanhas"><svg class="ico"><use href="#i-target"/></svg><span>Campanhas</span><span class="nav-b">4</span></button>
+    </nav>
+    <div class="side-foot">
+      <div class="wa" title="Número conectado via API oficial"><svg class="ico"><use href="#i-wa"/></svg><div><strong>WhatsApp conectado</strong><span>+55 11 94002-8922</span></div><i class="pulse"></i></div>
+      <p class="demo-note">Ambiente de demonstração. Todos os nomes, empresas e números são fictícios.</p>
+      <div class="me"><span class="avatar me-av">RD</span><div><strong>Rafael Dalas</strong><span>Gestor de tráfego</span></div></div>
+    </div>
+  </aside>
+
+  <div class="shell" id="shell">
+    <header class="topbar">
+      <svg class="tb-logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#markGrad)"/><path d="M10 8h6.4c4.6 0 7.6 3.1 7.6 8s-3 8-7.6 8H10z" fill="#05070B"/><path d="M10 22v5.5l5-5.5z" fill="#05070B"/></svg>
+      <div class="tb-title"><strong id="tb-title">Pipeline de vendas</strong><span id="tb-sub">Outubro de 2026 · 15 leads ativos</span></div>
+      <label class="search"><svg class="ico"><use href="#i-search"/></svg><span class="sr">Buscar lead</span><input type="search" id="search" placeholder="Buscar lead, empresa ou etiqueta" autocomplete="off"><kbd>Ctrl K</kbd></label>
+      <div class="tb-actions">
+        <button class="btn btn-primary" type="button" id="btn-new"><svg class="ico"><use href="#i-plus"/></svg>Novo lead</button>
+        <button class="icon-btn" type="button" id="btn-bell" aria-label="Notificações, 3 novas" aria-haspopup="true" aria-expanded="false"><svg class="ico"><use href="#i-bell"/></svg><i class="dot"></i></button>
+        <button class="icon-btn" type="button" aria-label="Conta de Rafael Dalas" data-toast="Perfil e configurações: ilustrativos nesta demonstração."><span class="avatar sm me-av">RD</span></button>
+      </div>
+    </header>
+
+    <div class="body">
+      <main class="main" id="main">
+
+        <!-- ================= PIPELINE ================= -->
+        <section class="view is-active" data-view="pipeline" aria-labelledby="greet">
+          <div class="hero">
+            <div class="hero-txt">
+              <h1 id="greet">Boa tarde, Rafael.</h1>
+              <p id="greet-sub">Carregando o resumo do dia…</p>
+            </div>
+            <div class="hero-act">
+              <button class="btn btn-ghost" type="button" id="btn-filter"><svg class="ico"><use href="#i-filter"/></svg>Filtros</button>
+              <button class="btn btn-primary" type="button" id="btn-oldest"><svg class="ico"><use href="#i-chat"/></svg>Responder a mais antiga</button>
+            </div>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi-panel" data-reveal>
+              <div class="kpi"><span class="kpi-l">Leads hoje</span><strong class="kpi-v" id="kpi-leads" data-n="23">0</strong><span class="kpi-d up"><svg class="ico"><use href="#i-trend"/></svg>5 a mais que ontem</span></div>
+              <div class="kpi"><span class="kpi-l">Taxa de resposta</span><strong class="kpi-v" id="kpi-resp" data-n="94" data-suffix="%">0</strong><span class="kpi-d">primeira resposta em 48 s</span></div>
+              <div class="kpi"><span class="kpi-l">Propostas na semana</span><strong class="kpi-v" id="kpi-prop" data-n="11">0</strong><span class="kpi-d">3 aguardam retorno</span></div>
+              <div class="kpi won"><span class="kpi-l">Fechados no mês</span><strong class="kpi-v" id="kpi-won" data-n="17">0</strong><span class="kpi-d"><svg class="ico"><use href="#i-badge"/></svg>R$ 86,4 mil em contratos</span></div>
+            </div>
+            <div class="chart-panel" id="chart-leads" data-reveal style="--d:90ms">
+              <div class="chart-h"><strong>Leads por dia</strong><span>últimos 14 dias</span></div>
+              <div class="tip" id="tip-leads"></div>
+            </div>
+          </div>
+
+          <div class="board-head" data-reveal style="--d:140ms">
+            <div><h2>Funil de vendas <span class="live"><i></i>recebendo do WhatsApp</span></h2><p>Arraste os cards entre etapas. Clique em um lead para abrir a conversa.</p></div>
+            <div class="chips" id="origin-chips" role="group" aria-label="Filtrar por origem">
+              <button class="chip is-on" type="button" data-origin="all">Todas as origens</button>
+              <button class="chip" type="button" data-origin="meta"><svg class="ico"><use href="#i-meta"/></svg>Meta Ads</button>
+              <button class="chip" type="button" data-origin="google"><svg class="ico"><use href="#i-cursor"/></svg>Google Ads</button>
+            </div>
+          </div>
+          <div class="board" id="board" aria-label="Quadro de leads por etapa"></div>
+        </section>
+
+        <!-- ================= CONVERSAS ================= -->
+        <section class="view" data-view="conversas" aria-labelledby="h-conv">
+          <div class="page-h">
+            <div><h1 id="h-conv">Conversas</h1><p>Todas as mensagens do WhatsApp da agência, ligadas ao lead certo. Quem chegou pelo anúncio já entra com origem, valor e etapa.</p></div>
+            <div class="hero-act"><button class="btn btn-ghost" type="button" data-toast="Exportação de conversas: ilustrativa nesta demonstração."><svg class="ico"><use href="#i-doc"/></svg>Exportar</button></div>
+          </div>
+          <div class="convs">
+            <div class="conv-list">
+              <div class="conv-list-h">
+                <label class="search"><svg class="ico"><use href="#i-search"/></svg><span class="sr">Buscar conversa</span><input type="search" id="conv-search" placeholder="Buscar conversa" autocomplete="off"></label>
+                <div class="conv-filters" role="group" aria-label="Filtrar conversas">
+                  <button class="chip is-on" type="button" data-cf="all">Todas</button>
+                  <button class="chip" type="button" data-cf="unread">Não lidas</button>
+                  <button class="chip" type="button" data-cf="waiting">Aguardando resposta</button>
+                </div>
+              </div>
+              <div class="conv-items" id="conv-items"></div>
+            </div>
+            <div class="conv-pane">
+              <div class="chat chat-inline" id="conv-pane">
+                <div class="conv-empty"><svg class="ico"><use href="#i-chat"/></svg><strong>Escolha uma conversa</strong>As mensagens aparecem aqui, com o histórico completo do lead e respostas rápidas.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= AUTOMAÇÕES ================= -->
+        <section class="view" data-view="automacoes" aria-labelledby="h-auto">
+          <div class="page-h">
+            <div><h1 id="h-auto">Automações</h1><p>Regras que cuidam do atendimento enquanto a equipe está em reunião, gravando criativo ou dormindo. Ligue e desligue quando quiser.</p></div>
+            <div class="hero-act"><button class="btn btn-ghost" type="button" data-toast="Criação de novas regras: ilustrativa nesta demonstração."><svg class="ico"><use href="#i-plus"/></svg>Nova regra</button></div>
+          </div>
+          <div class="auto-sum" data-reveal>
+            <div class="mini"><span>Regras ativas</span><strong id="auto-active">3 <small>de 4</small></strong></div>
+            <div class="mini"><span>Execuções hoje</span><strong id="auto-runs">61</strong></div>
+            <div class="mini"><span>Tempo economizado na semana</span><strong>6h40</strong></div>
+          </div>
+          <div class="auto-grid">
+            <div class="rules">
+              <article class="rule is-on" data-rule="fast" data-reveal>
+                <div class="rule-ico"><svg class="ico"><use href="#i-timer"/></svg></div>
+                <div><h3>Responder em até 1 minuto</h3><p>Quando um lead chega pelo anúncio, o CRM envia a primeira mensagem com o nome da pessoa e pergunta sobre o negócio dela. Quem responde em um minuto fala com o lead enquanto ele ainda está com o celular na mão.</p><div class="rule-meta"><span><b>23</b> respostas hoje</span><span>média de <b>48 s</b></span><span>Modelo: <b>Boas-vindas padrão</b></span></div></div>
+                <div class="rule-side"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Responder em até 1 minuto"></button><span class="rule-state">Ativa</span></div>
+              </article>
+              <article class="rule is-on" data-rule="follow" data-reveal style="--d:60ms">
+                <div class="rule-ico"><svg class="ico"><use href="#i-calendar"/></svg></div>
+                <div><h3>Lembrar follow-up em 24h</h3><p>Se a conversa fica um dia inteiro sem resposta do lead, o card recebe a etiqueta Follow-up e uma tarefa entra na sua agenda com sugestão de mensagem.</p><div class="rule-meta"><span><b>9</b> lembretes abertos</span><span>Dispara após <b>24 h</b> em silêncio</span></div></div>
+                <div class="rule-side"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Lembrar follow-up em 24h"></button><span class="rule-state">Ativa</span></div>
+              </article>
+              <article class="rule" data-rule="move" data-reveal style="--d:120ms">
+                <div class="rule-ico"><svg class="ico"><use href="#i-move"/></svg></div>
+                <div><h3>Mover para Negociação ao enviar proposta</h3><p>Ao enviar um PDF de proposta pelo WhatsApp, o card vai para Proposta enviada. Quando o lead responde, segue sozinho para Negociação.</p><div class="rule-meta"><span>Gatilho: <b>arquivo com “proposta” no nome</b></span><span><b>0</b> execuções hoje</span></div></div>
+                <div class="rule-side"><button class="switch" type="button" role="switch" aria-checked="false" aria-label="Mover para Negociação ao enviar proposta"></button><span class="rule-state">Pausada</span></div>
+              </article>
+              <article class="rule is-on" data-rule="notify" data-reveal style="--d:180ms">
+                <div class="rule-ico"><svg class="ico"><use href="#i-wa"/></svg></div>
+                <div><h3>Avisar no WhatsApp do gestor</h3><p>Lead com valor estimado acima de R$ 8 mil ou com a etiqueta Urgente? O Rafael recebe um aviso no celular com o link direto da conversa.</p><div class="rule-meta"><span><b>4</b> avisos hoje</span><span>Limite: <b>R$ 8.000</b></span><span>Destino: <b>+55 11 9•••• 8922</b></span></div></div>
+                <div class="rule-side"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Avisar no WhatsApp do gestor"></button><span class="rule-state">Ativa</span></div>
+              </article>
+            </div>
+            <aside class="log" data-reveal style="--d:120ms" aria-labelledby="h-log">
+              <h2 id="h-log">Atividade recente</h2>
+              <p class="sub">O que as automações fizeram hoje</p>
+              <ol id="log"></ol>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ================= RELATÓRIOS ================= -->
+        <section class="view" data-view="relatorios" aria-labelledby="h-rep">
+          <div class="page-h">
+            <div><h1 id="h-rep">Relatórios</h1><p>Do clique no anúncio ao contrato assinado: onde os leads entram, onde param e quanto tempo levam para ouvir de você.</p></div>
+            <div class="hero-act"><button class="chip is-on" type="button">Outubro</button><button class="chip" type="button" data-toast="Troca de período: ilustrativa nesta demonstração.">Setembro</button><button class="chip" type="button" data-toast="Troca de período: ilustrativa nesta demonstração.">Trimestre</button></div>
+          </div>
+          <div class="rep-grid">
+            <div class="rep span-7" data-reveal>
+              <h2>Funil do mês</h2><p class="sub">Quantos leads chegaram a cada etapa</p>
+              <div class="funnel">
+                <div class="frow"><span class="fl">Leads recebidos</span><div class="bar-w"><div class="fbar" style="--w:100%;--o:.45"></div></div><span class="n">312</span></div>
+                <div class="frow"><span class="fl">Em conversa</span><div class="bar-w"><div class="fbar" style="--w:77%;--o:.6"></div></div><span class="n">241<small>77%</small></span></div>
+                <div class="frow"><span class="fl">Proposta enviada</span><div class="bar-w"><div class="fbar" style="--w:31%;--o:.75"></div></div><span class="n">96<small>31%</small></span></div>
+                <div class="frow"><span class="fl">Negociação</span><div class="bar-w"><div class="fbar" style="--w:17%;--o:.9"></div></div><span class="n">54<small>17%</small></span></div>
+                <div class="frow"><span class="fl">Fechados</span><div class="bar-w"><div class="fbar" style="--w:12%;--o:1;background:var(--green)"></div></div><span class="n">37<small>12%</small></span></div>
+              </div>
+            </div>
+            <div class="rep span-5" data-reveal style="--d:60ms">
+              <h2>Origem dos leads</h2><p class="sub">312 leads em outubro</p>
+              <div class="donut">
+                <svg viewBox="0 0 120 120" role="img" aria-label="Meta Ads 58 por cento, Google Ads 42 por cento">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(200,214,235,.06)" stroke-width="14"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#4A88F0" stroke-width="14" stroke-dasharray="166 289" stroke-dashoffset="0" transform="rotate(-90 60 60)" stroke-linecap="butt"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#C98226" stroke-width="14" stroke-dasharray="119 289" stroke-dashoffset="-170" transform="rotate(-90 60 60)"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#10151F" stroke-width="16" stroke-dasharray="2 287" stroke-dashoffset="-166" transform="rotate(-90 60 60)"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#10151F" stroke-width="16" stroke-dasharray="2 287" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+                  <text x="60" y="56" text-anchor="middle" font-family="Sora,sans-serif" font-weight="600" font-size="20" fill="#F2F5F9">312</text>
+                  <text x="60" y="72" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9.5" fill="rgba(242,245,249,.5)">leads</text>
+                </svg>
+                <ul class="legend-l">
+                  <li><i style="background:#4A88F0"></i>Meta Ads<b>181 <small>58%</small></b></li>
+                  <li><i style="background:#C98226"></i>Google Ads<b>131 <small>42%</small></b></li>
+                  <li><i style="background:rgba(200,214,235,.2)"></i>Custo médio por lead<b>R$ 31,57</b></li>
+                  <li><i style="background:rgba(200,214,235,.2)"></i>Leads que viraram conversa<b>77%</b></li>
+                </ul>
+              </div>
+            </div>
+            <div class="rep span-7" id="rep-resp" data-reveal style="--d:120ms">
+              <h2>Tempo até a primeira resposta</h2><p class="sub">Média diária em segundos, últimos 7 dias</p>
+              <div class="tip" id="tip-resp"></div>
+            </div>
+            <div class="rep span-5" id="rep-week" data-reveal style="--d:180ms">
+              <h2>Contratos fechados por semana</h2><p class="sub">Valor em reais, outubro</p>
+              <div class="tip" id="tip-week"></div>
+            </div>
+            <div class="rep span-12" data-reveal style="--d:200ms">
+              <h2>Por que os leads não fecharam</h2><p class="sub">Motivo registrado ao marcar como perdido, 71 leads</p>
+              <div class="funnel">
+                <div class="frow loss"><span class="fl">Sem orçamento agora</span><div class="bar-w"><div class="fbar" style="--w:41%;--o:.5"></div></div><span class="n">29<small>41%</small></span></div>
+                <div class="frow loss"><span class="fl">Parou de responder</span><div class="bar-w"><div class="fbar" style="--w:27%;--o:.42"></div></div><span class="n">19<small>27%</small></span></div>
+                <div class="frow loss"><span class="fl">Fechou com outra agência</span><div class="bar-w"><div class="fbar" style="--w:18%;--o:.34"></div></div><span class="n">13<small>18%</small></span></div>
+                <div class="frow loss"><span class="fl">Fora do perfil</span><div class="bar-w"><div class="fbar" style="--w:14%;--o:.26"></div></div><span class="n">10<small>14%</small></span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= CAMPANHAS ================= -->
+        <section class="view" data-view="campanhas" aria-labelledby="h-camp">
+          <div class="page-h">
+            <div><h1 id="h-camp">Campanhas</h1><p>Cada campanha envia os leads direto para o pipeline, com a origem gravada no card. Assim você sabe qual anúncio pagou a conta.</p></div>
+            <div class="hero-act"><button class="btn btn-ghost" type="button" data-toast="Conexão de contas de anúncio: ilustrativa nesta demonstração."><svg class="ico"><use href="#i-plus"/></svg>Conectar conta</button></div>
+          </div>
+          <div class="camp-top" data-reveal>
+            <div class="mini"><span>Investimento em outubro</span><strong>R$ 9.850</strong></div>
+            <div class="mini"><span>Leads gerados</span><strong>312</strong></div>
+            <div class="mini"><span>Custo médio por lead</span><strong>R$ 31,57</strong></div>
+            <div class="mini"><span>Campanhas ativas</span><strong>4 <small>de 6</small></strong></div>
+          </div>
+          <div class="rep" data-reveal style="--d:80ms">
+            <h2>Campanhas do mês</h2><p class="sub">Dados sincronizados às 15h40</p>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Campanha</th><th>Plataforma</th><th>Status</th><th class="num">Investido</th><th class="num">Leads</th><th class="num">Custo por lead</th><th class="num">Conversas</th><th class="num">Fechados</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="camp"><strong>Clínicas e consultórios — captação</strong><span>Conjunto: São Paulo, raio 25 km</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-meta"/></svg>Meta Ads</span></td><td><span class="st on"><i></i>Ativa</span></td><td class="num">R$ 2.400</td><td class="num">76</td><td class="num">R$ 31,58</td><td class="num">61</td><td class="num">9</td></tr>
+                  <tr><td><div class="camp"><strong>Advocacia — pesquisa “advogado previdenciário”</strong><span>Palavras-chave exatas, 14 termos</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-cursor"/></svg>Google Ads</span></td><td><span class="st on"><i></i>Ativa</span></td><td class="num">R$ 1.850</td><td class="num">42</td><td class="num">R$ 44,05</td><td class="num">35</td><td class="num">6</td></tr>
+                  <tr><td><div class="camp"><strong>Comércio local — WhatsApp direto</strong><span>Objetivo: mensagens, 3 criativos em vídeo</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-meta"/></svg>Meta Ads</span></td><td><span class="st on"><i></i>Ativa</span></td><td class="num">R$ 1.950</td><td class="num">88</td><td class="num">R$ 22,16</td><td class="num">70</td><td class="num">11</td></tr>
+                  <tr><td><div class="camp"><strong>Engenharia e construção — pesquisa</strong><span>Rede de pesquisa, Grande SP e ABC</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-cursor"/></svg>Google Ads</span></td><td><span class="st on"><i></i>Ativa</span></td><td class="num">R$ 1.600</td><td class="num">31</td><td class="num">R$ 51,61</td><td class="num">24</td><td class="num">4</td></tr>
+                  <tr><td><div class="camp"><strong>Remarketing — visitantes do site</strong><span>Públicos: 30 dias, sem conversão</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-meta"/></svg>Meta Ads</span></td><td><span class="st rev"><i></i>Em revisão</span></td><td class="num">R$ 1.250</td><td class="num">47</td><td class="num">R$ 26,60</td><td class="num">38</td><td class="num">5</td></tr>
+                  <tr><td><div class="camp"><strong>Lançamento imobiliário — lista VIP</strong><span>Landing page, encerrada em 9 de outubro</span></div></td><td><span class="plat"><svg class="ico"><use href="#i-cursor"/></svg>Google Ads</span></td><td><span class="st"><i></i>Pausada</span></td><td class="num">R$ 800</td><td class="num">28</td><td class="num">R$ 28,57</td><td class="num">13</td><td class="num">2</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <footer class="foot">
+          <span>Demonstração · Dalas Marketing</span>
+          <span>Site desenvolvido por <a href="../../index.html">Dalas Marketing</a></span>
+        </footer>
+      </main>
+
+      <aside class="chat" id="chat" aria-label="Conversa no WhatsApp" aria-hidden="true"></aside>
+      <div class="chat-backdrop" id="chat-backdrop"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Navegação">
+  <button class="tab is-active" type="button" data-view-link="pipeline"><svg class="ico"><use href="#i-pipeline"/></svg>Pipeline</button>
+  <button class="tab" type="button" data-view-link="conversas"><svg class="ico"><use href="#i-chat"/></svg>Conversas<span class="nav-b" id="tab-unread"></span></button>
+  <button class="tab" type="button" data-view-link="automacoes"><svg class="ico"><use href="#i-bolt"/></svg>Automações</button>
+  <button class="tab" type="button" data-view-link="relatorios"><svg class="ico"><use href="#i-chart"/></svg>Relatórios</button>
+  <button class="tab" type="button" data-view-link="campanhas"><svg class="ico"><use href="#i-target"/></svg>Campanhas</button>
+</nav>
+<button class="fab" type="button" id="fab-new" aria-label="Novo lead"><svg class="ico"><use href="#i-plus"/></svg></button>
+
+<div class="pop" id="pop-card" role="menu" aria-label="Opções do lead"></div>
+<div class="pop notif" id="pop-notif" role="dialog" aria-label="Notificações">
+  <div class="pop-h">Notificações</div>
+  <button type="button" class="n-i" data-open-chat="5"><i class="n-dot"></i><div><p><b>Juliana Castro</b> respondeu: “Quero sim. Pode mandar por aqui mesmo?”</p><time>há 25 min</time></div></button>
+  <button type="button" class="n-i" data-open-chat="9"><i class="n-dot"></i><div><p>Follow-up: <b>Larissa Gomes</b> está há 2 dias sem contato depois da proposta.</p><time>há 1 h</time></div></button>
+  <button type="button" class="n-i" data-open-chat="15"><i class="n-dot"></i><div><p>Automação respondeu <b>Isabela Rocha</b> em 41 segundos.</p><time>há 20 min</time></div></button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-h">
+  <form class="dialog" id="form-lead" novalidate>
+    <h2 id="modal-h">Novo lead</h2>
+    <p>Leads de anúncio entram sozinhos. Use este formulário para indicações e contatos manuais.</p>
+    <div class="form">
+      <div class="field-g"><label for="f-name">Nome</label><input id="f-name" name="name" required placeholder="Ex.: Ana Beatriz Souza"></div>
+      <div class="field-g"><label for="f-co">Empresa</label><input id="f-co" name="co" required placeholder="Ex.: Souza Imóveis"></div>
+      <div class="field-g"><label for="f-origin">Origem</label><select id="f-origin" name="origin"><option value="meta">Meta Ads</option><option value="google">Google Ads</option></select></div>
+      <div class="field-g"><label for="f-value">Valor estimado (R$)</label><input id="f-value" name="value" type="number" min="0" step="100" placeholder="4.500"></div>
+      <div class="field-g full"><label for="f-tag">Etiqueta</label><select id="f-tag" name="tag"><option>Indicação</option><option>Quente</option><option>Site + tráfego</option><option>Landing page</option><option>Retorno</option></select></div>
+    </div>
+    <div class="dialog-act"><button class="btn btn-ghost" type="button" data-modal-close>Cancelar</button><button class="btn btn-primary" type="submit">Adicionar ao pipeline</button></div>
+  </form>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+document.documentElement.classList.add('js');
+(() => {
+'use strict';
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ico = (n, cls = '') => `<svg class="ico${cls ? ' ' + cls : ''}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ------------------------------------------------------------------ dados */
+const STAGES = [
+  { id: 'novo', name: 'Novo lead', p: '20%' },
+  { id: 'conversa', name: 'Em conversa', p: '40%' },
+  { id: 'proposta', name: 'Proposta enviada', p: '60%' },
+  { id: 'negociacao', name: 'Negociação', p: '80%' },
+  { id: 'fechado', name: 'Fechado', p: '100%' }
+];
+const stageName = id => (STAGES.find(s => s.id === id) || {}).name || id;
+const ORIGIN = { meta: 'Meta Ads', google: 'Google Ads' };
+const QUICK = ['Posso te mandar uma proposta ainda hoje?', 'Tem 15 minutos para uma call amanhã?', 'Qual orçamento mensal você imagina para mídia?', 'Vou te enviar dois cenários de investimento.'];
+
+/* mensagens: [direção, texto, hora, status, automação] */
+const LEADS = [
+  { id: 1, name: 'Mariana Lopes', co: 'Clínica Vitalle', origin: 'meta', value: 4800, ago: 12, tag: 'Quente', stage: 'novo', hue: 212, unread: 2,
+    chat: [
+      ['in', 'Oi! Vi o anúncio de vocês no Instagram sobre captação de pacientes. Tenho uma clínica de estética em Moema.', '15:52'],
+      ['out', 'Oi, Mariana! Aqui é a Dalas Marketing. Que bom que você chegou até aqui. Hoje vocês já anunciam ou seria a primeira campanha?', '15:52', 'read', true],
+      ['in', 'Já tentei impulsionar uns posts, mas só vinha curioso, ninguém marcava.', '15:55'],
+      ['out', 'Faz sentido. Impulsionar post é bem diferente de campanha com segmentação e página de agendamento. Me conta: qual procedimento tem mais margem para vocês hoje?', '15:56', 'read'],
+      ['in', 'Limpeza de pele e botox. O botox é o carro-chefe.', '15:59'],
+      ['in', 'Vocês conseguem me mostrar como ficaria o anúncio?', '16:00']
+    ], reply: 'Perfeito, fico no aguardo então!' },
+  { id: 2, name: 'Carlos Eduardo Nunes', co: 'Nunes Engenharia', origin: 'google', value: 12500, ago: 38, tag: 'Site + tráfego', stage: 'novo', hue: 226, unread: 1,
+    chat: [
+      ['in', 'Boa tarde. Pesquisei no Google por agência de marketing para engenharia e caí no site de vocês. Preciso de site e captação de clientes.', '15:26'],
+      ['out', 'Boa tarde, Carlos! Obrigado pelo contato. Hoje vocês atendem mais obras residenciais ou industriais?', '15:27', 'read', true],
+      ['in', 'Laudos e projetos estruturais, mais para construtoras.', '15:31'],
+      ['out', 'Entendi. Nesse caso Google Ads costuma funcionar melhor que redes sociais, porque a construtora já está procurando. Posso te mandar um diagnóstico rápido?', '15:32', 'read'],
+      ['in', 'Pode sim. Qual o prazo médio para colocar um site no ar?', '15:34']
+    ], reply: 'Ótimo, vou aguardar o material então.' },
+  { id: 3, name: 'Fernanda Ribeiro', co: 'Studio Fê Pilates', origin: 'meta', value: 2900, ago: 64, tag: 'Instagram', stage: 'novo', hue: 200, unread: 1,
+    chat: [
+      ['in', 'Olá, quero saber os valores do serviço de tráfego pago.', '14:58'],
+      ['out', 'Olá, Fernanda! Aqui é a Dalas Marketing. Antes de falar de valores, me conta um pouco: o estúdio é só pilates ou tem outras modalidades?', '14:59', 'read', true],
+      ['in', 'Pilates clássico e funcional. Fica em Perdizes, somos duas instrutoras.', '15:03'],
+      ['out', 'Para estúdio de bairro o que mais funciona é anúncio com raio de 3 km e oferta de aula experimental. Posso te mandar dois cenários de investimento?', '15:05', 'read'],
+      ['in', 'Quantas aulas experimentais vocês acham que conseguem trazer por mês?', '15:08']
+    ], reply: 'Manda sim, por favor.' },
+  { id: 15, name: 'Isabela Rocha', co: 'Rocha Cosméticos', origin: 'meta', value: 4400, ago: 20, tag: 'Loja online', stage: 'novo', hue: 206, unread: 1,
+    chat: [
+      ['in', 'Oi! Sou a Isabela, tenho uma loja de cosméticos naturais. Quero vender mais pela internet.', '15:43'],
+      ['out', 'Oi, Isabela! Aqui é a Dalas Marketing. Vocês vendem pelo site próprio ou só por marketplace?', '15:43', 'read', true],
+      ['in', 'Instagram e um site na Shopify que ninguém acessa, rs.', '15:47'],
+      ['out', 'Acontece muito, e dá para mudar. Qual é o seu ticket médio hoje?', '15:48', 'read'],
+      ['in', 'Uns R$ 120. Já vendi bem no Dia das Mães, depois caiu.', '15:52']
+    ], reply: 'Tá bom, vou aguardar as informações.' },
+
+  { id: 5, name: 'Juliana Castro', co: 'Castro Advocacia', origin: 'google', value: 6400, ago: 25, tag: 'Google Ads', stage: 'conversa', hue: 218, unread: 1,
+    chat: [
+      ['in', 'Boa tarde! Sou a Juliana, do escritório Castro Advocacia. Vi vocês no Google. Atendemos direito previdenciário e queremos mais consultas agendadas.', '15:11'],
+      ['out', 'Boa tarde, Juliana! Previdenciário tem demanda alta de pesquisa, principalmente aposentadoria e revisão de benefício. Vocês já têm site?', '15:12', 'read'],
+      ['in', 'Temos, mas é antigo e não converte. As pessoas ligam pouco.', '15:14'],
+      ['out', 'Entendi. O caminho mais comum nesse cenário é uma landing page focada em agendamento e campanha de pesquisa com clique no WhatsApp. O lead cai direto aqui no CRM.', '15:15', 'read'],
+      ['in', 'Interessante. E o investimento mínimo em anúncio, qual seria?', '15:17'],
+      ['out', 'Para a região de vocês, a gente recomenda começar com R$ 1.500 por mês em mídia. A gestão fica à parte. Quer que eu monte uma proposta com os dois valores?', '15:18', 'read'],
+      ['in', 'Quero sim. Pode mandar por aqui mesmo?', '15:27']
+    ], reply: 'Perfeito, vou dar uma olhada e te retorno ainda hoje.' },
+  { id: 4, name: 'Thiago Martins', co: 'Martins Imóveis', origin: 'google', value: 9200, ago: 180, tag: 'Landing page', stage: 'conversa', hue: 230, unread: 1,
+    chat: [
+      ['in', 'Thiago, da Martins Imóveis. Preciso de uma landing page para um lançamento em Santo André.', '12:40'],
+      ['out', 'Fala, Thiago! Lançamento de quantas unidades? E já tem material do empreendimento, como plantas e renders?', '12:41', 'read'],
+      ['in', '84 unidades, de 2 e 3 dormitórios. Tenho renders e o book da construtora.', '12:45'],
+      ['out', 'Isso adianta muito. Landing page com lista VIP e campanha de captação é o caminho. Quando é o lançamento oficial?', '12:46', 'read'],
+      ['in', 'Dia 28 de novembro. Dá tempo?', '12:48'],
+      ['out', 'Dá sim. A landing fica pronta em até 10 dias úteis e a campanha entra 5 dias antes para aquecer. Te mando o cronograma hoje ainda.', '12:50', 'read'],
+      ['in', 'Fechado, aguardo o cronograma.', '12:52']
+    ], reply: 'Show, valeu!' },
+  { id: 6, name: 'Ricardo Alves', co: 'Alves Motos', origin: 'meta', value: 3600, ago: 120, tag: 'Retorno', stage: 'conversa', hue: 196, unread: 0,
+    chat: [
+      ['in', 'Ricardo, da Alves Motos. Quero vender mais motos seminovas pelo Instagram.', '13:35'],
+      ['out', 'Fala, Ricardo! Quantas motos vocês têm em estoque em média? E já postam os anúncios no feed?', '13:36', 'read'],
+      ['in', 'Umas 40. Postamos, mas sem padrão nenhum.', '13:41'],
+      ['out', 'Para loja de motos o que mais dá resultado é catálogo no Instagram e campanha com as motos em destaque para quem está a até 15 km. Posso te mostrar um exemplo de outra loja?', '13:43', 'read'],
+      ['in', 'Pode mandar.', '13:44'],
+      ['out', 'Te mando em 10 minutos, estou fechando um atendimento aqui.', '13:45', 'read']
+    ], reply: 'Beleza, tô por aqui.' },
+  { id: 7, name: 'Beatriz Mendes', co: 'Doce Mel Confeitaria', origin: 'meta', value: 1900, ago: 300, tag: 'Delivery', stage: 'conversa', hue: 208, unread: 1,
+    chat: [
+      ['in', 'Oi, sou a Bia da Doce Mel. Quero encomendas de bolo para o fim de ano!', '10:28'],
+      ['out', 'Oi, Bia! Que projeto gostoso. Hoje as encomendas vêm mais pelo WhatsApp ou pelo iFood?', '10:29', 'read'],
+      ['in', 'WhatsApp. Mas é muito trabalho responder todo mundo.', '10:34'],
+      ['out', 'Esse é exatamente o tipo de coisa que a automação resolve: resposta em 1 minuto com o cardápio e botão de encomenda. A conversa cai aqui para você só fechar. Quer ver como funciona?', '10:35', 'read'],
+      ['in', 'Quero! Mas tenho que ver preço antes, ok?', '10:41']
+    ], reply: 'Combinado, me manda os valores.' },
+
+  { id: 8, name: 'Paulo Henrique Souza', co: 'PH Climatização', origin: 'google', value: 7800, ago: 1440, tag: 'Proposta v2', stage: 'proposta', hue: 222, unread: 0,
+    chat: [
+      ['in', 'Paulo, da PH Climatização. Recebi a proposta de vocês, obrigado.', '16:05'],
+      ['out', 'Que bom, Paulo! Ficou alguma dúvida sobre o plano de Google Ads para instalação de ar-condicionado?', '16:06', 'read'],
+      ['in', 'Sim. Esse valor de mídia é por mês ou por campanha?', '16:10'],
+      ['out', 'Por mês, e ele é 100% seu: vai direto para o Google, a gente só gerencia. A taxa de gestão é a outra linha da proposta.', '16:11', 'read'],
+      ['in', 'Entendi. Vou conversar com meu sócio e te retorno até sexta.', '16:14'],
+      ['out', 'Perfeito. Se quiser, agendo uma call de 15 minutos com vocês dois para tirar dúvidas juntos.', '16:15', 'read']
+    ], reply: 'Boa ideia, vou ver o horário dele.' },
+  { id: 9, name: 'Larissa Gomes', co: 'Gomes & Filhos Contabilidade', origin: 'meta', value: 5200, ago: 2880, tag: 'Follow-up', stage: 'proposta', hue: 214, unread: 0,
+    chat: [
+      ['in', 'Larissa aqui. Recebemos a proposta, vamos analisar.', '11:20'],
+      ['out', 'Ótimo, Larissa! Qualquer dúvida sobre o pacote de conteúdo e anúncios é só chamar.', '11:21', 'read'],
+      ['in', 'Uma pergunta: vocês fazem a arte dos posts também?', '11:30'],
+      ['out', 'Sim, os criativos estão incluídos no plano Crescimento: 12 artes por mês e 4 vídeos curtos.', '11:31', 'read'],
+      ['in', 'Perfeito, era essa a dúvida. Retorno em breve.', '11:33'],
+      ['out', 'Combinado. Fico à disposição.', '11:34', 'read']
+    ], reply: 'Ok, obrigada!' },
+  { id: 10, name: 'André Barbosa', co: 'Barbosa Odontologia', origin: 'google', value: 8900, ago: 360, tag: 'Urgente', stage: 'proposta', hue: 234, unread: 1,
+    chat: [
+      ['in', 'Dr. André aqui. Preciso de uma resposta rápida: a proposta inclui o site novo?', '09:48'],
+      ['out', 'Inclui sim, Dr. André. Site de 5 páginas com agendamento online e integração com o WhatsApp da clínica.', '09:49', 'read'],
+      ['in', 'E o prazo? Quero estar no ar antes de dezembro, época de implante.', '09:52'],
+      ['out', 'Prazo de 15 dias úteis para o site. Se assinar esta semana, entra no ar dia 10 de novembro, com margem.', '09:53', 'read'],
+      ['in', 'Ok. Me manda o contrato que eu assino hoje.', '09:58']
+    ], reply: 'Recebido, vou assinar.' },
+
+  { id: 11, name: 'Camila Ferreira', co: 'Ferreira Arquitetura', origin: 'meta', value: 11000, ago: 240, tag: 'Negociando', stage: 'negociacao', hue: 204, unread: 1,
+    chat: [
+      ['in', 'Camila, da Ferreira Arquitetura. Gostei muito da proposta, mas o valor está um pouco acima do que planejamos.', '11:52'],
+      ['out', 'Entendo, Camila. Qual é o orçamento que vocês tinham em mente para esse trimestre?', '11:53', 'read'],
+      ['in', 'Algo em torno de R$ 9 mil pelo projeto todo.', '11:57'],
+      ['out', 'Consigo fazer o seguinte: manter o site completo e começar com 2 campanhas em vez de 3 no primeiro mês. Fica em R$ 9.400 e a terceira entra no mês 2.', '12:01', 'read'],
+      ['in', 'Isso é interessante. Vocês fazem em 2 parcelas?', '12:05'],
+      ['out', 'Fazemos: 50% na assinatura e 50% na entrega do site.', '12:06', 'read'],
+      ['in', 'Vou alinhar com meu sócio e dou retorno amanhã cedo.', '12:08']
+    ], reply: 'Combinado!' },
+  { id: 12, name: 'Marcos Vinícius Lima', co: 'Lima Fitness Center', origin: 'meta', value: 6900, ago: 1500, tag: 'Desconto', stage: 'negociacao', hue: 198, unread: 0,
+    chat: [
+      ['in', 'Marcos aqui. Minha dúvida é se tem desconto para contrato anual.', '14:02'],
+      ['out', 'Tem sim, Marcos: contrato de 12 meses sai com 10% a menos na gestão e a landing page entra sem custo.', '14:03', 'read'],
+      ['in', 'E se eu quiser cancelar no meio?', '14:06'],
+      ['out', 'Aviso de 30 dias, sem multa. A gente prefere que você fique porque está vendo resultado, não por contrato.', '14:07', 'read'],
+      ['in', 'Gostei dessa postura. Vou pensar até amanhã.', '14:10'],
+      ['out', 'Fique à vontade. Qualquer dúvida, estou por aqui.', '14:11', 'read']
+    ], reply: 'Valeu pela atenção!' },
+
+  { id: 13, name: 'Renata Oliveira', co: 'Oliveira Pet Shop', origin: 'google', value: 3200, ago: 4320, tag: 'Ganho', stage: 'fechado', hue: 150, unread: 0,
+    chat: [
+      ['in', 'Renata, da Oliveira Pet. Contrato assinado! Qual o próximo passo?', '10:12'],
+      ['out', 'Parabéns pela decisão, Renata! O próximo passo é a reunião de onboarding. Que tal quinta às 10h?', '10:13', 'read'],
+      ['in', 'Quinta está ótimo.', '10:15'],
+      ['out', 'Agendado! Vou te mandar um formulário rápido para a gente já chegar com tudo mapeado: serviços, raio de entrega e diferenciais.', '10:16', 'read'],
+      ['in', 'Já preenchi. Obrigada!', '10:40'],
+      ['out', 'Recebido. Até quinta!', '10:41', 'read']
+    ], reply: 'Até lá!' },
+  { id: 14, name: 'Gustavo Pereira', co: 'Pereira Auto Center', origin: 'meta', value: 5600, ago: 1440, tag: 'Ganho', stage: 'fechado', hue: 150, unread: 0,
+    chat: [
+      ['in', 'Gustavo, do Auto Center. Assinei o contrato, pode seguir.', '17:20'],
+      ['out', 'Show, Gustavo! Bem-vindo. A equipe de criativos já começa hoje o roteiro dos vídeos de revisão.', '17:21', 'read'],
+      ['in', 'Beleza. Vocês precisam que eu grave alguma coisa?', '17:24'],
+      ['out', 'Sim: 3 vídeos curtos na oficina, com o celular mesmo. Te mando o roteiro e a lista do que filmar até amanhã.', '17:25', 'read'],
+      ['in', 'Perfeito.', '17:26']
+    ], reply: 'Fechado, aguardo o roteiro.' }
+];
+
+const POOL = [
+  { name: 'Luciana Prado', co: 'Prado Imóveis', origin: 'meta', value: 7200, tag: 'Quente', hue: 216,
+    chat: [['in', 'Oi, vi o anúncio de vocês sobre captação para imobiliárias. Quero entender como funciona.', null], ['out', 'Oi, Luciana! Aqui é a Dalas Marketing. Vocês trabalham mais com venda ou locação?', null, 'read', true]], reply: 'Mais venda. Posso te ligar?' },
+  { name: 'Felipe Andrade', co: 'Andrade Pizzaria', origin: 'meta', value: 2400, tag: 'Delivery', hue: 202,
+    chat: [['in', 'Boa tarde! Tenho uma pizzaria em Santana e quero pedidos pelo WhatsApp sem depender de app.', null], ['out', 'Boa tarde, Felipe! Aqui é a Dalas Marketing. Hoje quantos pedidos por dia vocês fazem em média?', null, 'read', true]], reply: 'Uns 60 nos fins de semana.' },
+  { name: 'Daniela Moraes', co: 'Moraes Fisioterapia', origin: 'google', value: 4100, tag: 'Site', hue: 228,
+    chat: [['in', 'Olá, pesquisei agência para clínica de fisioterapia e encontrei vocês. Preciso de site e agendamento.', null], ['out', 'Olá, Daniela! Aqui é a Dalas Marketing. A clínica atende particular, convênio ou os dois?', null, 'read', true]], reply: 'Particular. Posso mandar fotos da clínica?' }
+];
+
+const LOG0 = [
+  ['15:53', 'Resposta automática enviada para <b>Mariana Lopes</b> em 39 s.', ''],
+  ['15:44', 'Resposta automática enviada para <b>Isabela Rocha</b> em 41 s.', ''],
+  ['15:40', 'Aviso enviado ao gestor: <b>Carlos Eduardo Nunes</b> (R$ 12.500) entrou no pipeline.', ''],
+  ['15:27', 'Resposta automática enviada para <b>Carlos Eduardo Nunes</b> em 52 s.', ''],
+  ['14:59', 'Resposta automática enviada para <b>Fernanda Ribeiro</b> em 44 s.', ''],
+  ['11:20', 'Lembrete de follow-up criado para <b>Larissa Gomes</b> (2 dias sem contato).', ''],
+  ['09:50', 'Aviso enviado ao gestor: <b>André Barbosa</b> marcado como Urgente.', ''],
+  ['08:00', 'Resumo do dia enviado ao gestor: 7 conversas aguardando resposta.', '']
+];
+
+const VIEW_META = {
+  pipeline: ['Pipeline de vendas', 'Outubro de 2026'],
+  conversas: ['Conversas', 'WhatsApp da agência'],
+  automacoes: ['Automações', 'Regras de atendimento'],
+  relatorios: ['Relatórios', 'Outubro de 2026'],
+  campanhas: ['Campanhas', 'Meta Ads e Google Ads']
+};
+
+/* ---------------------------------------------------------------- helpers */
+const leadById = id => LEADS.find(l => l.id === Number(id));
+const brl = v => 'R$ ' + Number(v).toLocaleString('pt-BR');
+const brlK = v => v >= 1000 ? 'R$ ' + (v / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mil' : brl(v);
+const agoTxt = m => m < 1 ? 'agora' : m < 60 ? `há ${m} min` : m < 1440 ? `há ${Math.round(m / 60)} h` : `há ${Math.round(m / 1440)} ${Math.round(m / 1440) === 1 ? 'dia' : 'dias'}`;
+const initials = n => n.split(' ').filter(Boolean).filter((w, i, a) => i === 0 || i === a.length - 1).map(w => w[0]).join('').toUpperCase();
+const nowTime = () => new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+const isHot = l => /quente|urgente/i.test(l.tag);
+const lastMsg = l => l.chat[l.chat.length - 1];
+const waitingReply = l => l.chat.length && lastMsg(l)[0] === 'in' && l.stage !== 'fechado';
+const shell = $('#shell'), app = $('#app'), board = $('#board'), chatEl = $('#chat');
+
+function toast(msg, kind = '') {
+  const t = document.createElement('div');
+  t.className = 'toast' + (kind ? ' ' + kind : '');
+  t.innerHTML = ico(kind === 'ok' ? 'check' : 'spark') + `<span>${msg}</span>`;
+  $('#toasts').appendChild(t);
+  setTimeout(() => { t.classList.add('bye'); setTimeout(() => t.remove(), 320); }, 3400);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-toast]');
+  if (b) toast(b.dataset.toast);
+});
+
+/* ------------------------------------------------------------------ quadro */
+function cardHTML(l) {
+  const hot = isHot(l), won = l.stage === 'fechado', late = l.ago >= 1440 && !won;
+  return `<article class="card${hot ? ' is-hot' : ''}${won ? ' is-won' : ''}" draggable="true" data-id="${l.id}" data-origin="${l.origin}" tabindex="0" role="button" aria-label="${esc(l.name)}, ${esc(l.co)}, ${ORIGIN[l.origin]}, ${brl(l.value)}. Abrir conversa">
+    <div class="card-top"><span class="avatar" style="--h:${l.hue}">${initials(l.name)}</span><div class="who"><strong>${esc(l.name)}</strong><span>${esc(l.co)}</span></div><button class="card-more" type="button" aria-label="Opções de ${esc(l.name)}" data-more="${l.id}">${ico('more')}</button></div>
+    <div class="card-mid"><span class="origin">${ico(l.origin === 'meta' ? 'meta' : 'cursor')}${ORIGIN[l.origin]}</span><span class="value">${brl(l.value)}</span></div>
+    <div class="card-bot"><span class="ago${late ? ' late' : ''}">${ico('clock')}${agoTxt(l.ago)}</span><span class="tag${hot ? ' hot' : ''}${won ? ' won' : ''}">${esc(l.tag)}</span></div>
+  </article>`;
+}
+function renderBoard() {
+  board.innerHTML = STAGES.map((s, i) => `<section class="col" data-stage="${s.id}" data-reveal style="--d:${180 + i * 70}ms" aria-label="${s.name}">
+    <header class="col-h"><span class="col-dot"></span><h3>${s.name}</h3><span class="col-n">0</span><span class="col-sum"></span></header>
+    <div class="col-rail"><i style="--p:${s.p}"></i></div>
+    <div class="col-body" data-stage="${s.id}"><div class="col-empty">Nenhum lead nesta etapa.<br>Arraste um card para cá.</div></div>
+    <button class="col-add" type="button" data-add="${s.id}">${ico('plus')}Adicionar lead</button>
+  </section>`).join('');
+  LEADS.forEach(l => $(`.col-body[data-stage="${l.stage}"]`).insertAdjacentHTML('beforeend', cardHTML(l)));
+  recalc();
+}
+function recalc() {
+  STAGES.forEach(s => {
+    const body = $(`.col-body[data-stage="${s.id}"]`);
+    const cards = $$('.card', body);
+    const sum = cards.reduce((a, c) => a + (leadById(c.dataset.id) || { value: 0 }).value, 0);
+    $(`.col[data-stage="${s.id}"] .col-n`).textContent = cards.length;
+    $(`.col[data-stage="${s.id}"] .col-sum`).textContent = cards.length ? brlK(sum) : 'sem valor';
+    body.classList.toggle('is-empty', !cards.length);
+  });
+  const active = LEADS.filter(l => l.stage !== 'fechado').length;
+  $('#nav-count').textContent = active;
+  $('#tb-sub').textContent = VIEW_META.pipeline[1] + ` · ${active} leads ativos`;
+}
+function refreshCard(l) {
+  const old = $(`.card[data-id="${l.id}"]`);
+  if (!old) return;
+  const sel = old.classList.contains('is-sel');
+  old.outerHTML = cardHTML(l);
+  if (sel) $(`.card[data-id="${l.id}"]`).classList.add('is-sel');
+  applyFilters();
+}
+
+/* arrastar e soltar */
+let dragId = null;
+board.addEventListener('dragstart', e => {
+  const card = e.target.closest('.card'); if (!card) return;
+  dragId = Number(card.dataset.id);
+  card.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  try { e.dataTransfer.setData('text/plain', String(dragId)); } catch (_) {}
+});
+board.addEventListener('dragend', e => {
+  const card = e.target.closest('.card'); if (card) card.classList.remove('dragging');
+  $$('.col-body.over').forEach(b => b.classList.remove('over'));
+  dragId = null;
+});
+board.addEventListener('dragover', e => {
+  const body = e.target.closest('.col-body'); if (!body || dragId == null) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  $$('.col-body.over').forEach(b => { if (b !== body) b.classList.remove('over'); });
+  body.classList.add('over');
+  const dragging = $('.card.dragging'); if (!dragging) return;
+  const after = afterCard(body, e.clientY);
+  if (after == null) body.appendChild(dragging); else if (after !== dragging) body.insertBefore(dragging, after);
+});
+board.addEventListener('dragleave', e => {
+  const body = e.target.closest('.col-body');
+  if (body && !body.contains(e.relatedTarget)) body.classList.remove('over');
+});
+board.addEventListener('drop', e => {
+  const body = e.target.closest('.col-body'); if (!body) return;
+  e.preventDefault();
+  const id = dragId || Number(e.dataTransfer.getData('text/plain'));
+  body.classList.remove('over');
+  commitMove(id, body.dataset.stage, { keepPosition: true });
+});
+function afterCard(body, y) {
+  let best = { off: -Infinity, el: null };
+  $$('.card:not(.dragging)', body).forEach(el => {
+    const r = el.getBoundingClientRect();
+    const off = y - r.top - r.height / 2;
+    if (off < 0 && off > best.off) best = { off, el };
+  });
+  return best.el;
+}
+function commitMove(id, stage, { keepPosition = false } = {}) {
+  const l = leadById(id); if (!l) return;
+  const from = l.stage;
+  l.stage = stage;
+  if (stage === 'fechado') { l.tag = 'Ganho'; l.hue = 150; }
+  else if (l.tag === 'Ganho') { l.tag = 'Retomado'; l.hue = 214; }
+  const old = $(`.card[data-id="${id}"]`);
+  const html = cardHTML(l);
+  if (keepPosition && old && old.closest('.col-body') && old.closest('.col-body').dataset.stage === stage) old.outerHTML = html;
+  else { if (old) old.remove(); $(`.col-body[data-stage="${stage}"]`).insertAdjacentHTML('beforeend', html); }
+  recalc(); applyFilters();
+  if (from !== stage) {
+    const won = stage === 'fechado';
+    toast(`${l.name} foi para ${stageName(stage)}`, won ? 'ok' : '');
+    if (won && from !== 'fechado') { bump('#kpi-won', 1); addLog(`<b>${esc(l.name)}</b> marcado como ganho (${brl(l.value)}).`, true); }
+    if (stage === 'proposta') bump('#kpi-prop', 1);
+    if (stage === 'negociacao' && from === 'proposta' && auto.move) addLog(`<b>${esc(l.name)}</b> movido para Negociação pela automação de proposta.`);
+    if (chatLead && chatLead.id === l.id) $$('.meta-chip.stage').forEach(c => { c.innerHTML = ico('pipeline') + stageName(stage); });
+  }
+  updateHero(); renderConvList();
+}
+
+/* clique no card e menu */
+board.addEventListener('click', e => {
+  const more = e.target.closest('[data-more]');
+  if (more) { e.stopPropagation(); openCardMenu(more, Number(more.dataset.more)); return; }
+  const add = e.target.closest('[data-add]');
+  if (add) { openModal(add.dataset.add); return; }
+  const card = e.target.closest('.card');
+  if (card) openChat(Number(card.dataset.id));
+});
+board.addEventListener('keydown', e => {
+  const card = e.target.closest('.card'); if (!card || e.target !== card) return;
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openChat(Number(card.dataset.id)); }
+});
+function openCardMenu(anchor, id) {
+  const l = leadById(id); const pop = $('#pop-card');
+  pop.innerHTML = `<div class="pop-h">${esc(l.name)}</div>
+    <button type="button" data-act="chat">${ico('chat')}Abrir conversa</button>
+    <button type="button" data-act="ping">${ico('wa')}Avisar o gestor</button>
+    <hr><div class="pop-h">Mover para</div>
+    ${STAGES.filter(s => s.id !== l.stage && s.id !== 'fechado').map(s => `<button type="button" data-act="move" data-stage="${s.id}">${ico('move')}${s.name}</button>`).join('')}
+    ${l.stage !== 'fechado' ? `<hr><button type="button" class="won" data-act="move" data-stage="fechado">${ico('badge')}Marcar como ganho</button>` : ''}`;
+  pop.onclick = e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    closePops();
+    if (b.dataset.act === 'chat') openChat(id);
+    else if (b.dataset.act === 'move') commitMove(id, b.dataset.stage);
+    else if (b.dataset.act === 'ping') { toast(`Aviso enviado ao WhatsApp do gestor sobre ${l.name}.`, 'ok'); addLog(`Aviso manual ao gestor sobre <b>${esc(l.name)}</b>.`); }
+  };
+  showPop(pop, anchor);
+}
+function showPop(pop, anchor) {
+  closePops();
+  pop.classList.add('is-open');
+  const r = anchor.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+  let x = Math.min(r.right - w, innerWidth - w - 10); if (x < 10) x = 10;
+  let y = r.bottom + 8; if (y + h > innerHeight - 10) y = Math.max(10, r.top - h - 8);
+  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  const first = pop.querySelector('button'); if (first) first.focus({ preventScroll: true });
+}
+function closePops() { $$('.pop.is-open').forEach(p => p.classList.remove('is-open')); $('#btn-bell').setAttribute('aria-expanded', 'false'); }
+document.addEventListener('click', e => { if (!e.target.closest('.pop') && !e.target.closest('#btn-bell')) closePops(); });
+
+/* filtros do quadro */
+let originFilter = 'all', query = '';
+function applyFilters() {
+  const q = query.trim().toLowerCase();
+  let shown = 0;
+  $$('.card', board).forEach(c => {
+    const l = leadById(c.dataset.id);
+    const ok = (originFilter === 'all' || l.origin === originFilter) && (!q || `${l.name} ${l.co} ${l.tag} ${ORIGIN[l.origin]}`.toLowerCase().includes(q));
+    c.hidden = !ok; if (ok) shown++;
+  });
+  STAGES.forEach(s => {
+    const body = $(`.col-body[data-stage="${s.id}"]`);
+    body.classList.toggle('is-empty', !$$('.card:not([hidden])', body).length);
+  });
+  const empty = $('.col-empty');
+  $$('.col-empty').forEach(el => { el.innerHTML = (q || originFilter !== 'all') ? 'Nenhum lead com esse filtro.' : 'Nenhum lead nesta etapa.<br>Arraste um card para cá.'; });
+}
+$('#search').addEventListener('input', e => { query = e.target.value; if (!$('[data-view="pipeline"]').classList.contains('is-active')) showView('pipeline'); applyFilters(); });
+$('#origin-chips').addEventListener('click', e => {
+  const b = e.target.closest('[data-origin]'); if (!b) return;
+  originFilter = b.dataset.origin;
+  $$('#origin-chips .chip').forEach(c => c.classList.toggle('is-on', c === b));
+  applyFilters();
+});
+$('#btn-filter').addEventListener('click', () => { const next = { all: 'meta', meta: 'google', google: 'all' }[originFilter]; $(`#origin-chips [data-origin="${next}"]`).click(); toast(next === 'all' ? 'Mostrando todas as origens' : `Mostrando só leads de ${ORIGIN[next]}`); });
+
+/* ------------------------------------------------------------------ conversa */
+let chatLead = null;
+function msgHTML(m) {
+  const [dir, text, time, status, autoFlag] = m;
+  const t = time || nowTime();
+  let ticks = '';
+  if (dir === 'out') ticks = status === 'sent' ? ico('check') : ico('dcheck', status === 'delivered' ? '' : 'read');
+  return `<div class="msg ${dir}" data-status="${status || ''}">${esc(text)}<span class="msg-t">${autoFlag ? `<span class="auto-l">${ico('bolt')}Automação</span>` : ''}${t}${ticks}</span></div>`;
+}
+function chatHTML(l) {
+  const body = l.chat.length ? `<div class="day">Hoje</div>${l.chat.map(msgHTML).join('')}` : `<p class="chat-empty">Nenhuma mensagem ainda. Mande a primeira: leads respondem mais quando a abordagem é rápida e pessoal.</p>`;
+  return `<header class="chat-h">
+    <button class="icon-btn chat-back" type="button" data-chat-close aria-label="Voltar">${ico('arrow-left')}</button>
+    <span class="avatar" style="--h:${l.hue}">${initials(l.name)}</span>
+    <div class="who"><strong>${esc(l.name)}</strong><span class="online"><i></i>online agora</span></div>
+    <div class="chat-tools">
+      <button class="icon-btn" type="button" aria-label="Ligar pelo WhatsApp" data-toast="Chamada de voz: ilustrativa nesta demonstração.">${ico('phone')}</button>
+      <button class="icon-btn" type="button" aria-label="Opções do lead" data-more="${l.id}">${ico('more')}</button>
+      <button class="icon-btn chat-x" type="button" data-chat-close aria-label="Fechar conversa">${ico('x')}</button>
+    </div>
+  </header>
+  <div class="chat-meta"><span class="meta-chip">${esc(l.co)}</span><span class="meta-chip">${ico(l.origin === 'meta' ? 'meta' : 'cursor')}${ORIGIN[l.origin]}</span><span class="meta-chip">Estimado <b>${brl(l.value)}</b></span><span class="meta-chip stage">${ico('pipeline')}${stageName(l.stage)}</span></div>
+  <div class="chat-body" data-body>${body}</div>
+  <div class="quick" aria-label="Respostas rápidas">${QUICK.map(q => `<button type="button" data-quick>${q}</button>`).join('')}</div>
+  <form class="chat-f" data-form><label class="field"><button type="button" class="attach" aria-label="Anexar arquivo" data-toast="Anexos: ilustrativos nesta demonstração.">${ico('clip')}</button><span class="sr">Mensagem</span><input type="text" placeholder="Escreva uma mensagem" autocomplete="off" maxlength="400"></label><button class="send" type="submit" aria-label="Enviar mensagem">${ico('send')}</button></form>`;
+}
+function inlineChat() { return $('[data-view="conversas"]').classList.contains('is-active') && matchMedia('(min-width:1024px)').matches; }
+function openChat(id, { focus = false } = {}) {
+  const l = leadById(id); if (!l) return;
+  chatLead = l;
+  const inline = inlineChat();
+  const host = inline ? $('#conv-pane') : chatEl;
+  host.innerHTML = chatHTML(l);
+  if (inline) closeDrawer(false);
+  else {
+    shell.classList.add('chat-open');
+    chatEl.setAttribute('aria-hidden', 'false');
+    if (matchMedia('(max-width:1199px)').matches) document.body.classList.add('lock');
+  }
+  bindChat(host, l);
+  const body = $('[data-body]', host); if (body) body.scrollTop = body.scrollHeight;
+  if (l.unread) { l.unread = 0; }
+  $$('.card.is-sel').forEach(c => c.classList.remove('is-sel'));
+  const card = $(`.card[data-id="${id}"]`); if (card) card.classList.add('is-sel');
+  renderConvList(); updateBadges();
+  if (focus) { const inp = $('input', host); if (inp) inp.focus({ preventScroll: true }); }
+}
+function closeDrawer(clear = true) {
+  shell.classList.remove('chat-open');
+  chatEl.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('lock');
+  if (clear) { chatEl.innerHTML = ''; $$('.card.is-sel').forEach(c => c.classList.remove('is-sel')); if (!inlineChat()) chatLead = null; renderConvList(); }
+}
+$('#chat-backdrop').addEventListener('click', () => closeDrawer());
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-chat-close]')) closeDrawer();
+  const n = e.target.closest('[data-open-chat]'); if (n) { closePops(); openChat(Number(n.dataset.openChat)); }
+  const more = e.target.closest('.chat [data-more]'); if (more) { e.stopPropagation(); openCardMenu(more, Number(more.dataset.more)); }
+});
+function setStatus(el, status) {
+  if (!el || !el.isConnected) return;
+  el.dataset.status = status;
+  const t = el.querySelector('.msg-t'); const old = t.querySelector('.ico'); if (old) old.remove();
+  t.insertAdjacentHTML('beforeend', status === 'sent' ? ico('check') : ico('dcheck', status === 'read' ? 'read' : ''));
+}
+function bindChat(host, l) {
+  const form = $('[data-form]', host), input = $('input', form), body = $('[data-body]', host);
+  $$('[data-quick]', host).forEach(b => b.addEventListener('click', () => { input.value = b.textContent; input.focus(); }));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = input.value.trim(); if (!text) { input.focus(); return; }
+    input.value = '';
+    const empty = $('.chat-empty', body); if (empty) { empty.remove(); body.insertAdjacentHTML('beforeend', '<div class="day">Hoje</div>'); }
+    const m = ['out', text, nowTime(), 'sent'];
+    l.chat.push(m);
+    body.insertAdjacentHTML('beforeend', msgHTML(m));
+    const el = body.lastElementChild;
+    body.scrollTop = body.scrollHeight;
+    l.ago = 0; refreshCard(l); renderConvList(); updateHero();
+    setTimeout(() => { m[3] = 'delivered'; setStatus(el, 'delivered'); }, 700);
+    setTimeout(() => { m[3] = 'read'; setStatus(el, 'read'); }, 1700);
+    if (l.reply && !l.replied) {
+      l.replied = true;
+      let typing;
+      setTimeout(() => { if (!body.isConnected) return; typing = document.createElement('div'); typing.className = 'typing'; typing.innerHTML = '<i></i><i></i><i></i>'; body.appendChild(typing); body.scrollTop = body.scrollHeight; }, 2100);
+      setTimeout(() => {
+        if (typing) typing.remove();
+        const r = ['in', l.reply, nowTime()]; l.chat.push(r); l.ago = 0;
+        if (body.isConnected) { body.insertAdjacentHTML('beforeend', msgHTML(r)); body.scrollTop = body.scrollHeight; }
+        else l.unread = (l.unread || 0) + 1;
+        refreshCard(l); renderConvList(); updateBadges(); updateHero();
+        if (auto.notify && (l.value >= 8000 || isHot(l))) addLog(`Aviso ao gestor: <b>${esc(l.name)}</b> respondeu na conversa.`);
+      }, 3900);
+    }
+  });
+}
+
+/* lista de conversas */
+let convFilter = 'all';
+function renderConvList() {
+  const list = $('#conv-items'); if (!list) return;
+  const q = ($('#conv-search').value || '').trim().toLowerCase();
+  const items = LEADS.slice().sort((a, b) => a.ago - b.ago).filter(l => {
+    if (q && !`${l.name} ${l.co}`.toLowerCase().includes(q)) return false;
+    if (convFilter === 'unread') return l.unread > 0;
+    if (convFilter === 'waiting') return waitingReply(l);
+    return true;
+  });
+  list.innerHTML = items.map(l => {
+    const last = lastMsg(l);
+    const prev = last ? (last[0] === 'out' ? 'Você: ' : '') + last[1] : 'Sem mensagens ainda';
+    return `<button class="conv-i${chatLead && chatLead.id === l.id ? ' is-active' : ''}" type="button" data-conv="${l.id}"><span class="avatar" style="--h:${l.hue}">${initials(l.name)}</span><div class="who"><strong>${esc(l.name)}</strong><span>${esc(prev)}</span></div><div class="conv-r"><time>${agoTxt(l.ago)}</time>${l.unread ? `<span class="unread">${l.unread}</span>` : ''}</div></button>`;
+  }).join('') || '<p class="conv-none">Nenhuma conversa com esse filtro.</p>';
+}
+$('#conv-items').addEventListener('click', e => { const b = e.target.closest('[data-conv]'); if (b) openChat(Number(b.dataset.conv)); });
+$('#conv-search').addEventListener('input', renderConvList);
+$$('[data-cf]').forEach(b => b.addEventListener('click', () => { convFilter = b.dataset.cf; $$('[data-cf]').forEach(c => c.classList.toggle('is-on', c === b)); renderConvList(); }));
+function updateBadges() {
+  const n = LEADS.reduce((a, l) => a + (l.unread || 0), 0);
+  $('#nav-unread').textContent = n || ''; $('#tab-unread').textContent = n || '';
+}
+
+/* ------------------------------------------------------------------ telas */
+function showView(name) {
+  if (!VIEW_META[name]) name = 'pipeline';
+  $$('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view === name));
+  $$('[data-view-link]').forEach(a => {
+    const on = a.dataset.viewLink === name;
+    a.classList.toggle('is-active', on);
+    if (a.classList.contains('nav-i') || a.classList.contains('tab')) { if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }
+  });
+  $('#tb-title').textContent = VIEW_META[name][0];
+  $('#tb-sub').textContent = VIEW_META[name][1];
+  if (name === 'pipeline') recalc();
+  if (name === 'conversas') {
+    renderConvList();
+    if (chatLead && inlineChat() && shell.classList.contains('chat-open')) openChat(chatLead.id);
+  }
+  if (history.replaceState) history.replaceState(null, '', '#' + name);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  requestAnimationFrame(observeReveals);
+}
+document.addEventListener('click', e => { const a = e.target.closest('[data-view-link]'); if (a) { e.preventDefault(); showView(a.dataset.viewLink); } });
+
+/* menu lateral recolhido */
+const railBtn = $('#rail-btn');
+const toggleRail = e => { e.preventDefault(); e.stopPropagation(); app.classList.toggle('rail'); railBtn.setAttribute('aria-label', app.classList.contains('rail') ? 'Expandir menu' : 'Recolher menu'); };
+railBtn.addEventListener('click', toggleRail);
+railBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleRail(e); });
+
+/* notificações */
+$('#btn-bell').addEventListener('click', e => {
+  e.stopPropagation();
+  const pop = $('#pop-notif');
+  if (pop.classList.contains('is-open')) { closePops(); return; }
+  showPop(pop, e.currentTarget); e.currentTarget.setAttribute('aria-expanded', 'true');
+});
+
+/* ------------------------------------------------------------------ modal */
+const modal = $('#modal');
+let modalStage = 'novo';
+function openModal(stage = 'novo') { modalStage = stage; modal.classList.add('is-open'); document.body.classList.add('lock'); setTimeout(() => $('#f-name').focus(), 50); }
+function closeModal() { modal.classList.remove('is-open'); document.body.classList.remove('lock'); $('#form-lead').reset(); }
+$('#btn-new').addEventListener('click', () => openModal('novo'));
+$('#fab-new').addEventListener('click', () => openModal('novo'));
+modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-modal-close]')) closeModal(); });
+$('#form-lead').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  const name = f.name.value.trim(), co = f.co.value.trim();
+  if (!name || !co) { toast('Preencha nome e empresa para adicionar o lead.'); (name ? f.co : f.name).focus(); return; }
+  const l = { id: Math.max(...LEADS.map(x => x.id)) + 1, name, co, origin: f.origin.value, value: Number(f.value.value) || 0, ago: 0, tag: f.tag.value, stage: modalStage, hue: 210 + (name.length % 5) * 6, unread: 0, chat: [] };
+  LEADS.push(l);
+  $(`.col-body[data-stage="${modalStage}"]`).insertAdjacentHTML('beforeend', cardHTML(l).replace('class="card', 'class="card is-new'));
+  recalc(); applyFilters(); updateHero(); renderConvList(); closeModal();
+  toast(`${name} adicionado em ${stageName(modalStage)}`, 'ok');
+});
+
+/* ------------------------------------------------------------- automações */
+const auto = { fast: true, follow: true, move: false, notify: true };
+let runs = 61;
+function addLog(html, ok = false) {
+  const li = document.createElement('li');
+  li.innerHTML = `<time>${nowTime()}</time><span${ok ? ' class="ok"' : ''}>${html}</span>`;
+  $('#log').prepend(li);
+  runs++; $('#auto-runs').textContent = runs;
+}
+$('#log').innerHTML = LOG0.map(([t, h]) => `<li><time>${t}</time><span>${h}</span></li>`).join('');
+$$('.switch').forEach(sw => sw.addEventListener('click', () => {
+  const on = sw.getAttribute('aria-checked') !== 'true';
+  sw.setAttribute('aria-checked', String(on));
+  const rule = sw.closest('.rule'); rule.classList.toggle('is-on', on);
+  auto[rule.dataset.rule] = on;
+  $('.rule-state', rule).textContent = on ? 'Ativa' : 'Pausada';
+  const title = $('h3', rule).textContent;
+  toast(`${on ? 'Ativada' : 'Pausada'}: ${title}`, on ? 'ok' : '');
+  addLog(`Regra <b>${esc(title)}</b> ${on ? 'ativada' : 'pausada'} por Rafael Dalas.`);
+  const n = Object.values(auto).filter(Boolean).length;
+  $('#auto-active').innerHTML = `${n} <small>de 4</small>`; $('#nav-auto').textContent = n;
+}));
+$('#nav-auto').textContent = 3;
+
+/* ------------------------------------------------------------------ gráficos */
+function barChart(host, tipEl, data, labels, opts = {}) {
+  const W = 320, H = 96, padL = 4, padR = 4, base = 72, top = 14;
+  const n = data.length, max = Math.max(...data);
+  const slot = (W - padL - padR) / n, bw = Math.min(opts.barW || 12, slot * .62);
+  let bars = '', hits = '', texts = '';
+  data.forEach((v, i) => {
+    const h = Math.max(2, (v / max) * (base - top));
+    const x = padL + i * slot + (slot - bw) / 2, y = base - h;
+    const r = Math.min(4, bw / 2);
+    const today = i === n - 1 && opts.today !== false;
+    const path = `M${x} ${base}V${y + r}a${r} ${r} 0 0 1 ${r}-${r}h${bw - 2 * r}a${r} ${r} 0 0 1 ${r} ${r}V${base}z`;
+    bars += `<path class="bar${today ? ' today' : ''}" d="${path}" data-i="${i}"/>`;
+    hits += `<rect class="hit" x="${padL + i * slot}" y="0" width="${slot}" height="${base}" data-i="${i}"/>`;
+    if (today || i === 0 || (opts.labelEvery && i % opts.labelEvery === 0)) texts += `<text class="lbl${today ? ' strong' : ''}" x="${x + bw / 2}" y="${base + 13}" text-anchor="middle">${labels[i]}</text>`;
+    if (today) texts += `<text class="lbl strong" x="${x + bw / 2}" y="${y - 5}" text-anchor="middle">${opts.fmt ? opts.fmt(v) : v}</text>`;
+  });
+  const svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.aria || ''}"><line class="axis" x1="${padL}" x2="${W - padR}" y1="${base}" y2="${base}"/>${bars}${hits}${texts}</svg>`;
+  host.insertAdjacentHTML('beforeend', svg);
+  const s = host.querySelector('svg');
+  s.addEventListener('mousemove', e => {
+    const hit = e.target.closest('.hit'); if (!hit) return;
+    const i = Number(hit.dataset.i);
+    $$('.bar', s).forEach(b => b.classList.toggle('is-hover', Number(b.dataset.i) === i));
+    const bar = s.querySelector(`.bar[data-i="${i}"]`).getBoundingClientRect(), hr = host.getBoundingClientRect();
+    tipEl.innerHTML = `${labels[i]}${opts.tipLabel ? ' ' + opts.tipLabel : ''}<br><b>${opts.fmt ? opts.fmt(data[i]) : data[i]}</b> ${opts.unit || ''}`;
+    tipEl.style.left = (bar.left + bar.width / 2 - hr.left) + 'px';
+    tipEl.style.top = (bar.top - hr.top) + 'px';
+    tipEl.classList.add('on');
+  });
+  s.addEventListener('mouseleave', () => { tipEl.classList.remove('on'); $$('.bar.is-hover', s).forEach(b => b.classList.remove('is-hover')); });
+}
+const MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const leadsDaily = [12, 15, 9, 18, 21, 14, 8, 17, 22, 19, 25, 16, 20, 23];
+const dayLabels = leadsDaily.map((_, i) => { const d = new Date(); d.setDate(d.getDate() - (leadsDaily.length - 1 - i)); return `${d.getDate()} ${MES[d.getMonth()]}`; });
+barChart($('#chart-leads'), $('#tip-leads'), leadsDaily, dayLabels, { aria: 'Leads por dia nos últimos 14 dias', unit: 'leads', barW: 11 });
+
+function lineChart(host, tipEl, data, labels, opts = {}) {
+  const W = 320, H = 110, padL = 10, padR = 10, base = 84, top = 16;
+  const n = data.length, max = Math.max(...data) * 1.15, min = 0;
+  const x = i => padL + i * ((W - padL - padR) / (n - 1));
+  const y = v => base - ((v - min) / (max - min)) * (base - top);
+  const pts = data.map((v, i) => [x(i), y(v)]);
+  const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = d + ` L${x(n - 1)} ${base} L${x(0)} ${base}z`;
+  const grid = [0.25, 0.5, 0.75].map(k => `<line x1="${padL}" x2="${W - padR}" y1="${(base - (base - top) * k).toFixed(1)}" y2="${(base - (base - top) * k).toFixed(1)}" stroke="rgba(200,214,235,.07)" stroke-dasharray="2 4"/>`).join('');
+  const labelsSvg = labels.map((l, i) => `<text class="lbl${i === n - 1 ? ' strong' : ''}" x="${x(i)}" y="${base + 14}" text-anchor="middle">${l}</text>`).join('');
+  const best = data.indexOf(Math.min(...data));
+  const svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.aria || ''}">${grid}<line class="axis" x1="${padL}" x2="${W - padR}" y1="${base}" y2="${base}"/><path class="area" d="${area}"/><path class="line" d="${d}"/>${pts.map((p, i) => `<circle class="pt" cx="${p[0]}" cy="${p[1]}" r="3.5" data-i="${i}"/>`).join('')}<text class="lbl strong" x="${pts[best][0]}" y="${pts[best][1] - 9}" text-anchor="middle">${data[best]} s</text>${pts.map((p, i) => `<rect class="hit" x="${(x(i) - (W - padL - padR) / (n - 1) / 2).toFixed(1)}" y="0" width="${((W - padL - padR) / (n - 1)).toFixed(1)}" height="${base}" data-i="${i}"/>`).join('')}${labelsSvg}</svg>`;
+  host.insertAdjacentHTML('beforeend', svg);
+  const s = host.querySelector('svg');
+  s.addEventListener('mousemove', e => {
+    const hit = e.target.closest('.hit'); if (!hit) return;
+    const i = Number(hit.dataset.i);
+    const pt = s.querySelector(`.pt[data-i="${i}"]`).getBoundingClientRect(), hr = host.getBoundingClientRect();
+    tipEl.innerHTML = `${labels[i]}<br><b>${data[i]} s</b> até a primeira resposta`;
+    tipEl.style.left = (pt.left + pt.width / 2 - hr.left) + 'px';
+    tipEl.style.top = (pt.top - hr.top) + 'px';
+    tipEl.classList.add('on');
+  });
+  s.addEventListener('mouseleave', () => tipEl.classList.remove('on'));
+}
+const respData = [52, 48, 61, 45, 39, 47, 44];
+const respLabels = respData.map((_, i) => { const d = new Date(); d.setDate(d.getDate() - (respData.length - 1 - i)); return ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][d.getDay()]; });
+lineChart($('#rep-resp'), $('#tip-resp'), respData, respLabels, { aria: 'Tempo médio até a primeira resposta, em segundos, nos últimos 7 dias' });
+barChart($('#rep-week'), $('#tip-week'), [18400, 24900, 21600, 21500], ['Semana 1', 'Semana 2', 'Semana 3', 'Semana atual'], { aria: 'Valor de contratos fechados por semana em outubro', barW: 34, labelEvery: 1, fmt: brlK, unit: '' });
+$('#rep-week svg').classList.add('chart');
+
+/* ------------------------------------------------------------------ métricas */
+function countUp(el) {
+  const target = Number(el.dataset.n), suf = el.dataset.suffix || '';
+  if (reduce) { el.innerHTML = target + (suf ? `<small>${suf}</small>` : ''); return; }
+  const t0 = performance.now(), dur = 900;
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    el.innerHTML = Math.round(target * e) + (suf ? `<small>${suf}</small>` : '');
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+function bump(sel, d) {
+  const el = $(sel); const v = Number(el.dataset.n) + d; el.dataset.n = v;
+  el.innerHTML = v + (el.dataset.suffix ? `<small>${el.dataset.suffix}</small>` : '');
+  el.animate && !reduce && el.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'cubic-bezier(.2,.7,.2,1)' });
+}
+$$('.kpi-v').forEach(countUp);
+
+/* saudação e resumo */
+function updateHero() {
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  $('#greet').textContent = `${g}, Rafael.`;
+  const waiting = LEADS.filter(l => ['novo', 'conversa'].includes(l.stage) && waitingReply(l)).sort((a, b) => b.ago - a.ago);
+  const sub = $('#greet-sub'), btn = $('#btn-oldest');
+  if (!waiting.length) { sub.innerHTML = 'Todas as conversas foram respondidas. Bom momento para revisar as propostas em aberto.'; btn.hidden = true; return; }
+  const o = waiting[0];
+  sub.innerHTML = waiting.length === 1
+    ? `<b>1 conversa</b> espera a sua resposta: <b>${esc(o.name)}</b>, da ${esc(o.co)}, escreveu ${agoTxt(o.ago)}.`
+    : `<b>${waiting.length} conversas</b> esperam a sua resposta. A mais antiga é de <b>${esc(o.name)}</b>, da ${esc(o.co)}, ${agoTxt(o.ago)}.`;
+  btn.hidden = false; btn.dataset.id = o.id;
+}
+$('#btn-oldest').addEventListener('click', e => openChat(Number(e.currentTarget.dataset.id), { focus: true }));
+
+/* leads chegando ao vivo */
+let poolIdx = 0;
+function liveLead() {
+  if (document.hidden || poolIdx >= POOL.length) return;
+  const p = POOL[poolIdx++];
+  const l = { id: Math.max(...LEADS.map(x => x.id)) + 1, ...p, ago: 0, stage: 'novo', unread: 1, chat: p.chat.map(m => [m[0], m[1], nowTime(), m[3], m[4]]) };
+  if (!auto.fast) l.chat = l.chat.slice(0, 1);
+  LEADS.push(l);
+  const body = $('.col-body[data-stage="novo"]');
+  body.insertAdjacentHTML('afterbegin', cardHTML(l).replace('class="card', 'class="card is-new'));
+  recalc(); applyFilters(); updateHero(); renderConvList(); updateBadges();
+  bump('#kpi-leads', 1);
+  toast(`Novo lead pelo ${ORIGIN[l.origin]}: ${l.name}, ${l.co}`);
+  if (auto.fast) addLog(`Resposta automática enviada para <b>${esc(l.name)}</b> em ${30 + Math.floor(Math.random() * 25)} s.`);
+  if (auto.notify && (l.value >= 8000 || isHot(l))) addLog(`Aviso enviado ao gestor: <b>${esc(l.name)}</b> (${brl(l.value)}) entrou no pipeline.`);
+}
+setTimeout(() => { liveLead(); setInterval(liveLead, 34000); }, 26000);
+
+/* ------------------------------------------------------------------ geral */
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' }) : null;
+function observeReveals() {
+  $$('[data-reveal]:not(.is-in)').forEach(el => { if (io) io.observe(el); else el.classList.add('is-in'); });
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (modal.classList.contains('is-open')) closeModal();
+    else if ($('.pop.is-open')) closePops();
+    else if (shell.classList.contains('chat-open')) closeDrawer();
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); $('#search').focus(); $('#search').select(); }
+});
+matchMedia('(min-width:1200px)').addEventListener('change', () => { if (!shell.classList.contains('chat-open')) document.body.classList.remove('lock'); });
+
+/* inicialização */
+renderBoard();
+renderConvList();
+updateBadges();
+updateHero();
+const hash = location.hash.replace('#', '');
+if (hash && VIEW_META[hash] && hash !== 'pipeline') showView(hash); else observeReveals();
+})();
+</script>
+</body>
+</html>
