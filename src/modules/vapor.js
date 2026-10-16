@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 
 /** Vapor da respiração: nuvens suaves que nascem no focinho, abrem e se dissipam. */
-export function initVapor(canvas, { every = 3.4, reduceMotion = false } = {}) {
+export function initVapor(canvas, { every = 3.4, reduceMotion = false, dprMax = 1 } = {}) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return { breathe() {}, start() {}, stop() {}, setAnchor() {}, setRunning() {} };
 
@@ -22,9 +22,10 @@ export function initVapor(canvas, { every = 3.4, reduceMotion = false } = {}) {
   const puffs = [];
   let running = true;
   let loop = null;
+  let dirty = false;
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, dprMax);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr);
@@ -63,6 +64,14 @@ export function initVapor(canvas, { every = 3.4, reduceMotion = false } = {}) {
 
   function render(_t, deltaTime) {
     if (!running) return;
+    if (!puffs.length) {
+      if (dirty) {
+        ctx.clearRect(0, 0, w, h);
+        dirty = false;
+      }
+      return;
+    }
+    dirty = true;
     const dt = Math.min(deltaTime || 16, 50) / 1000;
     ctx.clearRect(0, 0, w, h);
     for (let i = puffs.length - 1; i >= 0; i -= 1) {
@@ -93,6 +102,10 @@ export function initVapor(canvas, { every = 3.4, reduceMotion = false } = {}) {
 
   return {
     breathe,
+    setDpr(d) {
+      dprMax = d;
+      resize();
+    },
     setAnchor(x, y, facing = 1) {
       anchor.x = x;
       anchor.y = y;

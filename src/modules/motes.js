@@ -13,7 +13,7 @@ export function initMotes(canvas, { count = 36, tint = '200,222,255', reduceMoti
   const state = { running: false, time: 0, flash: 0 };
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr);
@@ -73,6 +73,15 @@ export function initMotes(canvas, { count = 36, tint = '200,222,255', reduceMoti
     setRunning(v) {
       state.running = v;
       if (v) resize();
+      else ctx.clearRect(0, 0, w, h);
+    },
+    setCount(n) {
+      while (dots.length > n) dots.pop();
+      while (dots.length < n) {
+        const d = {};
+        spawn(d, true);
+        dots.push(d);
+      }
     },
   };
 }

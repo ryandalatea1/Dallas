@@ -33,7 +33,7 @@ float noise(vec2 p) {
   f = f * f * (3.0 - 2.0 * f);
   return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
 }
-float fbm(vec2 p) { return 0.6 * noise(p) + 0.3 * noise(p * 2.1 + 3.7) + 0.1 * noise(p * 4.3 + 9.1); }
+float fbm(vec2 p) { return 0.65 * noise(p) + 0.35 * noise(p * 2.1 + 3.7); }
 vec2 coverUv(vec2 uv) {
   float ra = uRes.x / uRes.y;
   float ia = uImgRes.x / uImgRes.y;
@@ -57,25 +57,33 @@ void main() {
   float trees = band * dark * (1.0 - wolf);
   float cloud = sky * smoothstep(0.32, 0.6, l) * (1.0 - smoothstep(0.86, 0.95, l));
 
+  // só calcula ruído onde a região existe: o resto do quadro sai de graça
   vec2 off = vec2(0.0);
-  // pelos: ruído fino e rápido, só no lobo
-  float furA = fbm(uv * vec2(42.0, 32.0) + vec2(t * 1.7, -t * 0.9)) - 0.5;
-  float furB = fbm(uv * vec2(28.0, 46.0) - vec2(t * 1.2, t * 1.5)) - 0.5;
-  off += vec2(furA, furB) * 0.0032 * wolf * uGust;
-  // árvores: balanço lento, maior no alto da copa
-  float sway = sin(t * 0.9 + uv.y * 7.0 + uv.x * 4.0) * 0.6 + 0.4 * sin(t * 0.37 + uv.x * 9.0);
-  off.x += sway * 0.0026 * trees * uGust * smoothstep(0.1, 0.6, uv.y);
-  // nuvens: respiração lenta
-  off += (vec2(fbm(uv * 3.0 + t * 0.12), fbm(uv * 3.0 - t * 0.1)) - 0.5) * 0.007 * cloud;
+  if (wolf > 0.003) {
+    // pelos: ruído fino e rápido, só no lobo
+    float furA = fbm(uv * vec2(42.0, 32.0) + vec2(t * 1.7, -t * 0.9)) - 0.5;
+    float furB = fbm(uv * vec2(28.0, 46.0) - vec2(t * 1.2, t * 1.5)) - 0.5;
+    off += vec2(furA, furB) * 0.0032 * wolf * uGust;
+  }
+  if (trees > 0.003) {
+    // árvores: balanço lento, maior no alto da copa
+    float sway = sin(t * 0.9 + uv.y * 7.0 + uv.x * 4.0) * 0.6 + 0.4 * sin(t * 0.37 + uv.x * 9.0);
+    off.x += sway * 0.0026 * trees * uGust * smoothstep(0.1, 0.6, uv.y);
+  }
+  if (cloud > 0.003) {
+    // nuvens: respiração lenta
+    off += (vec2(noise(uv * 3.0 + t * 0.12), noise(uv * 3.0 - t * 0.1)) - 0.5) * 0.007 * cloud;
+  }
   off *= uAmount;
-
-  vec3 col = texture2D(uTex, uv + off).rgb;
+  vec3 col = dot(off, off) > 0.0 ? texture2D(uTex, uv + off).rgb : base;
 
   // estrelas: pontos brilhantes no céu piscam, cada um no seu ritmo
-  vec2 cell = floor(uv * vec2(420.0, 240.0));
-  float star = sky * smoothstep(0.74, 0.9, luma(col)) * (1.0 - cloud);
-  float tw = 0.6 + 0.4 * sin(t * (1.2 + hash(cell) * 2.6) + hash(cell + 1.7) * 6.283);
-  col *= mix(1.0, tw, star * uAmount);
+  if (sky > 0.0) {
+    vec2 cell = floor(uv * vec2(420.0, 240.0));
+    float star = sky * smoothstep(0.74, 0.9, luma(col)) * (1.0 - cloud);
+    float tw = 0.6 + 0.4 * sin(t * (1.2 + hash(cell) * 2.6) + hash(cell + 1.7) * 6.283);
+    col *= mix(1.0, tw, star * uAmount);
+  }
 
   gl_FragColor = vec4(col, 1.0);
 }`;
@@ -91,7 +99,7 @@ function compile(gl, type, src) {
   return sh;
 }
 
-export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.36], quality = 'high', dprMax } = {}) {
+export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.36], quality = 'high', dprMax, fps = 60 } = {}) {
   if (!canvas || !(video || image)) return null;
   let gl = null;
   try {
@@ -126,13 +134,16 @@ export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.3
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
   const state = { running: false, captured: false, time: 0, amount: 0 };
+  let frameEvery = 1 / fps;
+  let acc = 0;
+  let dprCap = dprMax || (quality === 'high' ? 1 : 0.75);
   let width = 0;
   let height = 0;
   let imgW = 1;
   let imgH = 1;
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, dprMax || (quality === 'high' ? 1.5 : 1));
+    const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
     width = Math.round(canvas.clientWidth * dpr);
     height = Math.round(canvas.clientHeight * dpr);
     if (!width || !height) return;
@@ -170,7 +181,10 @@ export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.3
 
   function render(_t, deltaTime) {
     if (!state.running || !state.captured || !width) return;
-    state.time += Math.min(deltaTime || 16, 50) / 1000;
+    acc += Math.min(deltaTime || 16, 50) / 1000;
+    if (acc < frameEvery) return;
+    state.time += acc;
+    acc = 0;
     gl.uniform1i(u.uTex, 0);
     gl.uniform2f(u.uRes, width, height);
     gl.uniform2f(u.uImgRes, imgW, imgH);
@@ -192,6 +206,12 @@ export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.3
     },
     setRunning(v) {
       state.running = v;
+    },
+    // menor resolução e menos quadros quando o aparelho não acompanha
+    setQuality({ dpr, fps: f } = {}) {
+      if (dpr) dprCap = dpr;
+      if (f) frameEvery = 1 / f;
+      resize();
     },
     destroy() {
       gsap.ticker.remove(render);

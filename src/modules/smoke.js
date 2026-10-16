@@ -5,7 +5,10 @@ import { gsap } from 'gsap';
  * com rajadas, e que acendem quando cai um raio. Canvas 2D com sprites
  * pré-renderizados, barato o bastante para rodar junto com o vídeo.
  */
-export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200,215,235', opacity = 1, reduceMotion = false, dprMax = 1.5 } = {}) {
+export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200,215,235', opacity = 1, reduceMotion = false, dprMax = 0.6, fps = 30 } = {}) {
+  let activeCount = count;
+  let frameEvery = 1 / fps;
+  let acc = 0;
   const ctx = canvas.getContext('2d');
   if (!ctx) return { setRunning() {}, flash() {}, resize() {} };
 
@@ -31,7 +34,7 @@ export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200
   let w = 0;
   let h = 0;
   const puffs = [];
-  const state = { running: true, time: 0, flash: 0 };
+  const state = { running: true, frozen: false, time: 0, flash: 0 };
 
   function spawn(p, initial) {
     const scale = Math.max(0.7, w / 1440);
@@ -55,7 +58,7 @@ export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     puffs.length = 0;
-    for (let i = 0; i < count; i += 1) {
+    for (let i = 0; i < activeCount; i += 1) {
       const p = {};
       spawn(p, true);
       puffs.push(p);
@@ -65,8 +68,15 @@ export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200
   window.addEventListener('resize', resize);
 
   function render(_t, deltaTime) {
-    if (!state.running || !w) return;
-    const dt = Math.min(deltaTime || 16, 50) / 1000;
+    if (!state.running || state.frozen || !w) return;
+    // a névoa é lenta: 30 quadros por segundo bastam e custam metade
+    acc += Math.min(deltaTime || 16, 50) / 1000;
+    if (acc < frameEvery) return;
+    draw(acc);
+    acc = 0;
+  }
+
+  function draw(dt) {
     if (!reduceMotion) state.time += dt;
     state.flash = Math.max(0, state.flash - dt * 1.8);
     const gust = 0.7 + 0.3 * Math.sin(state.time * 0.3) + 0.2 * Math.sin(state.time * 0.9 + 1.3);
@@ -99,7 +109,19 @@ export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200
     },
     setRunning(v) {
       state.running = v;
-      if (!v) ctx.clearRect(0, 0, w, h);
+      if (!v && !state.frozen) ctx.clearRect(0, 0, w, h);
+    },
+    // menos névoa, menor resolução, menos quadros: mesma cara, muito mais leve
+    setQuality({ dpr, count: n, fps: f } = {}) {
+      if (dpr) dprMax = dpr;
+      if (n) activeCount = n;
+      if (f) frameEvery = 1 / f;
+      resize();
+    },
+    // para a animação mas deixa a névoa desenhada
+    freeze() {
+      state.frozen = true;
+      if (w) draw(0);
     },
   };
 }

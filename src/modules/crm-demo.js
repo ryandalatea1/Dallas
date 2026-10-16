@@ -36,6 +36,11 @@ export function initCrmDemo() {
       fit();
       window.addEventListener('resize', fit);
       io.disconnect();
+      // fora da tela o app não precisa ser pintado
+      const vis = new IntersectionObserver((es) => {
+        iframe.style.visibility = es.some((e) => e.isIntersecting) ? 'visible' : 'hidden';
+      }, { rootMargin: '200px 0px' });
+      vis.observe(frame);
     },
     { rootMargin: '400px 0px' }
   );

@@ -24,6 +24,7 @@ import { initTicker } from './modules/ticker.js';
 import { initLight } from './modules/light.js';
 import { initSolutions } from './modules/solutions.js';
 import { initMotes } from './modules/motes.js';
+import { watchFrames } from './modules/perf.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -65,7 +66,10 @@ const stormOrigin = pick(T.storm.origin);
 zoomEl.style.setProperty('--face-x', `${face[0] * 100}%`);
 zoomEl.style.setProperty('--face-y', `${face[1] * 100}%`);
 
-const smoke = initSmoke(document.getElementById('hero-smoke'), { count: lowPower ? 12 : 32, zone: [0.44, 1.08], reduceMotion, dprMax: lowPower ? 1 : 1.5 });
+// nível de qualidade dos efeitos: 0 = tudo, 1 = leve, 2 = mínimo (decidido pelo vigia de quadros)
+let qualityLevel = 0;
+// a névoa é desenhada em resolução baixa e a 30 fps: mesma cara, um quarto do custo
+const smoke = initSmoke(document.getElementById('hero-smoke'), { count: lowPower ? 10 : 24, zone: [0.44, 1.08], reduceMotion, dprMax: lowPower ? 0.5 : 0.6, fps: 30 });
 // no celular a névoa espera o vídeo engatar: a abertura fica mais fluida
 if (lowPower) {
   smoke.setRunning(false);
@@ -76,15 +80,15 @@ const storm = initStorm(document.getElementById('hero-storm'), {
   shake: film,
   origin: stormOrigin,
   every: T.storm.every,
-  meteors: true,
+  meteors: !lowPower,
   onStrike: (i) => smoke.flash(i),
   reduceMotion,
-  dprMax: lowPower ? 1.25 : 2,
+  dprMax: lowPower ? 1 : 1.5,
 });
 const livingCanvas = document.getElementById('hero-living');
 const living = reduceMotion
   ? null
-  : initLiving(livingCanvas, { video, wolf: pick(T.hold.wolfMask), quality: lowPower ? 'low' : 'high' });
+  : initLiving(livingCanvas, { video, wolf: pick(T.hold.wolfMask), quality: lowPower ? 'low' : 'high', dprMax: lowPower ? 0.75 : 1, fps: lowPower ? 30 : 60 });
 const vapor = initVapor(document.getElementById('hero-vapor'), { every: T.hold.breathEvery, reduceMotion });
 
 function coverPoint(fx, fy) {
@@ -148,7 +152,7 @@ function hold() {
   });
   if (reduceMotion) tl.progress(1).pause();
   // o último frame vira um quadro vivo: pelos, árvores, nuvens e estrelas em movimento
-  if (living && living.capture()) {
+  if (living && qualityLevel < 2 && living.capture()) {
     livingCanvas.classList.add('is-live');
     living.start();
   }
@@ -233,7 +237,9 @@ function loadFinaleStill() {
     finaleWolf.classList.add('has-still');
     finaleWolf.style.backgroundImage = `url("${media.wolfStill}")`;
     if (reduceMotion) return;
-    finaleLiving = initLiving(finaleLivingCanvas, { image: img, wolf: [0.48, 0.47, 0.2, 0.34], quality: lowPower ? 'low' : 'high' });
+    if (qualityLevel >= 2) return;
+    finaleLiving = initLiving(finaleLivingCanvas, { image: img, wolf: [0.48, 0.47, 0.2, 0.34], quality: lowPower ? 'low' : 'high', dprMax: lowPower ? 0.75 : 1, fps: lowPower ? 30 : 60 });
+    if (finaleLiving && qualityLevel === 1) finaleLiving.setQuality({ dpr: 0.6, fps: 30 });
     if (finaleLiving && finaleLiving.capture(img)) {
       finaleLivingCanvas.classList.add('is-live');
       finaleLiving.state.amount = 1;
@@ -261,7 +267,7 @@ function setHeroActive(active) {
   vapor.setRunning(active);
   smoke.setRunning(active);
   if (forest) forest.setRunning(active);
-  if (living) living.setRunning(active && holding);
+  if (living) living.setRunning(active && holding && qualityLevel < 2);
   if (!active) {
     video.pause();
     storm.stop();
@@ -286,6 +292,8 @@ gsap
         soundBtn.classList.toggle('is-gone', gone);
         if (forest) forest.setProgress(self.progress);
         setHeroActive(self.progress < 0.98);
+        // coberto pela página, o hero sai do compositor (vídeo e canvases param de custar)
+        hero.classList.toggle('is-covered', self.progress >= 1);
       },
     },
   })
@@ -294,16 +302,16 @@ gsap
   .to('#hero-content', { yPercent: -16, opacity: 0, ease: 'power1.in', duration: 0.6 }, 0);
 
 // chamada final: tempestade ao longe, névoa, partículas de luz e parallax leve no lobo
-const finaleSmoke = initSmoke(document.getElementById('finale-smoke'), { count: lowPower ? 10 : 18, zone: [0.55, 1.05], opacity: 0.55, reduceMotion, dprMax: lowPower ? 1 : 1.5 });
+const finaleSmoke = initSmoke(document.getElementById('finale-smoke'), { count: lowPower ? 8 : 14, zone: [0.55, 1.05], opacity: 0.55, reduceMotion, dprMax: lowPower ? 0.5 : 0.6, fps: 30 });
 finaleSmoke.setRunning(false);
-const finaleMotes = initMotes(document.getElementById('finale-motes'), { count: lowPower ? 16 : 36, reduceMotion });
+const finaleMotes = initMotes(document.getElementById('finale-motes'), { count: lowPower ? 12 : 28, reduceMotion });
 const finaleEyes = document.querySelectorAll('.finale__eye');
 const footerBig = document.getElementById('footer-big');
 const finaleStorm = initStorm(document.getElementById('finale-storm'), {
   flash: document.getElementById('finale-flash'),
   origin: [0.86, 0.5],
   every: [6, 12],
-  dprMax: lowPower ? 1.25 : 2,
+  dprMax: lowPower ? 1 : 1.5,
   onStrike: (i) => {
     finaleSmoke.flash(i);
     finaleMotes.flash(i);
@@ -325,9 +333,9 @@ ScrollTrigger.create({
     finaleActive = self.isActive;
     finaleStorm.setRunning(finaleActive);
     finaleSmoke.setRunning(finaleActive);
-    finaleMotes.setRunning(finaleActive);
+    finaleMotes.setRunning(finaleActive && qualityLevel < 2);
     finaleVapor.setRunning(finaleActive);
-    if (finaleLiving) finaleLiving.setRunning(finaleActive);
+    if (finaleLiving) finaleLiving.setRunning(finaleActive && qualityLevel < 2);
     if (finaleActive) {
       finaleStorm.start();
       placeFinaleVapor();
@@ -360,6 +368,30 @@ if (!reduceMotion) {
   }
 }
 
+// ---------- vigia de quadros: se o aparelho engasga, os efeitos ficam mais leves ----------
+function applyQuality(level) {
+  qualityLevel = level;
+  document.documentElement.classList.add('lite');
+  if (level === 1) {
+    smoke.setQuality({ count: lowPower ? 7 : 14, dpr: 0.45, fps: 24 });
+    finaleSmoke.setQuality({ count: lowPower ? 6 : 10, dpr: 0.45, fps: 24 });
+    [living, finaleLiving].forEach((l) => l && l.setQuality({ dpr: 0.6, fps: 30 }));
+    storm.setQuality({ dpr: 1, meteors: false });
+    finaleStorm.setQuality({ dpr: 1 });
+    finaleMotes.setCount(lowPower ? 6 : 14);
+    vapor.setDpr(0.75);
+    finaleVapor.setDpr(0.75);
+  } else if (level >= 2) {
+    // a névoa fica parada (continua bonita), o quadro vivo vira foto, partículas somem
+    smoke.freeze();
+    finaleSmoke.freeze();
+    [living, finaleLiving].forEach((l) => l && l.setRunning(false));
+    finaleMotes.setRunning(false);
+    document.documentElement.classList.add('lite-2');
+  }
+}
+if (!reduceMotion) watchFrames({ onLevel: applyQuality });
+
 // ---------- demais seções ----------
 document.fonts.ready.then(() => {
   initReveals();
@@ -371,4 +403,4 @@ document.fonts.ready.then(() => {
   ScrollTrigger.refresh();
 });
 window.addEventListener('load', () => ScrollTrigger.refresh());
-window.__dalas = { storm, vapor, living, forest: null };
+window.__dalas = { storm, vapor, living, forest: null, applyQuality, get qualityLevel() { return qualityLevel; } };

@@ -99,8 +99,18 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
     });
   }
 
+  let dirty = false;
   function render() {
     if (!running) return;
+    // sem raio nem estrela cadente na tela, não há o que desenhar
+    if (!bolts.length && !stars.length) {
+      if (dirty) {
+        ctx.clearRect(0, 0, w, h);
+        dirty = false;
+      }
+      return;
+    }
+    dirty = true;
     ctx.clearRect(0, 0, w, h);
     const now = performance.now();
 
@@ -229,6 +239,17 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
     setRunning(v) {
       running = v;
       if (!v) ctx.clearRect(0, 0, w, h);
+    },
+    setQuality({ dpr, meteors: m } = {}) {
+      if (dpr) {
+        dprMax = dpr;
+        resize();
+      }
+      if (m === false) {
+        meteors = false;
+        if (meteorTimer) meteorTimer.kill();
+        meteorTimer = null;
+      }
     },
   };
 }

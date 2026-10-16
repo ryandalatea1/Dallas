@@ -286,8 +286,6 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: var(--white);
   background: rgba(5, 7, 11, 0.3);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
 
 .btn--line::before {
@@ -355,8 +353,8 @@ button {
   background: rgba(8, 11, 17, 0.62);
   border-color: var(--line);
   padding: 0 6px 0 18px;
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.9);
 }
 
@@ -563,6 +561,11 @@ button {
   will-change: transform;
 }
 
+/* coberto pela página, o hero some do compositor */
+.hero.is-covered {
+  visibility: hidden;
+}
+
 .hero__zoom {
   transform-origin: var(--face-x, 59%) var(--face-y, 27%);
 }
@@ -617,7 +620,6 @@ button {
 .hero__flash {
   pointer-events: none;
   opacity: 0;
-  mix-blend-mode: screen;
   background: radial-gradient(
     55% 45% at var(--fx, 80%) var(--fy, 25%),
     rgba(225, 240, 255, 0.95),
@@ -672,8 +674,6 @@ button {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(5, 7, 11, 0.32);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
   font-weight: 500;
   font-size: 0.8rem;
   color: var(--text-2);
@@ -802,8 +802,6 @@ button {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: rgba(5, 7, 11, 0.35);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   font-weight: 500;
   font-size: 0.78rem;
   color: var(--text-2);
@@ -1230,7 +1228,6 @@ button {
   position: absolute;
   inset: -12% -8% -6%;
   background: radial-gradient(55% 50% at 50% 55%, rgba(158, 197, 255, 0.16), transparent 70%);
-  filter: blur(10px);
   animation: stage-glow 9s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -1302,7 +1299,6 @@ button {
   object-fit: cover;
   object-position: top left;
   opacity: 0;
-  will-change: opacity, transform;
 }
 
 .stage__sweep {
@@ -1314,7 +1310,6 @@ button {
   background: linear-gradient(100deg, transparent 0%, rgba(158, 197, 255, 0.14) 45%, rgba(255, 255, 255, 0.2) 50%, rgba(158, 197, 255, 0.14) 55%, transparent 100%);
   opacity: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .stage__label {
@@ -1515,7 +1510,6 @@ button {
 
 .finale__vapor {
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .finale__eye {
@@ -1528,7 +1522,6 @@ button {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 244, 214, 0.95), rgba(255, 220, 150, 0.45) 35%, transparent 70%);
-  mix-blend-mode: screen;
   opacity: 0;
   pointer-events: none;
 }
@@ -1566,14 +1559,12 @@ button {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  mix-blend-mode: screen;
   opacity: 0.8;
 }
 
 .finale__flash {
   pointer-events: none;
   opacity: 0;
-  mix-blend-mode: screen;
   background: radial-gradient(45% 45% at var(--fx, 86%) var(--fy, 50%), rgba(200, 230, 255, 0.7), rgba(120, 180, 255, 0.12) 50%, transparent 75%);
 }
 
@@ -1606,8 +1597,7 @@ button {
   position: absolute;
   inset: -14px -18px;
   border-radius: 999px;
-  background: radial-gradient(60% 80% at 50% 50%, rgba(158, 197, 255, 0.35), transparent 70%);
-  filter: blur(14px);
+  background: radial-gradient(60% 80% at 50% 50%, rgba(158, 197, 255, 0.28), rgba(158, 197, 255, 0.1) 40%, transparent 72%);
   opacity: 0.6;
   animation: halo 4.5s ease-in-out infinite;
   pointer-events: none;
@@ -1674,6 +1664,19 @@ button {
   color: var(--ice);
 }
 
+/* ---------- modo leve (quando o aparelho não acompanha) ---------- */
+.lite .stage__glow,
+.lite .finale__halo,
+.lite .footer__aurora,
+.lite .footer__pulse i,
+.lite .ticker__track {
+  animation: none;
+}
+
+.lite .cursor-light {
+  display: none;
+}
+
 /* ---------- rodapé ---------- */
 .footer {
   position: relative;
@@ -1690,7 +1693,6 @@ button {
   background:
     radial-gradient(40% 60% at 30% 100%, rgba(158, 197, 255, 0.22), transparent 70%),
     radial-gradient(35% 55% at 70% 100%, rgba(120, 160, 230, 0.18), transparent 70%);
-  filter: blur(24px);
   animation: aurora 14s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -1726,24 +1728,11 @@ button {
   position: absolute;
   inset: 0;
   -webkit-text-stroke: 0;
-  background:
-    linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.16) 50%, transparent 70%) 0 0 / 250% 100%,
-    linear-gradient(180deg, rgba(219, 233, 255, calc(0.26 + var(--flash) * 0.5)) 0%, rgba(158, 197, 255, calc(0.12 + var(--flash) * 0.3)) 50%, rgba(158, 197, 255, 0.04) 100%);
+  background: linear-gradient(180deg, rgba(219, 233, 255, calc(0.26 + var(--flash) * 0.5)) 0%, rgba(158, 197, 255, calc(0.12 + var(--flash) * 0.3)) 50%, rgba(158, 197, 255, 0.04) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   clip-path: inset(calc(100% - var(--fill)) 0 0 0);
-  animation: big-shine 7s ease-in-out infinite;
-}
-
-@keyframes big-shine {
-  0%,
-  35% {
-    background-position: 120% 0, 0 0;
-  }
-  100% {
-    background-position: -120% 0, 0 0;
-  }
 }
 
 .footer__grid {
@@ -2196,7 +2185,6 @@ button {
   display: block;
   transform: translateY(0);
   transition: transform 7s linear;
-  will-change: transform;
 }
 
 .work__card:hover .work__shot img {
