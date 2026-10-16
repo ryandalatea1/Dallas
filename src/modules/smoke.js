@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
  * com rajadas, e que acendem quando cai um raio. Canvas 2D com sprites
  * pré-renderizados, barato o bastante para rodar junto com o vídeo.
  */
-export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200,215,235', opacity = 1, reduceMotion = false } = {}) {
+export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200,215,235', opacity = 1, reduceMotion = false, dprMax = 1.5 } = {}) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return { setRunning() {}, flash() {}, resize() {} };
 
@@ -48,7 +48,7 @@ export function initSmoke(canvas, { count = 26, zone = [0.45, 1.05], tint = '200
   }
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, dprMax);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr);

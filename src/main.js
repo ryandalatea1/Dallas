@@ -22,6 +22,8 @@ import { initFaq } from './modules/faq.js';
 import { initCrmDemo } from './modules/crm-demo.js';
 import { initTicker } from './modules/ticker.js';
 import { initLight } from './modules/light.js';
+import { initSolutions } from './modules/solutions.js';
+import { initMotes } from './modules/motes.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -63,7 +65,12 @@ const stormOrigin = pick(T.storm.origin);
 zoomEl.style.setProperty('--face-x', `${face[0] * 100}%`);
 zoomEl.style.setProperty('--face-y', `${face[1] * 100}%`);
 
-const smoke = initSmoke(document.getElementById('hero-smoke'), { count: lowPower ? 16 : 32, zone: [0.44, 1.08], reduceMotion });
+const smoke = initSmoke(document.getElementById('hero-smoke'), { count: lowPower ? 12 : 32, zone: [0.44, 1.08], reduceMotion, dprMax: lowPower ? 1 : 1.5 });
+// no celular a névoa espera o vídeo engatar: a abertura fica mais fluida
+if (lowPower) {
+  smoke.setRunning(false);
+  gsap.delayedCall(2.2, () => heroActive && smoke.setRunning(true));
+}
 const storm = initStorm(document.getElementById('hero-storm'), {
   flash: document.getElementById('hero-flash'),
   shake: film,
@@ -72,6 +79,7 @@ const storm = initStorm(document.getElementById('hero-storm'), {
   meteors: true,
   onStrike: (i) => smoke.flash(i),
   reduceMotion,
+  dprMax: lowPower ? 1.25 : 2,
 });
 const livingCanvas = document.getElementById('hero-living');
 const living = reduceMotion
@@ -108,14 +116,14 @@ window.addEventListener('resize', placeVapor);
 // O site aparece na hora: nada de esperar o vídeo.
 const brandChars = new SplitText('#hero-brand .w', { type: 'chars', charsClass: 'char' }).chars;
 gsap.set(['#hero-tagline', '#hero-lede', '#hero-actions > *', '.hero__chip'], { opacity: 0, y: 18 });
-gsap.set(brandChars, { opacity: 0, y: 22, filter: 'blur(8px)' });
+gsap.set(brandChars, { opacity: 0, y: 22 });
 gsap.set([hint, '.nav__bar'], { opacity: 0 });
 
 const intro = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
 intro
   .to(black, { opacity: 0, duration: 0.9, ease: 'power2.inOut' }, 0)
   .to('.nav__bar', { opacity: 1, duration: 0.8 }, 0.2)
-  .to(brandChars, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.03 }, 0.25)
+  .to(brandChars, { opacity: 1, y: 0, duration: 1, stagger: 0.03 }, 0.25)
   .to('.hero__chip', { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.5)
   .to('#hero-tagline', { opacity: 1, y: 0, duration: 0.8 }, 0.7)
   .to('#hero-lede', { opacity: 1, y: 0, duration: 0.8 }, 0.85)
@@ -175,9 +183,11 @@ function fallback(hasVideo) {
 }
 
 let firstStrike = false;
-initWolfVideo(video, {
+const videoReady = initWolfVideo(video, {
   desktop: media.wolfDesktop,
+  desktopHd: media.wolfDesktopHd,
   desktop4k: media.wolfDesktop4k,
+  lowPower,
   mobile: media.wolfMobile,
   desktopWebm: media.wolfDesktopWebm,
   mobileWebm: media.wolfMobileWebm,
@@ -191,10 +201,10 @@ initWolfVideo(video, {
     }
   },
   onEnded: hold,
-}).then(({ ok }) => {
+});
+videoReady.then(({ ok }) => {
   if (ok && !reduceMotion) {
     hero.classList.add('has-video');
-    video.currentTime = 0;
     video.play().catch(() => fallback(false));
   } else {
     fallback(ok);
@@ -203,18 +213,43 @@ initWolfVideo(video, {
 
 initAmbience(soundBtn, media.ambience);
 
-// chamada final: a foto do lobo encarando, se existir; senão, os olhos na névoa
-if (media.wolfStill) {
-  fetch(media.wolfStill, { method: 'HEAD' })
-    .then((r) => {
-      if (r.ok && (r.headers.get('content-type') || '').startsWith('image')) {
-        const wolf = document.getElementById('finale-wolf');
-        wolf.classList.add('has-still');
-        wolf.style.backgroundImage = `url("${media.wolfStill}")`;
-      }
-    })
-    .catch(() => {});
+// chamada final: a foto do lobo encarando vira um quadro vivo (pelos, árvores,
+// nuvens e estrelas), com a respiração no focinho e os olhos acendendo
+const finaleWolf = document.getElementById('finale-wolf');
+const finaleLivingCanvas = document.getElementById('finale-living');
+const finaleVapor = initVapor(document.getElementById('finale-vapor'), { every: 4.6, reduceMotion });
+let finaleLiving = null;
+let finaleActive = false;
+const FINALE_MUZZLE = [0.592, 0.305];
+function placeFinaleVapor() {
+  finaleVapor.setAnchor(finaleWolf.clientWidth * FINALE_MUZZLE[0], finaleWolf.clientHeight * FINALE_MUZZLE[1], 1);
 }
+placeFinaleVapor();
+window.addEventListener('resize', placeFinaleVapor);
+function loadFinaleStill() {
+  if (!media.wolfStill || finaleWolf.classList.contains('has-still')) return;
+  const img = new Image();
+  img.onload = () => {
+    finaleWolf.classList.add('has-still');
+    finaleWolf.style.backgroundImage = `url("${media.wolfStill}")`;
+    if (reduceMotion) return;
+    finaleLiving = initLiving(finaleLivingCanvas, { image: img, wolf: [0.48, 0.47, 0.2, 0.34], quality: lowPower ? 'low' : 'high' });
+    if (finaleLiving && finaleLiving.capture(img)) {
+      finaleLivingCanvas.classList.add('is-live');
+      finaleLiving.state.amount = 1;
+      finaleLiving.setRunning(finaleActive);
+    } else {
+      finaleLiving = null;
+    }
+  };
+  img.src = media.wolfStill;
+}
+// a foto só baixa depois que o vídeo da abertura já engatou
+let stillTimer = setTimeout(loadFinaleStill, 6000);
+videoReady.then(() => {
+  clearTimeout(stillTimer);
+  gsap.delayedCall(1.5, loadFinaleStill);
+});
 
 // ---------- a página desliza por cima do lobo ----------
 // O hero é "sticky"; enquanto o conteúdo sobe, o lobo aproxima e escurece.
@@ -258,14 +293,27 @@ gsap
   .to(dim, { opacity: 0.92, ease: 'power1.in', duration: 1 }, 0)
   .to('#hero-content', { yPercent: -16, opacity: 0, ease: 'power1.in', duration: 0.6 }, 0);
 
-// chamada final: tempestade ao longe, fumaça e parallax leve no lobo
-const finaleSmoke = initSmoke(document.getElementById('finale-smoke'), { count: lowPower ? 10 : 18, zone: [0.55, 1.05], opacity: 0.8, reduceMotion });
+// chamada final: tempestade ao longe, névoa, partículas de luz e parallax leve no lobo
+const finaleSmoke = initSmoke(document.getElementById('finale-smoke'), { count: lowPower ? 10 : 18, zone: [0.55, 1.05], opacity: 0.55, reduceMotion, dprMax: lowPower ? 1 : 1.5 });
 finaleSmoke.setRunning(false);
+const finaleMotes = initMotes(document.getElementById('finale-motes'), { count: lowPower ? 16 : 36, reduceMotion });
+const finaleEyes = document.querySelectorAll('.finale__eye');
+const footerBig = document.getElementById('footer-big');
 const finaleStorm = initStorm(document.getElementById('finale-storm'), {
   flash: document.getElementById('finale-flash'),
   origin: [0.86, 0.5],
   every: [6, 12],
-  onStrike: (i) => finaleSmoke.flash(i),
+  dprMax: lowPower ? 1.25 : 2,
+  onStrike: (i) => {
+    finaleSmoke.flash(i);
+    finaleMotes.flash(i);
+    finaleEyes.forEach((eye) => {
+      eye.classList.remove('is-lit');
+      void eye.offsetWidth;
+      eye.classList.add('is-lit');
+    });
+    if (footerBig) gsap.fromTo(footerBig, { '--flash': 1 }, { '--flash': 0, duration: 1.2, ease: 'power2.out', overwrite: true });
+  },
   reduceMotion,
 });
 finaleStorm.setRunning(false);
@@ -274,19 +322,42 @@ ScrollTrigger.create({
   start: 'top bottom',
   end: 'bottom top',
   onToggle: (self) => {
-    finaleStorm.setRunning(self.isActive);
-    finaleSmoke.setRunning(self.isActive);
-    if (self.isActive) finaleStorm.start();
-    else finaleStorm.stop();
+    finaleActive = self.isActive;
+    finaleStorm.setRunning(finaleActive);
+    finaleSmoke.setRunning(finaleActive);
+    finaleMotes.setRunning(finaleActive);
+    finaleVapor.setRunning(finaleActive);
+    if (finaleLiving) finaleLiving.setRunning(finaleActive);
+    if (finaleActive) {
+      finaleStorm.start();
+      placeFinaleVapor();
+      finaleVapor.start();
+    } else {
+      finaleStorm.stop();
+      finaleVapor.stop();
+    }
   },
   onEnter: () => gsap.delayedCall(1.2, () => finaleStorm.strike({ intensity: 0.9 })),
 });
+// os olhos acendem de vez em quando, mesmo sem raio
+if (!reduceMotion) {
+  const blink = () => {
+    finaleEyes.forEach((eye) => {
+      eye.classList.remove('is-lit');
+      void eye.offsetWidth;
+      eye.classList.add('is-lit');
+    });
+    gsap.delayedCall(5 + Math.random() * 6, blink);
+  };
+  gsap.delayedCall(3, blink);
+}
 if (!reduceMotion) {
   gsap.to('#finale-wolf', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '#contato', start: 'top bottom', end: 'bottom top', scrub: true } });
-  gsap.utils.toArray('.tile').forEach((tile, i) => {
-    gsap.from(tile, { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: (i % 3) * 0.08, scrollTrigger: { trigger: tile, start: 'top 90%', once: true } });
-  });
   gsap.to('#statement-mark', { yPercent: 28, rotate: 6, ease: 'none', scrollTrigger: { trigger: '#sobre', start: 'top bottom', end: 'bottom top', scrub: true } });
+  // o "Dalas" gigante do rodapé se preenche conforme a página chega ao fim
+  if (footerBig) {
+    gsap.fromTo(footerBig, { '--fill': '0%' }, { '--fill': '100%', ease: 'none', scrollTrigger: { trigger: '#footer', start: 'top 95%', end: 'bottom bottom', scrub: 0.4 } });
+  }
 }
 
 // ---------- demais seções ----------
@@ -295,6 +366,7 @@ document.fonts.ready.then(() => {
   initProcess();
   initJourney();
   initFaq();
+  initSolutions({ reduceMotion });
   initCrmDemo();
   ScrollTrigger.refresh();
 });

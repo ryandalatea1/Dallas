@@ -91,8 +91,8 @@ function compile(gl, type, src) {
   return sh;
 }
 
-export function initLiving(canvas, { video, wolf = [0.475, 0.47, 0.2, 0.36], quality = 'high' } = {}) {
-  if (!canvas || !video) return null;
+export function initLiving(canvas, { video, image, wolf = [0.475, 0.47, 0.2, 0.36], quality = 'high', dprMax } = {}) {
+  if (!canvas || !(video || image)) return null;
   let gl = null;
   try {
     gl = canvas.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'high-performance' });
@@ -132,7 +132,7 @@ export function initLiving(canvas, { video, wolf = [0.475, 0.47, 0.2, 0.36], qua
   let imgH = 1;
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, quality === 'high' ? 1.5 : 1);
+    const dpr = Math.min(window.devicePixelRatio || 1, dprMax || (quality === 'high' ? 1.5 : 1));
     width = Math.round(canvas.clientWidth * dpr);
     height = Math.round(canvas.clientHeight * dpr);
     if (!width || !height) return;
@@ -143,18 +143,22 @@ export function initLiving(canvas, { video, wolf = [0.475, 0.47, 0.2, 0.36], qua
   resize();
   window.addEventListener('resize', resize);
 
-  function capture() {
-    if (!video.videoWidth) return false;
+  // copia o quadro atual do vídeo (ou uma imagem pronta) para a textura
+  function capture(source) {
+    const src = source || video || image;
+    const sw = src.videoWidth || src.naturalWidth || src.width;
+    const sh = src.videoHeight || src.naturalHeight || src.height;
+    if (!sw || !sh) return false;
     try {
       gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, src);
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
     } catch (error) {
       return false;
     }
-    imgW = video.videoWidth;
-    imgH = video.videoHeight;
+    imgW = sw;
+    imgH = sh;
     state.captured = true;
     return true;
   }

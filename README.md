@@ -15,7 +15,7 @@ npm run preview  # testa a build
 
 ## O lobo
 
-Os vídeos estão em `public/media/`: `wolf-intro-4k.mp4` (3840x2160, usado em telas grandes com boa conexão), `wolf-intro.mp4` (1440p, H.264), `wolf-intro.webm` (1080p, VP9), `wolf-intro-mobile.*` (vertical, 720x1280), pôsteres e `wolf-still.jpg` (o olhar final, usado na chamada final). Todos receberam um tratamento de cor cinematográfico (contraste, azul nas sombras, nitidez e vinheta). Para trocar o vídeo, substitua os arquivos mantendo os nomes ou aponte novos caminhos em `src/config.js`.
+Os vídeos estão em `public/media/`: `wolf-intro.mp4` (1080p, H.264, o padrão: leve e começa rápido), `wolf-intro-hd.mp4` (1440p, para telas grandes), `wolf-intro-4k.mp4` (3840x2160, só em telas muito grandes com boa conexão), `wolf-intro.webm` (1080p, VP9), `wolf-intro-mobile.*` (vertical, 720x1280, bem leve), pôsteres e `wolf-still.jpg` (o olhar final, que vira um quadro vivo na chamada final). O player (`src/modules/wolf-video.js`) escolhe a versão pela tela e pela conexão e só dá o play quando já há vídeo suficiente no buffer. As imagens da seção Soluções (telas reais do Dalas CRM e dos sites de exemplo) ficam em `public/images/solutions/`. Todos receberam um tratamento de cor cinematográfico (contraste, azul nas sombras, nitidez e vinheta). Para trocar o vídeo, substitua os arquivos mantendo os nomes ou aponte novos caminhos em `src/config.js`.
 
 A direção da cena fica em `src/config.js` (`timeline`):
 

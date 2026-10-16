@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
  * Tempestade: raios procedurais (ramificados, com brilho), flash no céu,
  * tremor sutil de câmera e relâmpagos difusos entre um raio e outro.
  */
-export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], meteors = false, onStrike = null, reduceMotion = false } = {}) {
+export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], meteors = false, onStrike = null, reduceMotion = false, dprMax = 2 } = {}) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return { strike() {}, start() {}, stop() {}, setRunning() {} };
 
@@ -18,7 +18,7 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
   let meteorTimer = null;
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, dprMax);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr);
