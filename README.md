@@ -15,7 +15,7 @@ npm run preview  # testa a build
 
 ## O lobo
 
-Os vídeos estão em `public/media/`: `wolf-intro.mp4` (1440p, H.264), `wolf-intro.webm` (1080p, VP9), `wolf-intro-mobile.*` (vertical, 720x1280), pôsteres e `wolf-still.jpg` (o olhar final, usado na chamada final). Todos receberam um tratamento de cor cinematográfico (contraste, azul nas sombras, nitidez e vinheta). Para trocar o vídeo, substitua os arquivos mantendo os nomes ou aponte novos caminhos em `src/config.js`.
+Os vídeos estão em `public/media/`: `wolf-intro-4k.mp4` (3840x2160, usado em telas grandes com boa conexão), `wolf-intro.mp4` (1440p, H.264), `wolf-intro.webm` (1080p, VP9), `wolf-intro-mobile.*` (vertical, 720x1280), pôsteres e `wolf-still.jpg` (o olhar final, usado na chamada final). Todos receberam um tratamento de cor cinematográfico (contraste, azul nas sombras, nitidez e vinheta). Para trocar o vídeo, substitua os arquivos mantendo os nomes ou aponte novos caminhos em `src/config.js`.
 
 A direção da cena fica em `src/config.js` (`timeline`):
 
@@ -33,6 +33,8 @@ A direção da cena fica em `src/config.js` (`timeline`):
 | Abertura e transição de scroll | `src/main.js` |
 | Raios, estrelas cadentes e vapor | `src/modules/storm.js`, `src/modules/vapor.js` |
 | Quadro vivo (pelos, árvores, nuvens, estrelas) | `src/modules/living.js`; máscara do lobo em `src/config.js` (`wolfMask`) |
+| Fumaça | `src/modules/smoke.js` |
+| Sites de demonstração e CRM | `public/demos/<nome>/index.html` (cada um é um arquivo só); imagens dos cards em `public/images/work/` |
 | Logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
 
 Política de privacidade e termos de uso: os links do rodapé apontam para `#` até você ter as páginas.
@@ -41,9 +43,18 @@ Política de privacidade e termos de uso: os links do rodapé apontam para `#` a
 
 - Abertura: o site aparece na hora (marca, frase, botões) com o lobo correndo ao fundo. Raio junto com o olhar, zoom lento no rosto e vapor da respiração. O último frame vira um quadro vivo em WebGL: pelos ao vento, árvores balançando, nuvens respirando, estrelas piscando, estrelas cadentes e novos raios de tempos em tempos.
 - Scroll: o lobo fica preso ao fundo e a página desliza por cima dele, enquanto ele aproxima e escurece.
-- Faixa com os serviços, Sobre com os quatro diferenciais ao lado, soluções em grade bento com luz que segue o cursor, processo em linha do tempo, chamada final com o lobo encarando e tempestade ao longe, rodapé com DALAS em grande escala.
-- Luz que acompanha o cursor, linha de progresso no topo, menu em tela cheia no celular. Tipografia: Sora nos títulos, Manrope no texto, Cinzel só na marca. Paleta azul-noite e prata.
+- Fumaça rasteira rolando pela cena (acende quando cai um raio), raios mais frequentes e em dupla, estrelas cadentes.
+- Faixa com os serviços, Sobre com os quatro diferenciais ao lado, soluções em grade bento com luz que segue o cursor.
+- Site + tráfego: a jornada "do anúncio à conversa" em sete etapas, com uma linha que se desenha no scroll e um ponto de luz percorrendo o caminho.
+- Dalas CRM: demonstração interativa do painel (pipeline arrastável, conversa estilo WhatsApp, automações) dentro do site e em tela cheia em `public/demos/crm/`.
+- Projetos: quatro sites completos de demonstração em `public/demos/` (clínica, academia, arquitetura, cafeteria), com a página inteira percorrida ao passar o mouse e abertos em nova aba.
+- Processo em linha do tempo, dúvidas sobre tráfego pago (acordeão), chamada final com o lobo encarando, tempestade e fumaça, rodapé com DALAS em grande escala.
+- Luz que acompanha o cursor, linha de progresso no topo, menu em tela cheia no celular. Tipografia: Sora nos títulos e na marca, Manrope no texto. Paleta azul-noite e prata.
 - Performance: só canvases 2D durante o hero, tudo pausado fora da tela, sem WebGL por padrão, `prefers-reduced-motion` respeitado.
+
+## Versões guardadas
+
+A versão anterior a esta (sem CRM e sem os sites de exemplo) está na branch `versao-anterior`. Para voltar a ela: `git checkout versao-anterior`, ou peça que ela seja restaurada na `main`.
 
 ## Publicação
 

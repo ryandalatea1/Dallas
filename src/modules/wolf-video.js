@@ -4,10 +4,15 @@
  * com a floresta em WebGL. Opcionalmente repete um trecho (loop) ou avisa
  * quando o vídeo termina (onEnded) para a cena seguir em "hold".
  */
-export function initWolfVideo(video, { desktop, mobile, desktopWebm, mobileWebm, poster, posterMobile, loop, onTime, onEnded, timeout = 7000 } = {}) {
+export function initWolfVideo(video, { desktop, desktop4k, mobile, desktopWebm, mobileWebm, poster, posterMobile, loop, onTime, onEnded, timeout = 7000 } = {}) {
   if (!video) return Promise.resolve({ ok: false });
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
-  const candidates = (isMobile ? [mobile, mobileWebm, desktop, desktopWebm] : [desktop, desktopWebm]).filter(Boolean);
+  // 4K só em telas grandes e conexões boas: o ganho é real, o custo também
+  const conn = navigator.connection || {};
+  const bigScreen = window.screen.width * (window.devicePixelRatio || 1) >= 2200;
+  const goodNet = !conn.saveData && !/2g|3g/.test(conn.effectiveType || '');
+  const use4k = desktop4k && bigScreen && goodNet;
+  const candidates = (isMobile ? [mobile, mobileWebm, desktop, desktopWebm] : [use4k ? desktop4k : null, desktop, desktopWebm]).filter(Boolean);
   const chosenPoster = isMobile && posterMobile ? posterMobile : poster;
   if (chosenPoster) video.poster = chosenPoster;
 

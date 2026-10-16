@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
  * Tempestade: raios procedurais (ramificados, com brilho), flash no céu,
  * tremor sutil de câmera e relâmpagos difusos entre um raio e outro.
  */
-export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], meteors = false, reduceMotion = false } = {}) {
+export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [6, 13], meteors = false, onStrike = null, reduceMotion = false } = {}) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return { strike() {}, start() {}, stop() {}, setRunning() {} };
 
@@ -55,7 +55,7 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
     const ey = oy * h + Math.random() * h * 0.08;
     const main = makePath(sx, sy, ex, ey, w * 0.12);
     const branches = [];
-    const count = 2 + Math.floor(Math.random() * 3);
+    const count = 3 + Math.floor(Math.random() * 3);
     for (let i = 0; i < count; i += 1) {
       const at = main[Math.floor(main.length * (0.25 + Math.random() * 0.55))];
       const len = (0.1 + Math.random() * 0.18) * h;
@@ -165,9 +165,14 @@ export function initStorm(canvas, { flash, shake, origin = [0.8, 0.3], every = [
   }
   gsap.ticker.add(render);
 
-  function strike({ x = origin[0], y = origin[1], intensity = 1, bolt = true } = {}) {
+  function strike({ x = origin[0], y = origin[1], intensity = 1, bolt = true, echo = true } = {}) {
     if (reduceMotion) intensity *= 0.5;
     if (bolt && !reduceMotion) bolts.push(makeBolt(x, y, intensity));
+    if (onStrike) onStrike(intensity);
+    // às vezes o raio vem em dupla
+    if (echo && bolt && !reduceMotion && Math.random() < 0.35) {
+      gsap.delayedCall(0.12 + Math.random() * 0.2, () => strike({ x: x + (Math.random() - 0.5) * 0.08, y, intensity: intensity * 0.7, bolt: true, echo: false }));
+    }
     if (flash) {
       flash.style.setProperty('--fx', `${x * 100}%`);
       flash.style.setProperty('--fy', `${y * 100}%`);

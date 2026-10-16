@@ -16,6 +16,10 @@ import { initProcess } from './modules/process.js';
 import { initSpotlight } from './modules/spotlight.js';
 import { initContact } from './modules/contact.js';
 import { initLiving } from './modules/living.js';
+import { initSmoke } from './modules/smoke.js';
+import { initJourney } from './modules/journey.js';
+import { initFaq } from './modules/faq.js';
+import { initCrmDemo } from './modules/crm-demo.js';
 import { initTicker } from './modules/ticker.js';
 import { initLight } from './modules/light.js';
 
@@ -59,12 +63,14 @@ const stormOrigin = pick(T.storm.origin);
 zoomEl.style.setProperty('--face-x', `${face[0] * 100}%`);
 zoomEl.style.setProperty('--face-y', `${face[1] * 100}%`);
 
+const smoke = initSmoke(document.getElementById('hero-smoke'), { count: lowPower ? 16 : 32, zone: [0.44, 1.08], reduceMotion });
 const storm = initStorm(document.getElementById('hero-storm'), {
   flash: document.getElementById('hero-flash'),
   shake: film,
   origin: stormOrigin,
   every: T.storm.every,
   meteors: true,
+  onStrike: (i) => smoke.flash(i),
   reduceMotion,
 });
 const livingCanvas = document.getElementById('hero-living');
@@ -101,7 +107,7 @@ window.addEventListener('resize', placeVapor);
 
 // O site aparece na hora: nada de esperar o vídeo.
 const brandChars = new SplitText('#hero-brand .w', { type: 'chars', charsClass: 'char' }).chars;
-gsap.set(['#hero-tagline', '#hero-lede', '#hero-actions > *', '.hero__kicker span'], { opacity: 0, y: 18 });
+gsap.set(['#hero-tagline', '#hero-lede', '#hero-actions > *', '.hero__chip'], { opacity: 0, y: 18 });
 gsap.set(brandChars, { opacity: 0, y: 22, filter: 'blur(8px)' });
 gsap.set([hint, '.nav__bar'], { opacity: 0 });
 
@@ -110,7 +116,7 @@ intro
   .to(black, { opacity: 0, duration: 0.9, ease: 'power2.inOut' }, 0)
   .to('.nav__bar', { opacity: 1, duration: 0.8 }, 0.2)
   .to(brandChars, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.03 }, 0.25)
-  .to('.hero__kicker span', { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.5)
+  .to('.hero__chip', { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.5)
   .to('#hero-tagline', { opacity: 1, y: 0, duration: 0.8 }, 0.7)
   .to('#hero-lede', { opacity: 1, y: 0, duration: 0.8 }, 0.85)
   .to('#hero-actions > *', { opacity: 1, y: 0, duration: 0.7, stagger: 0.1 }, 1)
@@ -171,6 +177,7 @@ function fallback(hasVideo) {
 let firstStrike = false;
 initWolfVideo(video, {
   desktop: media.wolfDesktop,
+  desktop4k: media.wolfDesktop4k,
   mobile: media.wolfMobile,
   desktopWebm: media.wolfDesktopWebm,
   mobileWebm: media.wolfMobileWebm,
@@ -217,6 +224,7 @@ function setHeroActive(active) {
   heroActive = active;
   storm.setRunning(active);
   vapor.setRunning(active);
+  smoke.setRunning(active);
   if (forest) forest.setRunning(active);
   if (living) living.setRunning(active && holding);
   if (!active) {
@@ -250,11 +258,14 @@ gsap
   .to(dim, { opacity: 0.92, ease: 'power1.in', duration: 1 }, 0)
   .to('#hero-content', { yPercent: -16, opacity: 0, ease: 'power1.in', duration: 0.6 }, 0);
 
-// chamada final: tempestade ao longe e parallax leve no lobo
+// chamada final: tempestade ao longe, fumaça e parallax leve no lobo
+const finaleSmoke = initSmoke(document.getElementById('finale-smoke'), { count: lowPower ? 10 : 18, zone: [0.55, 1.05], opacity: 0.8, reduceMotion });
+finaleSmoke.setRunning(false);
 const finaleStorm = initStorm(document.getElementById('finale-storm'), {
   flash: document.getElementById('finale-flash'),
   origin: [0.86, 0.5],
-  every: [7, 14],
+  every: [6, 12],
+  onStrike: (i) => finaleSmoke.flash(i),
   reduceMotion,
 });
 finaleStorm.setRunning(false);
@@ -264,6 +275,7 @@ ScrollTrigger.create({
   end: 'bottom top',
   onToggle: (self) => {
     finaleStorm.setRunning(self.isActive);
+    finaleSmoke.setRunning(self.isActive);
     if (self.isActive) finaleStorm.start();
     else finaleStorm.stop();
   },
@@ -281,6 +293,9 @@ if (!reduceMotion) {
 document.fonts.ready.then(() => {
   initReveals();
   initProcess();
+  initJourney();
+  initFaq();
+  initCrmDemo();
   ScrollTrigger.refresh();
 });
 window.addEventListener('load', () => ScrollTrigger.refresh());

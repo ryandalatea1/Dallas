@@ -8,7 +8,8 @@ export const siteConfig = {
 
   // Mídia (public/media/). Os vídeos do lobo já estão incluídos.
   media: {
-    wolfDesktop: './media/wolf-intro.mp4', // 16:9, 1080p, 5 s
+    wolfDesktop: './media/wolf-intro.mp4', // 16:9, 1440p, 5 s
+    wolfDesktop4k: './media/wolf-intro-4k.mp4', // 4K para telas grandes com boa conexão
     wolfMobile: './media/wolf-intro-mobile.mp4', // 9:16, 720x1280
     wolfDesktopWebm: './media/wolf-intro.webm', // mesmas cenas em VP9, para navegadores sem H.264
     wolfMobileWebm: './media/wolf-intro-mobile.webm',
@@ -37,7 +38,7 @@ export const siteConfig = {
     storm: {
       firstStrikeAt: 4.05,
       origin: { desktop: [0.82, 0.3], mobile: [0.86, 0.3] },
-      every: [6, 13],
+      every: [4, 9],
     },
   },
 };
