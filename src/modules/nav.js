@@ -1,47 +1,32 @@
-/** Barra fixa: vidro ao rolar, some ao descer, volta ao subir. Menu em tela cheia no celular. */
-export function initNav(lenis) {
-  const nav = document.getElementById('nav');
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+/** Link ativo conforme a seção na tela e o menu do celular. */
+export function initNav() {
+  document.querySelectorAll('[data-spy]').forEach((link) => {
+    const section = document.getElementById(link.dataset.spy);
+    if (!section) return;
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 50%',
+      end: 'bottom 50%',
+      onToggle: (self) => link.classList.toggle('is-active', self.isActive),
+    });
+  });
+
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
-  let open = false;
-
-  lenis.on('scroll', ({ scroll, direction }) => {
-    nav.classList.toggle('is-scrolled', scroll > 40);
-    const hide = scroll > 240 && direction === 1 && !open;
-    nav.classList.toggle('is-hidden', hide);
-  });
-
-  function setMenu(value) {
-    open = value;
-    menu.classList.toggle('is-open', open);
-    menu.setAttribute('aria-hidden', String(!open));
+  if (!burger || !menu) return;
+  const icon = burger.querySelector('use');
+  const set = (open) => {
+    menu.hidden = !open;
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    nav.classList.remove('is-hidden');
-    if (open) lenis.stop();
-    else lenis.start();
-  }
-
-  burger.addEventListener('click', () => setMenu(!open));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && open) setMenu(false);
-  });
-  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
-
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      const id = link.getAttribute('href');
-      if (!id || id.length < 2) return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      event.preventDefault();
-      const run = () => lenis.scrollTo(target, { offset: id === '#inicio' ? 0 : -24, duration: 1.4 });
-      if (open) {
-        setMenu(false);
-        setTimeout(run, 150);
-      } else {
-        run();
-      }
-    });
+    icon.setAttribute('href', open ? '#i-x' : '#i-menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', () => set(menu.hidden));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) set(false);
   });
 }

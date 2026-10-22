@@ -1,8 +1,8 @@
 # Dalas Marketing — site oficial
 
-Site cinematográfico da **Dalas Marketing**: o lobo na abertura, com tempestade e respiração, e as seções deslizando por cima dele.
+Site da **Dalas Marketing** (Grupo Kairos): sites, anúncios no Instagram e no Google, CRM e automações, do clique à venda. Escuro, prata e névoa, com o ouro e o verde da marca nos detalhes.
 
-Stack: [Vite](https://vite.dev) + JavaScript em módulos, [GSAP](https://gsap.com) (ScrollTrigger e SplitText), [Lenis](https://lenis.darkroom.engineering) (scroll suave) e [Three.js](https://threejs.org) só como reserva (floresta em WebGL quando o vídeo não carrega). Sem framework pesado: estático, rápido e publica em qualquer hospedagem.
+Stack: [Vite](https://vite.dev) + JavaScript em módulos e [GSAP](https://gsap.com) (ScrollTrigger). Sem framework: estático, rápido e publica em qualquer hospedagem.
 
 ## Rodando localmente
 
@@ -13,48 +13,50 @@ npm run build    # gera dist/
 npm run preview  # testa a build
 ```
 
-## O lobo
+## Seções
 
-Os vídeos estão em `public/media/`: `wolf-intro.mp4` (1080p, H.264, o padrão: leve e começa rápido), `wolf-intro-hd.mp4` (1440p, para telas grandes), `wolf-intro-4k.mp4` (3840x2160, só em telas muito grandes com boa conexão), `wolf-intro.webm` (1080p, VP9), `wolf-intro-mobile.*` (vertical, 720x1280, bem leve), pôsteres e `wolf-still.jpg` (o olhar final, que vira um quadro vivo na chamada final). O player (`src/modules/wolf-video.js`) escolhe a versão pela tela e pela conexão e só dá o play quando já há vídeo suficiente no buffer. As imagens da seção Soluções (telas reais do Dalas CRM e dos sites de exemplo) ficam em `public/images/solutions/`. Todos receberam um tratamento de cor cinematográfico (contraste, azul nas sombras, nitidez e vinheta). Para trocar o vídeo, substitua os arquivos mantendo os nomes ou aponte novos caminhos em `src/config.js`.
+1. **Abertura**: a asa da marca, DALAS letra por letra e um risco de luz (uma vez por visita).
+2. **Hero** "Do clique à venda.": constelação de pontos e uma órbita de luz que percorre a jornada do cliente (anúncio, site, WhatsApp, CRM, venda), acendendo cada etapa.
+3. **Faixa** com os canais e serviços.
+4. **Site comum x Site Dalas**: os três pontos acendem com o scroll e o celular troca de um site genérico para um site de verdade que rola sozinho.
+5. **01 Site + anúncios**: o celular mostra o anúncio no Instagram, o site e a conversa no WhatsApp, em loop, com duas marcas de exemplo.
+6. **Onde a venda se perde**: parágrafo que acende palavra por palavra e a história do cliente que esfriou, contada pelo scroll (22:07 até 09:14).
+7. **O relógio de bolso**: preso na tela em quatro momentos (tempo, segundos, minutos, Dalas); os ponteiros disparam e no fim se alinham no 12.
+8. **02 CRM + automações**: um cliente atravessa o funil do Dalas CRM (novo, em conversa, venda).
+9. **A tempestade**: o lobo correndo na chuva, com raios ao fundo.
+10. **Como a Dalas trabalha**: linha do tempo central que se preenche com o scroll.
+11. **Quem cuida da sua conta**: Ryan Dalatea (CEO da Dalas Marketing) e Gustavo Licks (Kairos Growth).
+12. **Dúvidas** e **chamada final** com fumaça sedosa em WebGL e mostradores girando.
+13. **Rodapé** com DALAS gigante, demonstrações e contato.
 
-A direção da cena fica em `src/config.js` (`timeline`):
-
-- `storm`: o primeiro raio cai junto com o raio do vídeo (`firstStrikeAt`); depois, raios aleatórios entre `every` segundos, com flash e tremor sutil.
-- `hold`: quando o vídeo termina no olhar, a câmera avança devagar no rosto (`zoom`, `duration`) e o vapor sai do focinho (`muzzle`, `breathEvery`).
-- `ambience.mp3` (opcional): vento e trovão, só no clique do visitante.
+Extras: questionário "Diagnóstico grátis" (7 passos, termina com a mensagem pronta no WhatsApp), botão do WhatsApp que pode ser arrastado, cronômetro de voltar ao topo cujo ponteiro marca o quanto da página foi lido, grão de filme.
 
 ## Onde editar
 
 | O quê | Onde |
 | --- | --- |
-| WhatsApp, e-mail, Instagram, mídias, tempos do vídeo | `src/config.js` |
+| WhatsApp, e-mail, Instagram, vídeo do lobo | `src/config.js` |
 | Textos de todas as seções | `index.html` |
+| Perguntas do diagnóstico | `src/modules/diag.js` (`STEPS`) |
+| Marcas e mensagens do celular do card 01 | `src/modules/ad-phone.js` (`BRANDS`) |
+| Clientes do kanban do card 02 | `src/modules/kanban.js` (`LEADS`) |
 | Cores, tipografia, espaçamentos | `src/styles/main.css` (bloco `:root`) |
-| Abertura e transição de scroll | `src/main.js` |
-| Raios, estrelas cadentes e vapor | `src/modules/storm.js`, `src/modules/vapor.js` |
-| Quadro vivo (pelos, árvores, nuvens, estrelas) | `src/modules/living.js`; máscara do lobo em `src/config.js` (`wolfMask`) |
-| Fumaça | `src/modules/smoke.js` |
-| Sites de demonstração e CRM | `public/demos/<nome>/index.html` (cada um é um arquivo só); imagens dos cards em `public/images/work/` |
-| Logo, favicon, imagem de compartilhamento | `public/images/`, `public/favicon.png`, `public/og.jpg` |
+| Logo (asa) | `public/images/brand/` |
+| Fotos da equipe | `public/images/team/ryan.jpg` e `gustavo.jpg` (quadradas; sem a foto, aparecem as iniciais) |
+| Telas dos celulares | `public/images/phone/` |
+| Sites de demonstração e CRM | `public/demos/<nome>/index.html` |
+| Favicon e imagem de compartilhamento | `public/favicon.png`, `public/og.jpg` |
 
-Política de privacidade e termos de uso: os links do rodapé apontam para `#` até você ter as páginas.
+## Performance
 
-## Experiência
-
-- Abertura: o site aparece na hora (marca, frase, botões) com o lobo correndo ao fundo. Raio junto com o olhar, zoom lento no rosto e vapor da respiração. O último frame vira um quadro vivo em WebGL: pelos ao vento, árvores balançando, nuvens respirando, estrelas piscando, estrelas cadentes e novos raios de tempos em tempos.
-- Scroll: o lobo fica preso ao fundo e a página desliza por cima dele, enquanto ele aproxima e escurece.
-- Fumaça rasteira rolando pela cena (acende quando cai um raio), raios mais frequentes e em dupla, estrelas cadentes.
-- Faixa com os serviços, Sobre com os quatro diferenciais ao lado, soluções em grade bento com luz que segue o cursor.
-- Site + tráfego: a jornada "do anúncio à conversa" em sete etapas, com uma linha que se desenha no scroll e um ponto de luz percorrendo o caminho.
-- Dalas CRM: demonstração interativa do painel (pipeline arrastável, conversa estilo WhatsApp, automações) dentro do site e em tela cheia em `public/demos/crm/`.
-- Projetos: quatro sites completos de demonstração em `public/demos/` (clínica, academia, arquitetura, cafeteria), com a página inteira percorrida ao passar o mouse e abertos em nova aba.
-- Processo em linha do tempo, dúvidas sobre tráfego pago (acordeão), chamada final com o lobo encarando, tempestade e fumaça, rodapé com DALAS em grande escala.
-- Luz que acompanha o cursor, linha de progresso no topo, menu em tela cheia no celular. Tipografia: Sora nos títulos e na marca, Manrope no texto. Paleta azul-noite e prata.
-- Performance: só canvases 2D durante o hero, tudo pausado fora da tela, sem WebGL por padrão, `prefers-reduced-motion` respeitado.
+Scroll nativo, canvases em resolução baixa e a 30 quadros por segundo no celular, tudo pausado fora da tela, vídeo carregado só quando a seção se aproxima, `prefers-reduced-motion` respeitado.
 
 ## Versões guardadas
 
-A versão anterior a esta (sem CRM e sem os sites de exemplo) está na branch `versao-anterior`. Para voltar a ela: `git checkout versao-anterior`, ou peça que ela seja restaurada na `main`.
+- `versao-lobo`: o site anterior, com o lobo na abertura, CRM e sites de exemplo.
+- `versao-anterior`: a versão antes dessa.
+
+Para voltar a uma delas: `git checkout versao-lobo`, ou peça que ela seja restaurada na `main`.
 
 ## Publicação
 

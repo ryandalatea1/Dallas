@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Dalas Marketing — Estratégia, tecnologia e crescimento</title>
+    <title>Dalas Marketing | Sites, tráfego pago e CRM para a sua empresa vender mais</title>
     <meta
       name="description"
-      content="Dalas Marketing: sites, sistemas, painéis, tráfego pago, automações e estratégia digital para transformar negócios em marcas fortes, modernas e competitivas."
+      content="Sites, anúncios no Instagram e no Google, CRM e automações trabalhando juntos, do clique à venda. Dalas Marketing."
     />
-    <meta name="theme-color" content="#050807" />
+    <meta name="theme-color" content="#050506" />
+    <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="https://ryandalatea1.github.io/Dallas/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dalas Marketing" />
-    <meta property="og:title" content="Dalas Marketing — Não seguimos o mercado. Criamos o próximo movimento." />
-    <meta property="og:description" content="Sites, sistemas, painéis, tráfego pago, automações e estratégia digital para empresas preparadas para o futuro." />
+    <meta property="og:title" content="Do clique à venda. | Dalas Marketing" />
+    <meta property="og:description" content="Sites, anúncios, CRM e automações trabalhando juntos para o cliente achar você, entender por que você e chamar no WhatsApp." />
     <meta property="og:image" content="https://ryandalatea1.github.io/Dallas/og.jpg" />
     <meta property="og:locale" content="pt_BR" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -22,9 +23,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@200;300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // a abertura aparece uma vez por visita
+      try {
+        if (sessionStorage.getItem('dalas-intro')) document.documentElement.classList.add('no-intro');
+      } catch (e) {}
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -32,481 +39,629 @@
         "name": "Dalas Marketing",
         "url": "https://ryandalatea1.github.io/Dallas/",
         "logo": "https://ryandalatea1.github.io/Dallas/apple-touch-icon.png",
-        "description": "Soluções digitais: sites, sistemas, painéis, tráfego pago, automações e estratégia digital.",
+        "description": "Sites, tráfego pago, CRM e automações para empresas venderem mais.",
         "areaServed": "BR"
       }
     </script>
   </head>
   <body>
-    <a class="skip" href="#sobre">Pular a abertura</a>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="cursor-light" id="cursor-light" aria-hidden="true"></div>
-    <i class="progress" id="progress" aria-hidden="true"></i>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-    <!-- Navegação -->
-    <header class="nav" id="nav">
-      <div class="nav__bar">
-        <a class="nav__brand" href="#inicio" aria-label="Dalas Marketing, voltar ao início">
-          <img class="nav__mark" src="./images/logo-mark.png" alt="" width="590" height="540" />
-          <span class="nav__word">Dalas<small>Marketing</small></span>
-        </a>
-        <nav class="nav__links" aria-label="Principal">
-          <a href="#inicio">Início</a>
-          <a href="#solucoes">Soluções</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#crm">CRM</a>
-          <a href="#processo">Processo</a>
-          <a href="#contato">Contato</a>
-        </nav>
-        <div class="nav__actions">
-          <a class="btn btn--solid btn--sm" href="#contato" data-whatsapp>
-            <span>Iniciar um projeto</span><i aria-hidden="true">↗</i>
-          </a>
-          <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-            <span></span><span></span>
-          </button>
-        </div>
-      </div>
-    </header>
+    <!-- ícones -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-r" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-l" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></symbol>
+        <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z" /></symbol>
+        <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /></g><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" /></symbol>
+        <symbol id="i-fb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M13.5 21v-7.5H16m-5 0h2.5M13.5 13.5V11c0-1.4.6-2.5 2.5-2.5h1" /></g></symbol>
+        <symbol id="i-google" viewBox="0 0 24 24"><path d="M20.5 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.8a4.1 4.1 0 0 1-1.8 2.7v2.2h2.9c1.7-1.6 2.6-3.9 2.6-6.5ZM12 21c2.4 0 4.5-.8 5.9-2.2L15 16.5c-.8.5-1.8.9-3 .9-2.3 0-4.3-1.6-5-3.7H4v2.3A9 9 0 0 0 12 21Z M7 13.7a5.4 5.4 0 0 1 0-3.4V8H4a9 9 0 0 0 0 8l3-2.3ZM12 6.6c1.3 0 2.5.5 3.4 1.3l2.6-2.6A9 9 0 0 0 4 8l3 2.3c.7-2.1 2.7-3.7 5-3.7Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></symbol>
+        <symbol id="i-site" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M3 9h18M7 6.5h.01M10 6.5h.01" stroke-linecap="round" /></g></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6M20 16v-9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.5l2 11h10.5l2-8H6.5" /><circle cx="9" cy="19.5" r="1.3" /><circle cx="17" cy="19.5" r="1.3" /></g></symbol>
+        <symbol id="i-kanban" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5" /><rect x="9.5" y="4" width="5" height="11" rx="1.5" /><rect x="16" y="4" width="5" height="7" rx="1.5" /></g></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4.2-4.2" /></g></symbol>
+        <symbol id="i-quote" viewBox="0 0 24 24"><path d="M7 17c-1.7 0-3-1.3-3-3.2C4 10 6.3 7.4 9 7v2c-1.6.4-2.6 1.6-2.8 3H7c1.4 0 2.5 1 2.5 2.5S8.4 17 7 17Zm9 0c-1.7 0-3-1.3-3-3.2C13 10 15.3 7.4 18 7v2c-1.6.4-2.6 1.6-2.8 3h.8c1.4 0 2.5 1 2.5 2.5S17.4 17 16 17Z" fill="currentColor" /></symbol>
+        <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 4l13 6.5-5.6 1.6L10 18 5 4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1-4A8 8 0 1 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3" /><path d="M4 10h16M9 3v4M15 3v4" /></g></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></g></symbol>
+        <symbol id="i-crm" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="9" r="3.2" /><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6M16 6.5h5M16 10.5h5M17.5 14.5H21" /></g></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-dots" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="19" cy="12" r="1.6" /></g></symbol>
+        <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11l.5-1.5a1.5 1.5 0 0 1 3 .5v1l.3-.6a1.5 1.5 0 0 1 2.8.9V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L5 15.6a1.5 1.5 0 0 1 2.3-1.9L9 15.3V11Z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round" /></symbol>
+      </defs>
+    </svg>
 
-    <div class="menu" id="menu" aria-hidden="true">
-      <nav class="menu__links" aria-label="Menu">
-        <a href="#inicio"><small>01</small>Início</a>
-        <a href="#solucoes"><small>02</small>Soluções</a>
-        <a href="#projetos"><small>03</small>Projetos</a>
-        <a href="#crm"><small>04</small>CRM</a>
-        <a href="#processo"><small>05</small>Processo</a>
-        <a href="#contato"><small>06</small>Contato</a>
-      </nav>
-      <div class="menu__foot">
-        <a class="btn btn--solid" href="#contato" data-whatsapp><span>Iniciar um projeto</span><i aria-hidden="true">↗</i></a>
-        <p>Inteligência, estratégia e tecnologia para transformar negócios.</p>
+    <!-- abertura -->
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro__in">
+        <img class="intro__mark" src="./images/brand/wing.webp" alt="" width="516" height="640" />
+        <p class="intro__name"><span>D</span><span>A</span><span>L</span><span>A</span><span>S</span></p>
+        <p class="intro__sub"><i></i>Marketing<i></i></p>
+        <i class="intro__streak"></i>
       </div>
     </div>
+    <div class="grain" aria-hidden="true"></div>
 
-    <main>
-      <!-- ================= ABERTURA: O LOBO ================= -->
-      <section class="hero" id="inicio" aria-label="Abertura">
-        <div class="hero__stage" id="hero-stage">
-          <div class="hero__film" id="hero-film">
-            <div class="hero__zoom" id="hero-zoom">
-              <video class="hero__video" id="wolf-video" muted playsinline preload="auto" aria-hidden="true"></video>
-              <canvas class="hero__living" id="hero-living" aria-hidden="true"></canvas>
-              <canvas class="hero__vapor" id="hero-vapor" aria-hidden="true"></canvas>
-            </div>
-          </div>
-          <canvas class="hero__scene" id="forest" aria-hidden="true" hidden></canvas>
-          <canvas class="hero__smoke" id="hero-smoke" aria-hidden="true"></canvas>
-          <canvas class="hero__storm" id="hero-storm" aria-hidden="true"></canvas>
-          <div class="hero__flash" id="hero-flash" aria-hidden="true"></div>
-          <div class="hero__grade" aria-hidden="true"></div>
-          <div class="hero__dim" id="hero-dim" aria-hidden="true"></div>
+    <!-- navegação -->
+    <header class="nav" id="nav">
+      <div class="nav__bar">
+        <a class="nav__brand" href="#top" aria-label="Dalas Marketing, voltar ao início">
+          <img src="./images/brand/wing-sm.webp" alt="" width="129" height="160" />
+          <span class="brand-word">Dalas<small>Marketing</small></span>
+        </a>
+        <nav class="nav__links" aria-label="Principal">
+          <a href="#solucoes" data-spy="solucoes">Soluções <svg><use href="#i-r" /></svg></a>
+          <a href="#crm" data-spy="crm">CRM <svg><use href="#i-r" /></svg></a>
+          <a href="#metodo" data-spy="metodo">Método</a>
+          <a href="#duvidas" data-spy="duvidas">Dúvidas</a>
+        </nav>
+        <div class="nav__right">
+          <a class="nav__ext" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver o CRM <svg><use href="#i-ur" /></svg></a>
+          <a class="btn btn--paper btn--sm" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
         </div>
+        <button class="nav__burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><svg><use href="#i-menu" /></svg></button>
+      </div>
+    </header>
+    <div class="menu" id="menu" hidden>
+      <nav class="menu__links" aria-label="Menu">
+        <a href="#solucoes"><small>01</small>Soluções</a>
+        <a href="#crm"><small>02</small>CRM</a>
+        <a href="#metodo"><small>03</small>Método</a>
+        <a href="#duvidas"><small>04</small>Dúvidas</a>
+        <a href="./demos/crm/index.html" target="_blank" rel="noopener"><small>05</small>Ver o CRM ↗</a>
+      </nav>
+      <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+    </div>
 
-        <div class="hero__content" id="hero-content">
-          <ul class="hero__chips" aria-label="O que fazemos">
-            <li class="hero__chip"><span>Sites</span></li>
-            <li class="hero__chip"><span>Tráfego pago</span></li>
-            <li class="hero__chip"><span>CRM e automações</span></li>
-          </ul>
-          <h1 class="hero__brand" id="hero-brand"><span class="w">Dalas</span> <span class="w w--thin">Marketing</span></h1>
-          <p class="hero__tagline" id="hero-tagline">Não seguimos o mercado. Criamos o próximo movimento.</p>
-          <p class="hero__lede" id="hero-lede">Sites, sistemas, painéis, tráfego e automações para marcas que querem dominar o digital.</p>
-          <div class="hero__actions" id="hero-actions">
-            <a class="btn btn--solid" href="#contato" data-whatsapp><span>Quero transformar minha empresa</span><i aria-hidden="true">↗</i></a>
-            <a class="btn btn--line" href="#solucoes"><span>Explorar nossas soluções</span><i aria-hidden="true">↓</i></a>
-          </div>
+    <main id="conteudo">
+      <!-- ================= HERO ================= -->
+      <section class="hero" id="top">
+        <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
+        <div class="hero__chips" id="hero-chips" aria-hidden="true">
+          <span class="chip" data-x="0.6" data-y="0.18" data-mx="0.08" data-my="0.86"><svg><use href="#i-cursor" /></svg>Viu seu anúncio</span>
+          <span class="chip" data-x="0.88" data-y="0.34" data-mx="0" data-my="0"><svg><use href="#i-site" /></svg>Abriu seu site</span>
+          <span class="chip" data-x="0.91" data-y="0.51" data-mx="0" data-my="0"><svg><use href="#i-chat" /></svg>Chamou no WhatsApp</span>
+          <span class="chip" data-x="0.86" data-y="0.68" data-mx="0" data-my="0"><svg><use href="#i-crm" /></svg>Entrou no CRM</span>
+          <span class="chip chip--end" data-x="0.64" data-y="0.84" data-mx="0.16" data-my="0.92"><svg><use href="#i-check" /></svg>Venda fechada</span>
         </div>
-
-        <div class="hero__hint" id="hero-hint" aria-hidden="true"><i></i><span>Role para conhecer a Dalas</span></div>
-        <button class="sound" id="sound" type="button" aria-pressed="false" hidden>
-          <i aria-hidden="true"><b></b><b></b><b></b><b></b></i><span>Som ambiente</span>
-        </button>
-        <div class="hero__black" id="hero-black" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="eyebrow hero-fade" style="--d: 0.1s">Sites, anúncios e CRM · do clique à venda</p>
+          <h1 class="hero__title">
+            <span class="mask"><span class="hero-rise light">Do clique</span></span>
+            <span class="mask"><span class="hero-rise silver bold" style="--d: 0.12s" data-shine>à venda.</span></span>
+          </h1>
+          <p class="hero__lede hero-fade" style="--d: 0.45s">
+            Fazemos o seu site, os seus anúncios no Instagram e no Google e o CRM que organiza cada conversa. Tudo junto, para o cliente achar você e chamar no WhatsApp.
+          </p>
+          <div class="hero__actions hero-fade" style="--d: 0.6s">
+            <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+            <a class="btn btn--glass" href="#contato" data-whatsapp>Falar no WhatsApp<span class="btn__wa"><svg><use href="#i-wa" /></svg></span></a>
+          </div>
+          <p class="hero__note hero-fade" style="--d: 0.75s">7 perguntas rápidas · resposta no seu WhatsApp</p>
+        </div>
       </section>
 
-      <!-- Tudo abaixo desliza por cima do lobo -->
-      <div class="page">
-        <div class="ticker" aria-hidden="true">
-          <div class="ticker__track">
-            <span>Sites</span><i></i>
-            <span>Sistemas</span><i></i>
-            <span>Painéis</span><i></i>
-            <span>Tráfego pago</span><i></i>
-            <span>Automações e IA</span><i></i>
-            <span>Estratégia digital</span><i></i>
+      <!-- ================= CANAIS ================= -->
+      <section class="channels" aria-label="Onde a Dalas trabalha">
+        <div class="channels__track">
+          <div class="channels__set">
+            <span><svg><use href="#i-site" /></svg>Sites</span><i></i>
+            <span><svg><use href="#i-ig" /></svg>Instagram</span><i></i>
+            <span><svg><use href="#i-google" /></svg>Google Ads</span><i></i>
+            <span><svg><use href="#i-fb" /></svg>Facebook</span><i></i>
+            <span><svg><use href="#i-wa" /></svg>WhatsApp</span><i></i>
+            <span><svg><use href="#i-crm" /></svg>CRM</span><i></i>
+            <span><svg><use href="#i-bolt" /></svg>Automações</span><i></i>
+            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
+            <span><svg><use href="#i-code" /></svg>Sistemas</span><i></i>
+          </div>
+          <div class="channels__set" aria-hidden="true">
+            <span><svg><use href="#i-site" /></svg>Sites</span><i></i>
+            <span><svg><use href="#i-ig" /></svg>Instagram</span><i></i>
+            <span><svg><use href="#i-google" /></svg>Google Ads</span><i></i>
+            <span><svg><use href="#i-fb" /></svg>Facebook</span><i></i>
+            <span><svg><use href="#i-wa" /></svg>WhatsApp</span><i></i>
+            <span><svg><use href="#i-crm" /></svg>CRM</span><i></i>
+            <span><svg><use href="#i-bolt" /></svg>Automações</span><i></i>
+            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
+            <span><svg><use href="#i-code" /></svg>Sistemas</span><i></i>
           </div>
         </div>
+      </section>
 
-        <!-- ================= SOBRE ================= -->
-        <section class="section about" id="sobre">
-          <img class="about__mark" id="statement-mark" src="./images/logo-mark.png" alt="" aria-hidden="true" />
-          <div class="about__grid">
-            <div class="about__main">
-              <p class="eyebrow">Sobre a Dalas</p>
-              <h2 class="h2" data-reveal>Não criamos apenas presença digital. <em>Criamos empresas preparadas para o futuro.</em></h2>
-              <p class="about__text" data-words>Estratégia, tecnologia e criatividade em soluções feitas para o seu negócio. Sem fórmulas prontas.</p>
-            </div>
-            <ul class="pillars" aria-label="Nosso diferencial">
-              <li class="pillar" data-fade><span class="pillar__num">01</span><h3>Estratégia antes da execução</h3><p>Cada projeto começa pelos objetivos, desafios e oportunidades do negócio.</p></li>
-              <li class="pillar" data-fade><span class="pillar__num">02</span><h3>Tecnologia com propósito</h3><p>Soluções que resolvem problemas reais e criam experiências melhores.</p></li>
-              <li class="pillar" data-fade><span class="pillar__num">03</span><h3>Design que comunica autoridade</h3><p>Interfaces e identidades que valorizam a percepção da marca.</p></li>
-              <li class="pillar" data-fade><span class="pillar__num">04</span><h3>Feito para evoluir</h3><p>Estruturas que acompanham o crescimento da empresa.</p></li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- ================= SOLUÇÕES ================= -->
-        <section class="section solutions" id="solucoes">
-          <div class="section__head">
-            <p class="eyebrow">Soluções</p>
-            <h2 class="h2" data-reveal>Tudo o que a sua empresa precisa para <em>dominar o digital.</em></h2>
-            <p class="lead" data-fade>Seis frentes, uma equipe. Cada uma entra quando faz sentido para o seu momento, e todas conversam entre si.</p>
-          </div>
-
-          <div class="showcase" id="showcase">
-            <ol class="showcase__list" id="showcase-list">
-              <li class="sol" data-image="./images/solutions/sites.jpg" data-label="Site · Áurea Odonto" data-url="aureaodonto.com.br" data-demo="./demos/aurea-odonto/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">01</span>
-                  <span class="sol__title">Sites</span>
-                  <span class="sol__hint">Landing pages, institucional, loja</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Seu site não deve apenas existir. Ele precisa impressionar, carregar rápido e levar o visitante até o contato.</p>
-                    <ul class="sol__tags"><li>Landing pages</li><li>Institucional</li><li>Loja virtual</li><li>Integrado ao WhatsApp</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/sites.jpg" alt="Site da Áurea Odonto, exemplo de site" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero um site<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener">Ver exemplo ao vivo</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
-              <li class="sol" data-image="./images/solutions/sistemas.jpg" data-label="Sistema · Dalas CRM" data-url="crm.dalas / pipeline" data-demo="./demos/crm/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">02</span>
-                  <span class="sol__title">Sistemas</span>
-                  <span class="sol__hint">CRM, portais, áreas do cliente</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Tecnologia desenvolvida para acompanhar sua ambição: o sistema nasce do jeito que a sua operação funciona.</p>
-                    <ul class="sol__tags"><li>CRM</li><li>Portal do cliente</li><li>Gestão interna</li><li>Integrações</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/sistemas.jpg" alt="Pipeline de vendas do Dalas CRM" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero um sistema<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="./demos/crm/index.html" target="_blank" rel="noopener">Abrir o CRM</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
-              <li class="sol" data-image="./images/solutions/paineis.jpg" data-label="Painel · Relatórios" data-url="crm.dalas / relatorios" data-demo="./demos/crm/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">03</span>
-                  <span class="sol__title">Painéis</span>
-                  <span class="sol__hint">Dashboards e relatórios em tempo real</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Transforme informações em decisões inteligentes. Vendas, leads e campanhas num lugar só, atualizados sozinhos.</p>
-                    <ul class="sol__tags"><li>Métricas ao vivo</li><li>Funil de vendas</li><li>Origem dos leads</li><li>Metas</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/paineis.jpg" alt="Relatórios do Dalas CRM" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero um painel<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver relatórios</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
-              <li class="sol" data-image="./images/solutions/trafego.jpg" data-label="Tráfego · Campanhas" data-url="crm.dalas / campanhas" data-demo="./demos/crm/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">04</span>
-                  <span class="sol__title">Tráfego pago</span>
-                  <span class="sol__hint">Meta Ads e Google Ads</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Mais do que anúncios. Campanhas que levam o cliente certo até o seu site e de lá para o seu WhatsApp.</p>
-                    <ul class="sol__tags"><li>Meta Ads</li><li>Google Ads</li><li>Criativos</li><li>Otimização semanal</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/trafego.jpg" alt="Campanhas no Dalas CRM" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero mais clientes<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="#jornada">Ver a jornada</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
-              <li class="sol" data-image="./images/solutions/automacoes.jpg" data-label="Automações · Regras" data-url="crm.dalas / automacoes" data-demo="./demos/crm/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">05</span>
-                  <span class="sol__title">Automações e IA</span>
-                  <span class="sol__hint">Atendimento que não dorme</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Automatize processos. Resposta em segundos, follow-up no dia certo e aviso no celular quando chega um lead quente.</p>
-                    <ul class="sol__tags"><li>Resposta automática</li><li>Follow-up</li><li>Alertas</li><li>IA no atendimento</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/automacoes.jpg" alt="Automações do Dalas CRM" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero automatizar<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver automações</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
-              <li class="sol" data-image="./images/solutions/estrategia.jpg" data-label="Marca · Nórdica Café" data-url="nordicacafe.com.br" data-demo="./demos/nordica-cafe/index.html">
-                <button class="sol__head" type="button" aria-expanded="false">
-                  <span class="sol__num">06</span>
-                  <span class="sol__title">Estratégia digital</span>
-                  <span class="sol__hint">Posicionamento e presença</span>
-                  <span class="sol__icon" aria-hidden="true"></span>
-                </button>
-                <div class="sol__body">
-                  <div class="sol__inner">
-                    <p>Grandes marcas não surgem por acaso. Posicionamento, identidade e um plano claro para a sua empresa ser lembrada.</p>
-                    <ul class="sol__tags"><li>Posicionamento</li><li>Identidade</li><li>Conteúdo</li><li>Plano de crescimento</li></ul>
-                    <figure class="sol__fig"><img src="./images/solutions/estrategia.jpg" alt="Site da Nórdica Café, exemplo de posicionamento" loading="lazy" width="1600" height="1000" /></figure>
-                    <div class="sol__links">
-                      <a class="sol__go" href="#contato" data-whatsapp>Quero posicionar minha marca<i aria-hidden="true">↗</i></a>
-                      <a class="sol__demo" href="./demos/nordica-cafe/index.html" target="_blank" rel="noopener">Ver exemplo ao vivo</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="sol__bar" aria-hidden="true"><i></i></span>
-              </li>
+      <!-- ================= SITE COMUM x SITE DALAS ================= -->
+      <section class="section compare" id="diferenca">
+        <div class="wrap compare__grid">
+          <div class="compare__text">
+            <h2 class="h2" data-split>Site bonito <b>não basta. Precisa convencer.</b></h2>
+            <p class="p-lead" data-rise>No celular, o cliente abre algumas opções e decide em segundos se você é mais um ou a melhor escolha. A diferença não é ter site. É o que ele entende quando olha.</p>
+            <ol class="points" id="points">
+              <li><small>01</small><p><b>Clareza.</b> Em uma frase, ele entende o que você faz e por que você.</p></li>
+              <li><small>02</small><p><b>Confiança.</b> Visual, velocidade e detalhes no nível do que você entrega.</p></li>
+              <li><small>03</small><p><b>Caminho.</b> Um próximo passo só: falar com você no WhatsApp.</p></li>
             </ol>
-
-            <div class="showcase__stage" id="showcase-stage" aria-hidden="true">
-              <div class="stage__glow"></div>
-              <div class="stage__frame">
-                <div class="stage__top"><span></span><span></span><span></span><em id="stage-url">aureaodonto.com.br</em></div>
-                <div class="stage__screen" id="stage-screen"></div>
-                <div class="stage__sweep" id="stage-sweep"></div>
+          </div>
+          <div class="compare__device">
+            <div class="phone phone--lg" id="compare-phone">
+              <div class="phone__notch"></div>
+              <div class="phone__screen">
+                <div class="cmp cmp--plain is-on" data-cmp="plain">
+                  <div class="plain__top"><b>Clínica</b><i></i></div>
+                  <div class="plain__img">
+                    <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice"><rect width="160" height="100" fill="#c9d7e3" /><path d="M0 70 35 40l25 22 30-30 30 26 40-24v66H0Z" fill="#9db4c6" /><path d="M0 82 40 60l30 16 35-20 55 26v18H0Z" fill="#7b97ab" /><rect x="66" y="56" width="26" height="20" fill="#fff" /><path d="M63 57 79 45l16 12Z" fill="#c75b4a" /><rect x="76" y="66" width="6" height="10" fill="#7b5b4a" /></svg>
+                  </div>
+                  <div class="plain__body">
+                    <b>Clínica odontológica de qualidade</b>
+                    <p>Atendimento humanizado e preço justo.</p>
+                    <span>Saiba mais</span>
+                    <div class="plain__thumbs"><i></i><i></i><i></i></div>
+                  </div>
+                </div>
+                <div class="cmp cmp--pro" data-cmp="pro">
+                  <img src="./images/phone/aurea.jpg" alt="Site da Áurea Odonto no celular, exemplo de site Dalas" width="520" height="3600" loading="lazy" />
+                </div>
               </div>
-              <a class="stage__label" id="stage-label" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener" tabindex="-1">
-                <span id="stage-label-text">Site · Áurea Odonto</span><i>Abrir ao vivo ↗</i>
-              </a>
+            </div>
+            <div class="toggle" role="tablist" aria-label="Comparar sites">
+              <button type="button" role="tab" aria-selected="true" data-cmp-btn="plain">Site comum</button>
+              <button type="button" role="tab" aria-selected="false" data-cmp-btn="pro">Site Dalas</button>
+              <i class="toggle__pill"></i>
+            </div>
+            <p class="mono-cap" id="compare-cap">Site comum · o que todo mundo já faz</p>
+            <p class="fine">Exemplo ilustrativo, com marcas e dados fictícios.</p>
+            <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 01 SITE + ANÚNCIOS ================= -->
+      <section class="section offer" id="solucoes">
+        <div class="wrap offer__grid">
+          <div class="offer__title">
+            <div class="offer__sticky">
+              <h2 class="h2 h2--xl" data-split>Mais clientes <b>chamando no seu WhatsApp.</b></h2>
+              <p class="p-lead" data-rise>Site, anúncios e CRM trabalhando juntos, do clique à venda.</p>
             </div>
           </div>
-        </section>
+          <article class="card card--gold" data-rise>
+            <header class="card__head"><span class="card__tag"><i></i>Site + anúncios</span><span class="card__num">01</span></header>
+            <div class="card__stage">
+              <p class="stage-chip" id="ad-chip"><svg><use href="#i-ig" /></svg><span>No Instagram, o cliente vê o seu anúncio</span></p>
+              <div class="phone phone--sm" id="ad-phone">
+                <div class="phone__notch"></div>
+                <div class="phone__screen">
+                  <!-- anúncio -->
+                  <div class="scr scr--ig is-on" data-scr="ig">
+                    <div class="ig__top"><i>Instagram</i><span><svg><use href="#i-heart" /></svg><svg><use href="#i-send" /></svg></span></div>
+                    <div class="ig__user"><b class="ig__av" data-brand-av>ÁO</b><p><b data-brand-name>Áurea Odonto</b><small>Patrocinado</small></p><svg><use href="#i-dots" /></svg></div>
+                    <div class="ig__creative" data-brand-creative>
+                      <span class="ig__badge" data-brand-badge>Agenda aberta</span>
+                      <b data-brand-title>Seu sorriso,<br />planejado.</b>
+                      <small data-brand-sub>Implantes, lentes e ortodontia invisível.</small>
+                      <i class="ig__art" data-brand-art></i>
+                    </div>
+                    <div class="ig__cta"><svg><use href="#i-wa" /></svg><span data-brand-cta>Saiba mais</span><svg class="ig__chev"><use href="#i-r" /></svg></div>
+                    <div class="ig__bar"><span><svg><use href="#i-heart" /></svg><svg><use href="#i-chat" /></svg><svg><use href="#i-send" /></svg></span><svg><use href="#i-bookmark" /></svg></div>
+                    <svg class="tap" id="ad-tap"><use href="#i-tap" /></svg>
+                  </div>
+                  <!-- site -->
+                  <div class="scr scr--site" data-scr="site">
+                    <img data-brand-site src="./images/phone/aurea.jpg" alt="" width="520" height="3600" loading="lazy" />
+                    <span class="site__wa"><svg><use href="#i-wa" /></svg></span>
+                  </div>
+                  <!-- abrindo o WhatsApp -->
+                  <div class="scr scr--splash" data-scr="splash"><span><svg><use href="#i-wa" /></svg></span></div>
+                  <!-- conversa -->
+                  <div class="scr scr--chat" data-scr="chat">
+                    <div class="wa__top"><svg><use href="#i-l" /></svg><b class="ig__av" data-brand-av>ÁO</b><p><b data-brand-name>Áurea Odonto</b><small id="wa-status">online</small></p></div>
+                    <div class="wa__body">
+                      <span class="wa__day">Hoje</span>
+                      <div class="wa__msg wa__msg--me" id="wa-m1">
+                        <div class="wa__ref"><i data-brand-thumb></i><p><b>Anúncio de <span data-brand-name>Áurea Odonto</span></b><small>via Instagram</small></p></div>
+                        <span data-brand-ask>Olá! Vi o anúncio. Como funciona a avaliação?</span><em>09:41 ✓✓</em>
+                      </div>
+                      <div class="wa__typing" id="wa-typing"><i></i><i></i><i></i></div>
+                      <div class="wa__msg" id="wa-m2"><span data-brand-reply>Oi! A avaliação é sem custo. Temos amanhã às 9h ou às 14h30, qual fica melhor?</span><em>09:41</em></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="fine">Exemplos ilustrativos, com marcas e dados fictícios.</p>
+            <h3 class="h3">Anúncios que levam ao lugar certo</h3>
+            <p class="card__p">Primeiro a mensagem: por que escolher você. Depois, o site ou a landing page e os anúncios no Instagram e no Google que levam o cliente até o seu WhatsApp.</p>
+            <ul class="checks">
+              <li><svg><use href="#i-check" /></svg>Mensagem definida com você antes do primeiro anúncio</li>
+              <li><svg><use href="#i-check" /></svg>Site ou landing page feita para virar conversa</li>
+              <li><svg><use href="#i-check" /></svg>Criativos todo mês e gestão diária das campanhas</li>
+              <li><svg><use href="#i-check" /></svg>Relatório de conversas e custo por cliente</li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--gold" href="#metodo">Ver como funciona<span class="btn__dot btn__dot--ink"><svg><use href="#i-r" /></svg></span></a>
+              <a class="link" href="#diagnostico" data-diag>ou faça o diagnóstico grátis</a>
+            </div>
+          </article>
+        </div>
+      </section>
 
-        <!-- ================= SITE + TRÁFEGO: A JORNADA ================= -->
-        <section class="section journey-section" id="jornada">
-          <div class="section__head">
-            <p class="eyebrow">Site + tráfego</p>
-            <h2 class="h2" data-reveal>Do anúncio à conversa. <em>Do clique ao fechamento.</em></h2>
-            <p class="lead" data-fade>Um caminho só, operado pela mesma equipe: o cliente sai do anúncio, passa pelo seu site e chega no seu WhatsApp pronto para comprar.</p>
+      <!-- ================= ONDE A VENDA SE PERDE ================= -->
+      <section class="section problem" id="problema">
+        <div class="wrap">
+          <p class="eyebrow" data-rise>Onde a venda se perde</p>
+          <p class="problem__big" data-scrub-words>
+            A venda <b>não termina no clique.</b> Quem chama às 22h e só recebe resposta às 9h <b>já fechou com outro.</b>
+          </p>
+        </div>
+        <div class="lost" id="lost">
+          <div class="lost__pin">
+            <div class="wrap lost__in">
+              <h3 class="h2 h2--md" data-split>O cliente que <b>esfriou</b></h3>
+              <div class="lost__track" id="lost-track">
+                <div class="lost__line"><i class="lost__dash"></i><i class="lost__fill" id="lost-fill"></i></div>
+                <span class="lost__dot" style="--p: 0"></span>
+                <span class="lost__dot" style="--p: 0.42"></span>
+                <span class="lost__dot" style="--p: 0.9"></span>
+                <div class="bub bub--a" id="lost-1"><small>cliente · 22:07</small><p>Oi! Quanto fica a avaliação?</p></div>
+                <div class="lost__wait" id="lost-wait"><span class="lost__none"><svg><use href="#i-clock" /></svg>Ninguém respondeu.</span><small class="mono" id="lost-time">22:07 → 22:07</small><b id="lost-hours">0 min sem resposta</b></div>
+                <div class="bub bub--b" id="lost-2"><small>empresa · 09:14</small><p>Bom dia! A avaliação é sem custo. Quer agendar?</p></div>
+                <div class="bub bub--c" id="lost-3"><small>cliente · 09:31</small><p>Ah, já marquei em outro lugar. Obrigado!</p></div>
+              </div>
+              <p class="fine lost__cap">Uma história que se repete todo dia em muitas empresas.</p>
+            </div>
           </div>
-          <div class="journey" id="journey">
-            <svg class="journey__svg" id="journey-svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="journey-grad" x1="0" x2="1" y1="0" y2="0">
-                  <stop offset="0" stop-color="#9ec5ff" />
-                  <stop offset="1" stop-color="#ffffff" />
-                </linearGradient>
-              </defs>
-              <path class="journey__track" d="" />
-              <path class="journey__draw" d="" />
-              <circle class="journey__dot" r="5" />
-            </svg>
-            <ol class="jnodes">
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">01</span><h3>Diagnóstico</h3><p>Entendemos seu negócio, seu público e o que precisa acontecer para vender mais.</p></li>
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">02</span><h3>Estratégia</h3><p>Canais, oferta, funil e metas definidos antes de qualquer anúncio ir ao ar.</p></li>
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">03</span><h3>Criativos</h3><p>Anúncios, vídeos e textos feitos para parar o dedo e gerar o clique certo.</p></li>
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">04</span><h3>Site ou landing page</h3><p>Uma página rápida e persuasiva que transforma o clique em contato.</p></li>
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">05</span><h3>Campanha no ar</h3><p>Meta, Google e TikTok configurados, com rastreamento de cada conversão.</p></li>
-              <li class="jnode"><i class="jnode__dot"></i><span class="jnode__num">06</span><h3>Otimização</h3><p>Dados toda semana: ajustamos públicos, verbas e criativos para baixar o custo por cliente.</p></li>
-              <li class="jnode jnode--end"><i class="jnode__dot"></i><span class="jnode__num">07</span><h3>Cliente no WhatsApp</h3><p>O lead chega no seu CRM já qualificado, pronto para fechar.</p></li>
-            </ol>
-          </div>
-        </section>
+        </div>
+        <div class="wrap problem__ask" data-rise>
+          <p>Isso acontece na sua empresa?</p>
+          <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+        </div>
+      </section>
 
-        <!-- ================= CRM ================= -->
-        <section class="section crm" id="crm">
-          <div class="crm__grid">
-            <div class="crm__text">
-              <p class="eyebrow">Dalas CRM</p>
-              <h2 class="h2" data-reveal>Seus leads organizados, do primeiro clique <em>ao fechamento.</em></h2>
-              <p class="lead" data-fade>Cada contato que chega do anúncio entra no seu painel com origem, valor e histórico. Você responde, acompanha e fecha sem sair do WhatsApp.</p>
-              <ul class="crm__list">
-                <li data-fade><strong>Pipeline visual.</strong> Arraste o lead de etapa em etapa: novo, em conversa, proposta, negociação, fechado.</li>
-                <li data-fade><strong>WhatsApp integrado.</strong> A conversa fica dentro do painel, com toda a equipe vendo o mesmo histórico.</li>
-                <li data-fade><strong>Automações.</strong> Resposta em até um minuto, lembrete de follow-up e avisos para o gestor.</li>
-                <li data-fade><strong>Relatórios.</strong> De qual anúncio veio cada venda, quanto custou e quanto rendeu.</li>
+      <!-- ================= O RELÓGIO ================= -->
+      <section class="watch" id="tempo">
+        <div class="watch__pin">
+          <div class="watch__ghost" aria-hidden="true"><span data-ghost="0">Tempo</span><span data-ghost="1">Segundos</span><span data-ghost="2">Minutos</span><span data-ghost="3">Dalas</span></div>
+          <div class="wrap watch__in">
+            <div class="watch__steps">
+              <div class="watch__rail" aria-hidden="true"><i class="watch__rail-fill" id="watch-rail"></i><b></b><b></b><b></b><b></b></div>
+              <div class="wstep is-on" data-wstep="0">
+                <h2 class="wstep__title wstep__title--md">Todo cliente decide no tempo dele.</h2>
+              </div>
+              <div class="wstep" data-wstep="1">
+                <h2 class="wstep__title">Segundos.</h2>
+                <p>É o tempo que o seu site tem para abrir e convencer antes de ele voltar e tocar no próximo.</p>
+              </div>
+              <div class="wstep" data-wstep="2">
+                <h2 class="wstep__title">Minutos.</h2>
+                <p>É o tempo que ele espera uma resposta antes de chamar o concorrente.</p>
+              </div>
+              <div class="wstep" data-wstep="3">
+                <h2 class="wstep__title wstep__title--md">A Dalas trabalha nesses segundos e minutos.</h2>
+                <p>Site rápido, anúncio certo e CRM respondendo na hora. Quando ele decidir, a escolha é você.</p>
+              </div>
+            </div>
+            <div class="watch__obj" aria-hidden="true">
+              <div class="watch__halo" id="watch-halo"></div>
+              <svg class="watch__svg" id="watch-svg" viewBox="0 0 400 560">
+                <defs>
+                  <linearGradient id="wg-metal" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#f4f4f7" />
+                    <stop offset="0.35" stop-color="#9c9ca6" />
+                    <stop offset="0.55" stop-color="#e6e6ec" />
+                    <stop offset="0.8" stop-color="#6d6d76" />
+                    <stop offset="1" stop-color="#cfcfd6" />
+                  </linearGradient>
+                  <linearGradient id="wg-metal2" x1="1" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#dcdce2" />
+                    <stop offset="0.5" stop-color="#55555e" />
+                    <stop offset="1" stop-color="#b9b9c2" />
+                  </linearGradient>
+                  <radialGradient id="wg-dial" cx="0.5" cy="0.42" r="0.62">
+                    <stop offset="0" stop-color="#25252b" />
+                    <stop offset="0.7" stop-color="#121216" />
+                    <stop offset="1" stop-color="#08080a" />
+                  </radialGradient>
+                  <radialGradient id="wg-glass" cx="0.35" cy="0.25" r="0.7">
+                    <stop offset="0" stop-color="#fff" stop-opacity="0.16" />
+                    <stop offset="0.5" stop-color="#fff" stop-opacity="0.02" />
+                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+                <g class="watch__swing" id="watch-swing">
+                  <!-- corrente -->
+                  <g id="watch-chain" fill="none" stroke="url(#wg-metal)" stroke-width="3"></g>
+                  <!-- argola e coroa -->
+                  <circle cx="200" cy="168" r="20" fill="none" stroke="url(#wg-metal)" stroke-width="7" />
+                  <rect x="187" y="186" width="26" height="22" rx="4" fill="url(#wg-metal2)" />
+                  <path d="M190 190v14M195 190v14M200 190v14M205 190v14M210 190v14" stroke="#3a3a42" stroke-width="1.2" />
+                  <rect x="193" y="206" width="14" height="10" rx="2" fill="url(#wg-metal)" />
+                  <!-- caixa -->
+                  <circle cx="200" cy="370" r="156" fill="url(#wg-metal)" />
+                  <circle cx="200" cy="370" r="146" fill="#1a1a1f" />
+                  <circle cx="200" cy="370" r="143" fill="none" stroke="url(#wg-metal2)" stroke-width="5" />
+                  <circle cx="200" cy="370" r="136" fill="url(#wg-dial)" />
+                  <!-- marcações -->
+                  <g id="watch-ticks" stroke="#d9d9e0"></g>
+                  <g id="watch-nums" fill="#e9e9ee" font-family="Georgia, 'Times New Roman', serif" font-size="17" text-anchor="middle" dominant-baseline="central"></g>
+                  <text x="200" y="300" fill="#9a9aa4" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" letter-spacing="4" text-anchor="middle">DALAS</text>
+                  <!-- engrenagens e subdial -->
+                  <g class="watch__gears" opacity="0.55" fill="none" stroke="#6b6b75" stroke-width="1.2">
+                    <circle cx="200" cy="370" r="44" stroke-dasharray="3 3" />
+                    <circle cx="183" cy="356" r="16" stroke-dasharray="2 2.4" />
+                    <circle cx="219" cy="388" r="12" stroke-dasharray="2 2.4" />
+                  </g>
+                  <circle cx="200" cy="432" r="24" fill="#0c0c0f" stroke="#55555e" stroke-width="1.2" />
+                  <g id="watch-subticks" stroke="#8a8a94"></g>
+                  <line id="watch-sub" x1="200" y1="432" x2="200" y2="414" stroke="#e8e8ee" stroke-width="1.4" stroke-linecap="round" />
+                  <!-- ponteiros -->
+                  <g id="watch-hour"><path d="M196.5 370 L198 300 Q200 292 202 300 L203.5 370 Z" fill="#f2f2f5" /><circle cx="200" cy="314" r="5" fill="none" stroke="#f2f2f5" stroke-width="2" /></g>
+                  <g id="watch-min"><path d="M197.5 370 L199 262 Q200 254 201 262 L202.5 370 Z" fill="#f2f2f5" /></g>
+                  <g id="watch-sec"><line x1="200" y1="392" x2="200" y2="250" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" /><circle cx="200" cy="384" r="3" fill="#fff" /></g>
+                  <circle cx="200" cy="370" r="7" fill="url(#wg-metal)" />
+                  <circle cx="200" cy="370" r="2.4" fill="#1a1a1f" />
+                  <!-- vidro -->
+                  <circle cx="200" cy="370" r="136" fill="url(#wg-glass)" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 02 CRM + AUTOMAÇÕES ================= -->
+      <section class="section offer offer--rev" id="crm">
+        <div class="wrap offer__grid">
+          <article class="card card--green" data-rise>
+            <header class="card__head"><span class="card__tag"><i></i>CRM + automações · Dalas CRM</span><span class="card__num">02</span></header>
+            <div class="card__stage card__stage--win">
+              <div class="win">
+                <div class="win__bar"><span></span><span></span><span></span><em>crm.dalas · pipeline</em></div>
+                <div class="kb" id="kanban">
+                  <div class="kb__col"><p><i></i>Novo</p><div class="kb__card kb__card--ghost"><b>MR</b><span>Marina Rocha<small>Meta Ads</small></span></div><div class="kb__card kb__card--ghost"><b>JC</b><span>João Castro<small>Google Ads</small></span></div></div>
+                  <div class="kb__col"><p><i></i>Em conversa</p><div class="kb__card kb__card--ghost"><b>PH</b><span>Paulo Henrique<small>Site</small></span></div></div>
+                  <div class="kb__col kb__col--win"><p><i></i>Venda</p><span class="kb__ok" id="kb-ok"><svg><use href="#i-check" /></svg></span></div>
+                  <div class="kb__card kb__card--live" id="kb-live"><b>CL</b><span>Camila Lopes<small id="kb-live-src">Instagram · agora</small></span></div>
+                </div>
+                <p class="stage-chip stage-chip--b" id="kb-chip"><svg><use href="#i-ig" /></svg><span>Mensagem nova pelo Instagram</span></p>
+              </div>
+            </div>
+            <h3 class="h3">Tudo num lugar só</h3>
+            <p class="card__p">O Dalas CRM organiza cada conversa por etapa e as automações respondem na hora, mesmo quando você está ocupado. Você entra quando tiver tempo, com o cliente já aquecido.</p>
+            <ul class="checks">
+              <li><svg><use href="#i-check" /></svg>Cada cliente por etapa, do primeiro oi à venda</li>
+              <li><svg><use href="#i-check" /></svg>Resposta automática em segundos, de dia ou de noite</li>
+              <li><svg><use href="#i-check" /></svg>Retorno automático para quem parou de responder</li>
+              <li><svg><use href="#i-check" /></svg>Painel com a origem de cada venda: anúncio, site ou indicação</li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--green" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver o CRM ao vivo<span class="btn__dot btn__dot--ink"><svg><use href="#i-ur" /></svg></span></a>
+              <a class="link" href="#diagnostico" data-diag>ou faça o diagnóstico grátis</a>
+            </div>
+          </article>
+          <div class="offer__title">
+            <div class="offer__sticky">
+              <h2 class="h2 h2--xl" data-split>Nenhum cliente <b>sem resposta.</b></h2>
+              <p class="p-lead" data-rise>Você pode estar numa reunião ou dormindo: o CRM responde, organiza e deixa o cliente pronto para você.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= A TEMPESTADE ================= -->
+      <section class="storm" id="tempestade">
+        <canvas class="storm__rain" id="storm-rain" aria-hidden="true"></canvas>
+        <canvas class="storm__bolts" id="storm-bolts" aria-hidden="true"></canvas>
+        <div class="storm__flash" id="storm-flash" aria-hidden="true"></div>
+        <div class="storm__media" aria-hidden="true">
+          <video class="storm__video" id="storm-video" muted playsinline preload="none" poster="./media/wolf-poster.jpg"></video>
+        </div>
+        <div class="wrap storm__text">
+          <h2 class="h2 h2--xl" data-split>Quando a tempestade vem, <b>o lobo avança.</b></h2>
+          <div class="storm__p" data-rise>
+            <p>Quando o tempo fecha, muita gente recua e espera passar. O lobo não: ele usa a tempestade para chegar onde os outros não vão.</p>
+            <p>Mercado mudando, concorrência baixando preço, anúncio ficando mais caro. Para quem tem estratégia e estrutura, <b>a tempestade vira vantagem.</b></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= MÉTODO ================= -->
+      <section class="section method" id="metodo">
+        <div class="wrap method__head">
+          <h2 class="h2 h2--xl" data-split>Como a Dalas <b>trabalha.</b></h2>
+          <p class="p-lead" data-rise>Primeiro a mensagem, depois o anúncio. Do clique à venda, cada etapa existe para o cliente entender por que você e chegar até a conversa.</p>
+        </div>
+        <div class="wrap mtl" id="mtl">
+          <div class="mtl__line" aria-hidden="true"><i class="mtl__fill" id="mtl-fill"></i><b class="mtl__tip" id="mtl-tip"></b></div>
+          <div class="mstep">
+            <div class="mstep__text"><small>Diagnóstico</small><h3>Como o cliente te vê hoje</h3><p>Olhamos o seu Instagram, os seus anúncios e o seu site como o cliente olha e mostramos onde a escolha se perde.</p></div>
+            <span class="mstep__node"><svg><use href="#i-search" /></svg></span>
+            <span class="mstep__ghost">Diagnóstico</span>
+          </div>
+          <div class="mstep">
+            <div class="mstep__text"><small>Mensagem</small><h3>Por que você</h3><p>Antes do primeiro anúncio, definimos com você a frase que diz por que escolher a sua empresa. Ela abre o anúncio e o topo do site.</p></div>
+            <span class="mstep__node"><svg><use href="#i-quote" /></svg></span>
+            <span class="mstep__ghost">Mensagem</span>
+          </div>
+          <div class="mstep">
+            <div class="mstep__text"><small>Site ou sistema</small><h3>Onde o cliente confere</h3><p>Quando ele clica para saber mais, encontra a sua mensagem na primeira tela, carregando rápido, e um caminho só: o WhatsApp.</p></div>
+            <span class="mstep__node"><svg><use href="#i-site" /></svg></span>
+            <span class="mstep__ghost">Site</span>
+          </div>
+          <div class="mstep">
+            <div class="mstep__text"><small>Anúncios</small><h3>Ser visto por quem procura</h3><p>Criativos feitos por nós e anúncios no Instagram, no Facebook e no Google para quem já procura o que você vende.</p></div>
+            <span class="mstep__node"><svg><use href="#i-cursor" /></svg></span>
+            <span class="mstep__ghost">Anúncios</span>
+          </div>
+          <div class="mstep">
+            <div class="mstep__text"><small>CRM e automações</small><h3>Ninguém sem resposta</h3><p>Cada conversa entra no CRM com a origem gravada. A resposta automática atende na hora e o follow-up lembra quem parou de responder.</p></div>
+            <span class="mstep__node"><svg><use href="#i-kanban" /></svg></span>
+            <span class="mstep__ghost">CRM</span>
+          </div>
+          <div class="mstep">
+            <div class="mstep__text"><small>Medir</small><h3>O que traz venda</h3><p>Você acompanha conversas, vendas e custo por cliente num painel. Cortamos o que não traz resultado e reforçamos o que traz.</p></div>
+            <span class="mstep__node"><svg><use href="#i-chart" /></svg></span>
+            <span class="mstep__ghost">Medir</span>
+          </div>
+          <div class="mtl__end">
+            <img src="./images/brand/wing-sm.webp" alt="" width="129" height="160" />
+            <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= QUEM CUIDA ================= -->
+      <section class="section team" id="time">
+        <div class="wrap">
+          <div class="team__card" data-rise>
+            <div class="team__people">
+              <figure class="team__fig">
+                <div class="team__photo" data-initials="RD"><img src="./images/team/ryan.jpg" alt="Ryan Dalatea" width="480" height="480" loading="lazy" /></div>
+                <figcaption><b>Ryan Dalatea</b>CEO da Dalas Marketing.</figcaption>
+              </figure>
+              <figure class="team__fig">
+                <div class="team__photo" data-initials="GL"><img src="./images/team/gustavo.jpg" alt="Gustavo Licks" width="480" height="480" loading="lazy" /></div>
+                <figcaption><b>Gustavo Licks</b>Fundador da Kairos Growth.</figcaption>
+              </figure>
+            </div>
+            <div class="team__text">
+              <p class="eyebrow eyebrow--dot">Dalas Marketing · Grupo Kairos</p>
+              <h2 class="h2 h2--md" data-split>Quem cuida da <b>sua conta.</b></h2>
+              <ul class="checks checks--plain">
+                <li><svg><use href="#i-check" /></svg>Você fala direto com quem pensa a estratégia e coloca no ar.</li>
+                <li><svg><use href="#i-check" /></svg>A verba dos anúncios vai direto para o Meta e o Google, separada do nosso serviço.</li>
+                <li><svg><use href="#i-check" /></svg>Site, sistema e CRM ficam no nome da sua empresa.</li>
               </ul>
-              <div class="crm__actions">
-                <a class="btn btn--solid" href="#contato" data-whatsapp><span>Quero o CRM na minha empresa</span><i aria-hidden="true">↗</i></a>
-                <a class="btn btn--line" href="./demos/crm/index.html" target="_blank" rel="noopener"><span>Abrir demonstração</span><i aria-hidden="true">↗</i></a>
-              </div>
-            </div>
-            <div class="crm__frame" id="crm-frame" data-src="./demos/crm/index.html">
-              <div class="crm__bar"><i></i><i></i><i></i><span>crm.dalasmarketing.com.br</span></div>
-              <div class="crm__screen" id="crm-screen">
-                <img class="crm__poster" src="./images/work/crm-cover.jpg" alt="Painel do Dalas CRM com o pipeline de leads e a conversa do WhatsApp" width="1440" height="900" loading="lazy" />
-                <a class="crm__open" href="./demos/crm/index.html" target="_blank" rel="noopener">Explorar o CRM <i aria-hidden="true">↗</i></a>
+              <div class="team__actions">
+                <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+                <a class="btn btn--glass" href="#contato" data-whatsapp>Falar com o Ryan<span class="btn__wa"><svg><use href="#i-wa" /></svg></span></a>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- ================= PROJETOS ================= -->
-        <section class="section work" id="projetos">
-          <div class="section__head">
-            <p class="eyebrow">Projetos</p>
-            <h2 class="h2" data-reveal>Sites que fazem o cliente parar <em>e confiar.</em></h2>
-            <p class="lead" data-fade>Cada site é desenhado do zero para o negócio: identidade própria, velocidade e um caminho claro até o contato. Passe o mouse para percorrer a página, clique para abrir.</p>
+      <!-- ================= DÚVIDAS ================= -->
+      <section class="section faq" id="duvidas">
+        <div class="wrap faq__grid">
+          <div class="faq__title"><h2 class="h2 h2--lg" data-split>Perguntas que a gente <b>sempre ouve.</b></h2></div>
+          <div class="faq__list" id="faq">
+            <div class="qa is-open">
+              <button class="qa__q" type="button" aria-expanded="true"><span>Já investi em tráfego e não deu certo. O que muda?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Muitas vezes o anúncio só mostrou foto e preço, e o cliente não entendeu por que você. A gente começa pela mensagem, olha o anúncio, o site e o atendimento juntos e só depois volta a anunciar. No diagnóstico você vê onde a venda se perdeu antes de investir de novo.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>Preciso de um site novo?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Nem sempre. Às vezes o problema está na mensagem, no anúncio ou na demora da resposta, e dá para anunciar direto para o WhatsApp. O site entra quando é ele que está fazendo você parecer mais um.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>O que exatamente a Dalas faz?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Sites e landing pages, anúncios no Instagram, no Facebook e no Google, CRM com automações e sistemas ou painéis sob medida. Tudo começa pela estratégia: por que o cliente deve escolher a sua empresa, para quem e com qual oferta. Você contrata só o que faz sentido para o seu momento.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>O CRM é difícil de usar?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Não. Ele mostra cada cliente num quadro por etapa, com a conversa do WhatsApp ao lado. A gente configura as automações e treina você e a sua equipe. Dá para ver uma demonstração ao vivo aqui no site.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>Funciona para o meu tipo de negócio?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Se o seu cliente pesquisa e compara antes de comprar e fala com você pelo WhatsApp ou pelas redes, faz sentido. No diagnóstico a gente confirma.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>Como funciona o diagnóstico grátis?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>São 7 perguntas rápidas. Depois a gente olha o seu Instagram e o seu site, analisa as respostas e te chama no WhatsApp com o diagnóstico: o que o cliente entende quando te vê, onde ele desiste e o que fazer primeiro.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>Quanto preciso investir em anúncios?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>A verba dos anúncios é paga direto ao Meta e ao Google, separada do nosso serviço. No diagnóstico a gente indica um valor inicial que caiba no seu momento.</p></div>
+            </div>
+            <div class="qa">
+              <button class="qa__q" type="button" aria-expanded="false"><span>Quanto custa?</span><i><svg><use href="#i-plus" /></svg></i></button>
+              <div class="qa__a"><p>Depende do que a sua empresa precisa: site, anúncios, CRM ou tudo junto. Depois do diagnóstico grátis você recebe a proposta com o valor, antes de decidir qualquer coisa.</p></div>
+            </div>
           </div>
-          <div class="work__grid">
-            <a class="work__card" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener" data-spot>
-              <div class="work__shot"><img src="./images/work/aurea-odonto-full.jpg" alt="Site da Áurea Odontologia" width="1100" height="2800" loading="lazy" /></div>
-              <div class="work__info"><span class="work__tag">Clínica odontológica</span><h3>Áurea Odontologia</h3><span class="work__go">Abrir site <i aria-hidden="true">↗</i></span></div>
-            </a>
-            <a class="work__card" href="./demos/forja-box/index.html" target="_blank" rel="noopener" data-spot>
-              <div class="work__shot"><img src="./images/work/forja-box-full.jpg" alt="Site do Forja Box" width="1100" height="2800" loading="lazy" /></div>
-              <div class="work__info"><span class="work__tag">Academia e cross training</span><h3>Forja Box</h3><span class="work__go">Abrir site <i aria-hidden="true">↗</i></span></div>
-            </a>
-            <a class="work__card" href="./demos/vertice-arquitetura/index.html" target="_blank" rel="noopener" data-spot>
-              <div class="work__shot"><img src="./images/work/vertice-arquitetura-full.jpg" alt="Site da Vértice Arquitetura" width="1100" height="2800" loading="lazy" /></div>
-              <div class="work__info"><span class="work__tag">Arquitetura e incorporação</span><h3>Vértice Arquitetura</h3><span class="work__go">Abrir site <i aria-hidden="true">↗</i></span></div>
-            </a>
-            <a class="work__card" href="./demos/nordica-cafe/index.html" target="_blank" rel="noopener" data-spot>
-              <div class="work__shot"><img src="./images/work/nordica-cafe-full.jpg" alt="Site do Nórdica Café" width="1100" height="2800" loading="lazy" /></div>
-              <div class="work__info"><span class="work__tag">Cafeteria e loja online</span><h3>Nórdica Café</h3><span class="work__go">Abrir site <i aria-hidden="true">↗</i></span></div>
-            </a>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- ================= PROCESSO ================= -->
-        <section class="section process" id="processo">
-          <div class="process__intro">
-            <p class="eyebrow">Processo de trabalho</p>
-            <h2 class="h2" data-reveal>Da primeira ideia à <em>próxima grande conquista.</em></h2>
-            <p class="lead" data-fade>Grandes projetos começam com uma visão clara. Planejamento, criatividade, desenvolvimento e evolução contínua.</p>
+      <!-- ================= CHAMADA FINAL ================= -->
+      <section class="final" id="contato">
+        <canvas class="final__silk" id="final-silk" aria-hidden="true"></canvas>
+        <div class="final__dial" aria-hidden="true">
+          <svg class="final__ring final__ring--a" id="dial-a" viewBox="0 0 1000 1000"></svg>
+          <svg class="final__ring final__ring--b" id="dial-b" viewBox="0 0 1000 1000"></svg>
+          <img class="final__mark" src="./images/brand/wing-outline.png" alt="" width="588" height="730" />
+        </div>
+        <div class="final__in">
+          <h2 class="final__title" data-split>Sua próxima venda <b>começa agora.</b></h2>
+          <p class="final__p" data-rise>7 perguntas rápidas. A gente analisa e te responde no WhatsApp com três coisas: o que o cliente entende quando te vê hoje, onde ele desiste e o que fazer primeiro.</p>
+          <div class="final__actions" data-rise>
+            <a class="btn btn--paper btn--lg" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+            <p>Prefere conversar direto?</p>
+            <a class="btn btn--glass" href="#contato" data-whatsapp>Chamar no WhatsApp<span class="btn__wa"><svg><use href="#i-wa" /></svg></span></a>
           </div>
-          <ol class="steps" id="steps">
-            <span class="steps__progress" aria-hidden="true"></span>
-            <li class="step"><span class="step__num">01</span><div><h3>Imersão</h3><p>Entendemos o negócio, seus desafios, seu público e suas oportunidades.</p></div></li>
-            <li class="step"><span class="step__num">02</span><div><h3>Estratégia</h3><p>Definimos os caminhos, as tecnologias e as soluções mais adequadas para o projeto.</p></div></li>
-            <li class="step"><span class="step__num">03</span><div><h3>Criação</h3><p>Transformamos conceitos em interfaces, experiências e estruturas digitais.</p></div></li>
-            <li class="step"><span class="step__num">04</span><div><h3>Desenvolvimento</h3><p>Construímos e integramos as funcionalidades, priorizando qualidade, segurança e desempenho.</p></div></li>
-            <li class="step"><span class="step__num">05</span><div><h3>Entrega e evolução</h3><p>Validamos a solução, ajustamos o necessário e preparamos o projeto para evoluir.</p></div></li>
-          </ol>
-        </section>
-
-
-        <!-- ================= DÚVIDAS ================= -->
-        <section class="section faq" id="duvidas">
-          <div class="faq__grid">
-            <div class="faq__head">
-              <p class="eyebrow">Dúvidas sobre tráfego pago</p>
-              <h2 class="h2" data-reveal>O que todo mundo pergunta <em>antes de anunciar.</em></h2>
-              <p class="lead" data-fade>Respostas diretas. Se a sua dúvida não está aqui, chama no WhatsApp.</p>
-            </div>
-            <div class="faq__list" id="faq">
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>Quanto preciso investir em anúncios?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Depende do seu mercado e da meta. Definimos a verba no diagnóstico, começamos com um valor de teste e escalamos o que funciona. A gestão da Dalas é cobrada à parte do valor investido nas plataformas.</p></div></div></div>
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>Em quanto tempo vejo resultado?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Os primeiros contatos costumam chegar nos primeiros dias de campanha. A consistência vem com a otimização: as primeiras semanas servem para aprender o que o seu público responde melhor.</p></div></div></div>
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>Meta Ads ou Google Ads?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Depende de onde o seu cliente está. Meta e TikTok criam desejo em quem ainda não conhece você; o Google captura quem já procura. Na maioria dos negócios, usamos os dois com papéis diferentes.</p></div></div></div>
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>Preciso de um site para anunciar?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Não é obrigatório, mas uma landing page bem feita costuma reduzir o custo por contato e aumenta a confiança de quem clica. Por isso entregamos site e tráfego juntos.</p></div></div></div>
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>Como sei que está funcionando?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Você acompanha no CRM e nos relatórios: de qual anúncio veio cada lead, quantos viraram conversa e quantos fecharam. Sem achismo.</p></div></div></div>
-              <div class="faq__item"><button class="faq__q" type="button" aria-expanded="false"><span>O que a Dalas entrega todo mês?</span><i aria-hidden="true"></i></button><div class="faq__a"><div><p>Criativos novos, ajustes de público e verba, testes, relatório semanal com os números e uma reunião de alinhamento com você.</p></div></div></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ================= CHAMADA FINAL ================= -->
-        <section class="finale" id="contato">
-          <div class="finale__scene" aria-hidden="true">
-            <div class="finale__sky"></div>
-            <canvas class="finale__motes" id="finale-motes"></canvas>
-            <div class="finale__wolf" id="finale-wolf">
-              <canvas class="finale__living" id="finale-living"></canvas>
-              <canvas class="finale__vapor" id="finale-vapor"></canvas>
-              <span class="finale__eye" style="--x: 57.1%; --y: 25.2%"></span>
-              <span class="finale__eye" style="--x: 60.6%; --y: 25.2%"></span>
-            </div>
-            <canvas class="finale__smoke" id="finale-smoke"></canvas>
-            <div class="finale__light"></div>
-            <canvas class="finale__storm" id="finale-storm"></canvas>
-            <div class="finale__flash" id="finale-flash"></div>
-          </div>
-          <div class="finale__content">
-            <p class="eyebrow">O próximo movimento</p>
-            <h2 class="h2 finale__title" data-reveal>O futuro da sua marca começa com <em>uma decisão.</em></h2>
-            <div class="finale__text" data-words>
-              <p>Enquanto o mercado continua mudando, novas oportunidades surgem para empresas que estão preparadas para evoluir.</p>
-              <p>A Dalas une estratégia, tecnologia e criatividade para transformar ideias em soluções digitais e ajudar negócios a construir uma presença mais forte, moderna e competitiva.</p>
-            </div>
-            <div class="finale__cta">
-              <span class="finale__halo" aria-hidden="true"></span>
-              <a class="btn btn--solid btn--lg" id="cta-button" href="#contato" data-whatsapp><span>Vamos construir algo extraordinário</span><i aria-hidden="true">↗</i></a>
-            </div>
-            <ul class="finale__notes" data-fade>
-              <li>Conversa sem compromisso</li>
-              <li>Diagnóstico do seu momento</li>
-              <li>Proposta sob medida</li>
-            </ul>
-            <p class="finale__alt" id="cta-alt"></p>
-          </div>
-        </section>
-
-        <!-- ================= RODAPÉ ================= -->
-        <footer class="footer" id="footer">
-          <div class="footer__aurora" aria-hidden="true"></div>
-          <div class="footer__big" id="footer-big" data-text="Dalas" aria-hidden="true">Dalas</div>
-          <div class="footer__grid">
-            <div class="footer__brand">
-              <img class="footer__logo" src="./images/logo-mark.png" alt="" width="590" height="540" />
-              <p class="footer__name">Dalas Marketing</p>
-              <p class="footer__claim">Inteligência, estratégia e tecnologia para transformar negócios em marcas preparadas para o futuro.</p>
-              <a class="footer__top" href="#inicio">Voltar ao topo<i aria-hidden="true">↑</i></a>
-            </div>
-            <div class="footer__col">
-              <h4>Serviços</h4>
-              <a href="#solucoes">Sites</a>
-              <a href="#solucoes">Sistemas</a>
-              <a href="#solucoes">Painéis</a>
-              <a href="#solucoes">Tráfego pago</a>
-              <a href="#solucoes">Automações e IA</a>
-              <a href="#solucoes">Estratégia digital</a>
-            </div>
-            <div class="footer__col">
-              <h4>Navegação</h4>
-              <a href="#inicio">Início</a>
-              <a href="#solucoes">Soluções</a>
-              <a href="#projetos">Projetos</a>
-              <a href="#crm">CRM</a>
-              <a href="#processo">Processo</a>
-              <a href="#duvidas">Dúvidas</a>
-              <a href="#contato">Contato</a>
-            </div>
-            <div class="footer__col">
-              <h4>Contato</h4>
-              <a href="#contato" id="footer-whatsapp" data-whatsapp>WhatsApp</a>
-              <a href="#contato" id="footer-instagram">Instagram</a>
-              <a href="#contato" id="footer-email">E-mail comercial</a>
-              <a href="#" id="footer-privacy">Política de privacidade</a>
-              <a href="#" id="footer-terms">Termos de uso</a>
-            </div>
-          </div>
-          <div class="footer__row">
-            <p>© 2026 Dalas Marketing. Todos os direitos reservados.</p>
-            <p class="footer__pulse"><i aria-hidden="true"></i>Feito para empresas que escolhem estar à frente.</p>
-          </div>
-        </footer>
-      </div>
+        </div>
+      </section>
     </main>
+
+    <!-- ================= RODAPÉ ================= -->
+    <footer class="footer">
+      <div class="wrap footer__grid">
+        <div class="footer__brand">
+          <a class="nav__brand nav__brand--lg" href="#top"><img src="./images/brand/wing-sm.webp" alt="" width="129" height="160" /><span class="brand-word">Dalas<small>Marketing</small></span></a>
+          <p>Sites, anúncios e CRM para a sua empresa ser encontrada e escolhida.</p>
+          <p class="footer__group">Uma empresa do Grupo Kairos.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a class="btn btn--ghost btn--sm" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot btn__dot--line"><svg><use href="#i-ur" /></svg></span></a>
+          <div class="footer__social">
+            <a class="icon-btn icon-btn--wa" href="#contato" data-whatsapp aria-label="WhatsApp"><svg><use href="#i-wa" /></svg></a>
+            <a class="icon-btn icon-btn--ig" href="#contato" id="footer-instagram" aria-label="Instagram"><svg><use href="#i-ig" /></svg></a>
+            <span class="footer__handle" id="footer-handle"></span>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Demonstrações</h4>
+          <a class="footer__link" href="./demos/crm/index.html" target="_blank" rel="noopener">Dalas CRM <svg><use href="#i-ur" /></svg></a>
+          <a class="footer__link" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener">Áurea Odonto <svg><use href="#i-ur" /></svg></a>
+          <a class="footer__link" href="./demos/forja-box/index.html" target="_blank" rel="noopener">Forja Box <svg><use href="#i-ur" /></svg></a>
+          <a class="footer__link" href="./demos/vertice-arquitetura/index.html" target="_blank" rel="noopener">Vértice Arquitetura <svg><use href="#i-ur" /></svg></a>
+          <a class="footer__link" href="./demos/nordica-cafe/index.html" target="_blank" rel="noopener">Nórdica Café <svg><use href="#i-ur" /></svg></a>
+        </div>
+      </div>
+      <div class="footer__word" aria-hidden="true"><i class="footer__glow"></i><span>DALAS</span></div>
+      <div class="wrap footer__row">
+        <p>© 2026 Dalas Marketing</p>
+        <p>Do clique à venda.</p>
+      </div>
+    </footer>
+
+    <!-- flutuantes -->
+    <button class="totop" id="totop" type="button" aria-label="Voltar ao topo">
+      <svg viewBox="0 0 40 46" aria-hidden="true"><rect x="17" y="1" width="6" height="5" rx="1.5" fill="currentColor" opacity=".7" /><circle cx="20" cy="26" r="16" fill="none" stroke="currentColor" stroke-width="2" /><g opacity=".6" stroke="currentColor" stroke-width="1.4"><path d="M20 12v3M34 26h-3M20 40v-3M6 26h3" /></g><line id="totop-hand" x1="20" y1="26" x2="20" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round" /><circle cx="20" cy="26" r="1.8" fill="#fff" /></svg>
+    </button>
+    <a class="wa-float" id="wa-float" href="#contato" data-whatsapp aria-label="Falar no WhatsApp"><svg><use href="#i-wa" /></svg></a>
+
+    <!-- diagnóstico -->
+    <div class="diag" id="diag" role="dialog" aria-modal="true" aria-labelledby="diag-q" hidden>
+      <div class="diag__backdrop" data-diag-close></div>
+      <div class="diag__box">
+        <div class="diag__head">
+          <p class="mono" id="diag-step">Passo 1 de 7</p>
+          <button class="diag__x" type="button" data-diag-close aria-label="Fechar"><svg><use href="#i-x" /></svg></button>
+        </div>
+        <div class="diag__bars" id="diag-bars"></div>
+        <div class="diag__body" id="diag-body"></div>
+      </div>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -1,7 +1,13 @@
-/** Liga todos os botões de contato aos dados de src/config.js. */
-export function initContact(config) {
+/** Monta o link do WhatsApp com uma mensagem (vazio se o número não foi configurado). */
+export function waLink(config, text) {
   const digits = (config.whatsapp || '').replace(/\D/g, '');
-  const whatsapp = digits ? `https://wa.me/${digits}?text=${encodeURIComponent(config.whatsappMessage || '')}` : '';
+  if (!digits) return '';
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text || config.whatsappMessage || '')}`;
+}
+
+/** Liga os botões de contato aos dados de src/config.js. */
+export function initContact(config) {
+  const whatsapp = waLink(config);
   const email = config.email ? `mailto:${config.email}` : '';
   const handle = (config.instagram || '').replace('@', '');
   const instagram = handle ? `https://instagram.com/${handle}` : '';
@@ -17,23 +23,15 @@ export function initContact(config) {
   });
 
   const ig = document.getElementById('footer-instagram');
-  if (ig && instagram) {
-    ig.href = instagram;
-    ig.target = '_blank';
-    ig.rel = 'noopener';
-    ig.textContent = `@${handle}`;
-  }
-  const mail = document.getElementById('footer-email');
-  if (mail && email) {
-    mail.href = email;
-    mail.textContent = config.email;
-  }
-
-  const alt = document.getElementById('cta-alt');
-  if (alt) {
-    const parts = [];
-    if (config.email) parts.push(`<a href="mailto:${config.email}">${config.email}</a>`);
-    if (handle) parts.push(`<a href="${instagram}" target="_blank" rel="noopener">@${handle}</a>`);
-    alt.innerHTML = parts.join('<span class="sep">·</span>');
+  if (ig) {
+    if (instagram) {
+      ig.href = instagram;
+      ig.target = '_blank';
+      ig.rel = 'noopener';
+      const label = document.getElementById('footer-handle');
+      if (label) label.textContent = `@${handle}`;
+    } else {
+      ig.hidden = true;
+    }
   }
 }
