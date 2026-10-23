@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Chamada final com fumaça sedosa — Dalas Marketing
+   Versão independente: funciona sozinha, sem build e sem bibliotecas.
+   ========================================================================== */
+
+.final {
+  --fog-100: #ececf0;
+  --fog-200: #d6d6dc;
+  --fog-400: #8a8a94;
+  --paper: #f5f5f7;
+  --ink-950: #050506;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-2: rgba(255, 255, 255, 0.12);
+  --line-3: rgba(255, 255, 255, 0.2);
+  --wa: #25d366;
+  --gutter: clamp(20px, 7.5vw, 108px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  isolation: isolate;
+  margin: 0 clamp(12px, 1.7vw, 24px) clamp(12px, 1.7vw, 24px);
+  min-height: 92svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: radial-gradient(70% 60% at 50% 45%, #1a1a1f, #070708 75%);
+  color: var(--fog-100);
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.final *,
+.final *::before,
+.final *::after {
+  box-sizing: border-box;
+}
+
+/* fumaça em WebGL (desenhada em resolução baixa e esticada: fica macia) */
+.final__silk {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s;
+}
+
+.final__silk.is-on {
+  opacity: 1;
+}
+
+/* mostradores girando e a asa em contorno */
+.final__dial {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.final__ring {
+  position: absolute;
+  width: min(1300px, 125vmin);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.final__ring--a {
+  color: rgba(255, 255, 255, 0.35);
+  animation: final-spin 120s linear infinite;
+}
+
+.final__ring--b {
+  color: rgba(255, 255, 255, 0.18);
+  width: min(1000px, 96vmin);
+  animation: final-spin 200s linear infinite reverse;
+}
+
+@keyframes final-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.final__mark {
+  position: absolute;
+  width: min(560px, 60vmin);
+  height: auto;
+  opacity: 0.16;
+}
+
+/* conteúdo */
+.final__in {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding: 120px var(--gutter);
+}
+
+.final__title {
+  margin: 0;
+  font-size: clamp(3rem, 7.6vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  font-weight: 300;
+  max-width: 12ch;
+  text-wrap: balance;
+}
+
+.final__title b {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+/* palavras em negrito com degradê prata (aplicado em cada palavra) */
+.final__title b,
+.final__title b .w {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f1f4 38%, #a2a2ad 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.final__title .w {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.final__p {
+  margin: 36px 0 0;
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.62;
+  color: var(--fog-200);
+}
+
+.final__actions {
+  margin-top: 40px;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.final__actions p {
+  margin: 18px 0 0;
+  font-size: 14px;
+  color: var(--fog-400);
+}
+
+/* botões */
+.final .btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 52px;
+  padding: 0 7px 0 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    transform 0.35s var(--ease),
+    background-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    border-color 0.35s;
+}
+
+.final .btn:active {
+  transform: scale(0.97);
+}
+
+.final .btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.final .btn__dot,
+.final .btn__wa {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--ink-950);
+  color: #fff;
+  transition: transform 0.45s var(--ease);
+}
+
+.final .btn:hover .btn__dot {
+  transform: rotate(45deg);
+}
+
+.final .btn__wa {
+  background: rgba(37, 211, 102, 0.12);
+  color: var(--wa);
+}
+
+.final .btn--paper {
+  background: var(--paper);
+  color: var(--ink-950);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 12px 40px -12px rgba(255, 255, 255, 0.45);
+}
+
+.final .btn--paper:hover {
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 16px 50px -12px rgba(255, 255, 255, 0.6);
+}
+
+.final .btn--glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-2);
+  color: var(--fog-100);
+  padding-left: 24px;
+}
+
+.final .btn--glass:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--line-3);
+}
+
+.final .btn--lg {
+  height: 58px;
+  font-size: 17px;
+  padding-left: 30px;
+}
+
+.final .btn--lg .btn__dot {
+  width: 44px;
+  height: 44px;
+}
+
+@media (max-width: 640px) {
+  .final__actions {
+    width: 100%;
+  }
+
+  .final__actions .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final__ring--a,
+  .final__ring--b {
+    animation: none;
+  }
+}
