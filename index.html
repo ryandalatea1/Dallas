@@ -79,6 +79,13 @@
         <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
         <symbol id="i-dots" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="19" cy="12" r="1.6" /></g></symbol>
         <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11l.5-1.5a1.5 1.5 0 0 1 3 .5v1l.3-.6a1.5 1.5 0 0 1 2.8.9V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L5 15.6a1.5 1.5 0 0 1 2.3-1.9L9 15.3V11Z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round" /></symbol>
+        <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></symbol>
+        <symbol id="i-film" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5" /><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4M10 9.5v5l4-2.5-4-2.5Z" /></g></symbol>
+        <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c4-1 6-3 8-7M12 13c0-5 3-8 8-9-1 5-4 8-9 9" /><circle cx="12" cy="13" r="1.6" /></g></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5-10-6.5Z" fill="currentColor" /></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5M3 17.5l9 5 9-5" /></g></symbol>
+        <symbol id="i-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 8V4M9 4h6M2 13v3M22 13v3M9 14h.01M15 14h.01M9.5 17.5h5" /></g></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
       </defs>
     </svg>
 
@@ -101,8 +108,9 @@
           <span class="brand-word">Dalas<small>Marketing</small></span>
         </a>
         <nav class="nav__links" aria-label="Principal">
-          <a href="#solucoes" data-spy="solucoes">Soluções <svg><use href="#i-r" /></svg></a>
-          <a href="#crm" data-spy="crm">CRM <svg><use href="#i-r" /></svg></a>
+          <a href="#servicos" data-spy="servicos">Serviços <svg><use href="#i-r" /></svg></a>
+          <a href="#projetos" data-spy="projetos">Projetos</a>
+          <a href="#crm" data-spy="crm">CRM</a>
           <a href="#metodo" data-spy="metodo">Método</a>
           <a href="#duvidas" data-spy="duvidas">Dúvidas</a>
         </nav>
@@ -115,361 +123,270 @@
     </header>
     <div class="menu" id="menu" hidden>
       <nav class="menu__links" aria-label="Menu">
-        <a href="#solucoes"><small>01</small>Soluções</a>
-        <a href="#crm"><small>02</small>CRM</a>
-        <a href="#metodo"><small>03</small>Método</a>
-        <a href="#duvidas"><small>04</small>Dúvidas</a>
-        <a href="./demos/crm/index.html" target="_blank" rel="noopener"><small>05</small>Ver o CRM ↗</a>
+        <a href="#servicos"><small>01</small>Serviços</a>
+        <a href="#projetos"><small>02</small>Projetos</a>
+        <a href="#crm"><small>03</small>CRM</a>
+        <a href="#metodo"><small>04</small>Método</a>
+        <a href="#duvidas"><small>05</small>Dúvidas</a>
+        <a href="./demos/crm/index.html" target="_blank" rel="noopener"><small>06</small>Ver o CRM ↗</a>
       </nav>
       <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
     </div>
 
     <main id="conteudo">
-      <!-- ================= HERO ================= -->
-      <section class="hero" id="top">
-        <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
-        <div class="hero__chips" id="hero-chips" aria-hidden="true">
-          <span class="chip" data-x="0.6" data-y="0.18" data-mx="0.08" data-my="0.86"><svg><use href="#i-cursor" /></svg>Viu seu anúncio</span>
-          <span class="chip" data-x="0.88" data-y="0.34" data-mx="0" data-my="0"><svg><use href="#i-site" /></svg>Abriu seu site</span>
-          <span class="chip" data-x="0.91" data-y="0.51" data-mx="0" data-my="0"><svg><use href="#i-chat" /></svg>Chamou no WhatsApp</span>
-          <span class="chip" data-x="0.86" data-y="0.68" data-mx="0" data-my="0"><svg><use href="#i-crm" /></svg>Entrou no CRM</span>
-          <span class="chip chip--end" data-x="0.64" data-y="0.84" data-mx="0.16" data-my="0.92"><svg><use href="#i-check" /></svg>Venda fechada</span>
-        </div>
-        <div class="hero__content">
-          <p class="eyebrow hero-fade" style="--d: 0.1s">Sites, anúncios e CRM · do clique à venda</p>
-          <h1 class="hero__title">
-            <span class="mask"><span class="hero-rise light">Do clique</span></span>
-            <span class="mask"><span class="hero-rise silver bold" style="--d: 0.12s" data-shine>à venda.</span></span>
-          </h1>
-          <p class="hero__lede hero-fade" style="--d: 0.45s">
-            Fazemos o seu site, os seus anúncios no Instagram e no Google e o CRM que organiza cada conversa. Tudo junto, para o cliente achar você e chamar no WhatsApp.
-          </p>
-          <div class="hero__actions hero-fade" style="--d: 0.6s">
-            <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
-            <a class="btn btn--glass" href="#contato" data-whatsapp>Falar no WhatsApp<span class="btn__wa"><svg><use href="#i-wa" /></svg></span></a>
+      <!-- ================= HERO: O LOBO NO SCROLL ================= -->
+      <div class="hero-wrap" id="top">
+        <section class="hero" aria-label="Abertura">
+          <canvas class="hero__seq" id="hero-seq" aria-hidden="true"></canvas>
+          <div class="hero__veil" aria-hidden="true"></div>
+          <div class="hero__content" id="hero-content">
+            <p class="eyebrow hero-fade" style="--d: 0.1s">Sites · Funis · CRM · Automações · Sistemas · Painéis · Audiovisual · Design</p>
+            <h1 class="hero__title">
+              <span class="mask"><span class="hero-rise light">Criamos</span></span>
+              <span class="mask mask--rot"><span class="hero-rise bold silver rot" id="hero-rot" style="--d: 0.12s"><i class="is-on">sites</i><i>funis</i><i>CRMs</i><i>automações</i><i>sistemas</i><i>painéis</i><i>vídeos</i><i>marcas</i></span></span>
+              <span class="mask"><span class="hero-rise light" style="--d: 0.24s">que vendem.</span></span>
+            </h1>
+            <p class="hero__lede hero-fade" style="--d: 0.5s">Design, tecnologia e tráfego no mesmo time. Do primeiro clique à venda fechada, com tudo no nome da sua empresa.</p>
+            <div class="hero__actions hero-fade" style="--d: 0.65s">
+              <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+              <a class="btn btn--glass" href="#projetos">Ver projetos<span class="btn__dot btn__dot--line"><svg><use href="#i-down" /></svg></span></a>
+            </div>
           </div>
-          <p class="hero__note hero-fade" style="--d: 0.75s">7 perguntas rápidas · resposta no seu WhatsApp</p>
-        </div>
-      </section>
+          <div class="hero__phases" aria-hidden="true">
+            <p class="phase" data-phase="0"><small>01</small>Design.</p>
+            <p class="phase" data-phase="1"><small>02</small>Tecnologia.</p>
+            <p class="phase" data-phase="2"><small>03</small>Tráfego.</p>
+            <p class="phase phase--end" data-phase="3"><small>Dalas Marketing</small>Do clique <b>à venda.</b></p>
+          </div>
+          <div class="hero__cue hero-fade" style="--d: 0.9s" aria-hidden="true"><span>Role para ver</span><i><b id="hero-cue-bar"></b></i></div>
+        </section>
+      </div>
 
-      <!-- ================= CANAIS ================= -->
-      <section class="channels" aria-label="Onde a Dalas trabalha">
+      <!-- ================= FAIXA ================= -->
+      <section class="channels" aria-label="O que a Dalas faz">
         <div class="channels__track">
           <div class="channels__set">
             <span><svg><use href="#i-site" /></svg>Sites</span><i></i>
-            <span><svg><use href="#i-ig" /></svg>Instagram</span><i></i>
-            <span><svg><use href="#i-google" /></svg>Google Ads</span><i></i>
-            <span><svg><use href="#i-fb" /></svg>Facebook</span><i></i>
-            <span><svg><use href="#i-wa" /></svg>WhatsApp</span><i></i>
+            <span><svg><use href="#i-funnel" /></svg>Funis</span><i></i>
             <span><svg><use href="#i-crm" /></svg>CRM</span><i></i>
             <span><svg><use href="#i-bolt" /></svg>Automações</span><i></i>
-            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
             <span><svg><use href="#i-code" /></svg>Sistemas</span><i></i>
+            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
+            <span><svg><use href="#i-film" /></svg>Audiovisual</span><i></i>
+            <span><svg><use href="#i-pen" /></svg>Design</span><i></i>
           </div>
           <div class="channels__set" aria-hidden="true">
             <span><svg><use href="#i-site" /></svg>Sites</span><i></i>
-            <span><svg><use href="#i-ig" /></svg>Instagram</span><i></i>
-            <span><svg><use href="#i-google" /></svg>Google Ads</span><i></i>
-            <span><svg><use href="#i-fb" /></svg>Facebook</span><i></i>
-            <span><svg><use href="#i-wa" /></svg>WhatsApp</span><i></i>
+            <span><svg><use href="#i-funnel" /></svg>Funis</span><i></i>
             <span><svg><use href="#i-crm" /></svg>CRM</span><i></i>
             <span><svg><use href="#i-bolt" /></svg>Automações</span><i></i>
-            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
             <span><svg><use href="#i-code" /></svg>Sistemas</span><i></i>
+            <span><svg><use href="#i-chart" /></svg>Painéis</span><i></i>
+            <span><svg><use href="#i-film" /></svg>Audiovisual</span><i></i>
+            <span><svg><use href="#i-pen" /></svg>Design</span><i></i>
           </div>
         </div>
       </section>
 
-      <!-- ================= SITE COMUM x SITE DALAS ================= -->
-      <section class="section compare" id="diferenca">
-        <div class="wrap compare__grid">
-          <div class="compare__text">
-            <h2 class="h2" data-split>Site bonito <b>não basta. Precisa convencer.</b></h2>
-            <p class="p-lead" data-rise>No celular, o cliente abre algumas opções e decide em segundos se você é mais um ou a melhor escolha. A diferença não é ter site. É o que ele entende quando olha.</p>
-            <ol class="points" id="points">
-              <li><small>01</small><p><b>Clareza.</b> Em uma frase, ele entende o que você faz e por que você.</p></li>
-              <li><small>02</small><p><b>Confiança.</b> Visual, velocidade e detalhes no nível do que você entrega.</p></li>
-              <li><small>03</small><p><b>Caminho.</b> Um próximo passo só: falar com você no WhatsApp.</p></li>
-            </ol>
-          </div>
-          <div class="compare__device">
-            <div class="phone phone--lg" id="compare-phone">
-              <div class="phone__notch"></div>
-              <div class="phone__screen">
-                <div class="cmp cmp--plain is-on" data-cmp="plain">
-                  <div class="plain__top"><b>Clínica</b><i></i></div>
-                  <div class="plain__img">
-                    <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice"><rect width="160" height="100" fill="#c9d7e3" /><path d="M0 70 35 40l25 22 30-30 30 26 40-24v66H0Z" fill="#9db4c6" /><path d="M0 82 40 60l30 16 35-20 55 26v18H0Z" fill="#7b97ab" /><rect x="66" y="56" width="26" height="20" fill="#fff" /><path d="M63 57 79 45l16 12Z" fill="#c75b4a" /><rect x="76" y="66" width="6" height="10" fill="#7b5b4a" /></svg>
-                  </div>
-                  <div class="plain__body">
-                    <b>Clínica odontológica de qualidade</b>
-                    <p>Atendimento humanizado e preço justo.</p>
-                    <span>Saiba mais</span>
-                    <div class="plain__thumbs"><i></i><i></i><i></i></div>
-                  </div>
-                </div>
-                <div class="cmp cmp--pro" data-cmp="pro">
-                  <img src="./images/phone/aurea.jpg" alt="Site da Áurea Odonto no celular, exemplo de site Dalas" width="520" height="3600" loading="lazy" />
-                </div>
-              </div>
+      <!-- ================= SERVIÇOS: ROLAGEM HORIZONTAL ================= -->
+      <section class="services" id="servicos">
+        <div class="services__pin" id="services-pin">
+          <div class="wrap services__head">
+            <div>
+              <p class="eyebrow eyebrow--dot">O que a gente faz</p>
+              <h2 class="h2 h2--lg" data-split>Oito frentes. <b>Um time só.</b></h2>
             </div>
-            <div class="toggle" role="tablist" aria-label="Comparar sites">
-              <button type="button" role="tab" aria-selected="true" data-cmp-btn="plain">Site comum</button>
-              <button type="button" role="tab" aria-selected="false" data-cmp-btn="pro">Site Dalas</button>
-              <i class="toggle__pill"></i>
-            </div>
-            <p class="mono-cap" id="compare-cap">Site comum · o que todo mundo já faz</p>
-            <p class="fine">Exemplo ilustrativo, com marcas e dados fictícios.</p>
-            <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+            <p class="p-lead services__lead" data-rise>Você contrata só o que faz sentido para o seu momento. Tudo conversa entre si, do site ao painel.</p>
           </div>
+          <div class="services__track" id="services-track">
+            <article class="svc">
+              <span class="svc__num">01</span>
+              <div class="svc__art svc__art--site" aria-hidden="true"><i class="bar"></i><i class="bar"></i><i class="bar"></i><b></b></div>
+              <h3>Sites e landing pages</h3>
+              <p>Páginas rápidas, bonitas e feitas para virar conversa. A sua mensagem na primeira tela e um caminho só: o WhatsApp.</p>
+              <ul class="tags"><li>Institucional</li><li>Landing page</li><li>Loja virtual</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero um site<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">02</span>
+              <div class="svc__art svc__art--funnel" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+              <h3>Funis de venda</h3>
+              <p>Do anúncio ao fechamento, cada etapa com um objetivo: atrair, convencer, converter e voltar a vender.</p>
+              <ul class="tags"><li>Captura</li><li>Nutrição</li><li>Fechamento</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero um funil<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">03</span>
+              <div class="svc__art svc__art--crm" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+              <h3>CRM</h3>
+              <p>Cada cliente por etapa, com a conversa do WhatsApp ao lado e a origem de cada lead gravada.</p>
+              <ul class="tags"><li>Pipeline</li><li>WhatsApp</li><li>Origem do lead</li></ul>
+              <a class="svc__go" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver o Dalas CRM<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">04</span>
+              <div class="svc__art svc__art--auto" aria-hidden="true"><i></i><i></i><i></i></div>
+              <h3>Automações e IA</h3>
+              <p>Resposta em segundos, de dia ou de noite. Follow-up no dia certo e aviso no celular quando chega um lead quente.</p>
+              <ul class="tags"><li>Resposta automática</li><li>Follow-up</li><li>Alertas</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero automatizar<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">05</span>
+              <div class="svc__art svc__art--code" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              <h3>Sistemas sob medida</h3>
+              <p>Portais, áreas do cliente e ferramentas internas do jeito que a sua operação funciona, não o contrário.</p>
+              <ul class="tags"><li>Portal</li><li>Gestão</li><li>Integrações</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero um sistema<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">06</span>
+              <div class="svc__art svc__art--chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+              <h3>Painéis e relatórios</h3>
+              <p>Vendas, leads e campanhas num lugar só, atualizados sozinhos. Você decide com número, não com achismo.</p>
+              <ul class="tags"><li>Métricas ao vivo</li><li>Funil</li><li>Metas</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero um painel<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">07</span>
+              <div class="svc__art svc__art--film" aria-hidden="true"><i></i><i></i><i></i><i></i><b><svg><use href="#i-play" /></svg></b></div>
+              <h3>Audiovisual</h3>
+              <p>Roteiro, captação, edição e motion. Vídeos para anúncios e redes que param o dedo e explicam por que você.</p>
+              <ul class="tags"><li>Vídeos</li><li>Criativos</li><li>Motion</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero vídeos<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <article class="svc">
+              <span class="svc__num">08</span>
+              <div class="svc__art svc__art--pen" aria-hidden="true"><svg viewBox="0 0 200 120"><path class="curve" d="M14 100 C 60 10, 120 120, 186 24" /><circle class="pt pt--a" cx="14" cy="100" r="4" /><circle class="pt pt--b" cx="186" cy="24" r="4" /><circle class="pt pt--h" cx="60" cy="10" r="3" /><circle class="pt pt--h" cx="120" cy="120" r="3" /><path class="hnd" d="M14 100 60 10M186 24 120 120" /></svg></div>
+              <h3>Design</h3>
+              <p>Identidade visual, peças para redes, apresentações e interfaces no nível do que a sua empresa entrega.</p>
+              <ul class="tags"><li>Identidade</li><li>Social</li><li>Interfaces</li></ul>
+              <a class="svc__go" href="#diagnostico" data-diag>Quero design<svg><use href="#i-ur" /></svg></a>
+            </article>
+            <div class="svc svc--end">
+              <p>Tudo isso<br /><b>no mesmo time.</b></p>
+              <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
+            </div>
+          </div>
+          <div class="services__bar" aria-hidden="true"><i id="services-bar"></i></div>
         </div>
       </section>
 
-      <!-- ================= 01 SITE + ANÚNCIOS ================= -->
-      <section class="section offer" id="solucoes">
-        <div class="wrap offer__grid">
-          <div class="offer__title">
-            <div class="offer__sticky">
-              <h2 class="h2 h2--xl" data-split>Mais clientes <b>chamando no seu WhatsApp.</b></h2>
-              <p class="p-lead" data-rise>Site, anúncios e CRM trabalhando juntos, do clique à venda.</p>
+      <!-- ================= PROJETOS: MURAL ================= -->
+      <section class="section mural" id="projetos">
+        <div class="wrap mural__head">
+          <p class="eyebrow eyebrow--dot">Projetos</p>
+          <h2 class="h2 h2--lg" data-split>Feito pela Dalas, <b>pronto para navegar.</b></h2>
+          <p class="p-lead" data-rise>Sites e sistemas de demonstração, com marcas fictícias. Abra, role e clique: tudo funciona.</p>
+        </div>
+        <div class="mural__stage" id="mural">
+          <div class="mural__grid">
+            <div class="mural__col" data-speed="1">
+              <a class="mural__item" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener"><img src="./images/work/aurea-odonto-cover.jpg" alt="Site da Áurea Odonto" width="1440" height="900" loading="lazy" /><span>Áurea Odonto · site</span></a>
+              <a class="mural__item" href="./demos/crm/index.html" target="_blank" rel="noopener"><img src="./images/solutions/paineis.jpg" alt="Relatórios do Dalas CRM" width="1600" height="1000" loading="lazy" /><span>Dalas CRM · relatórios</span></a>
+              <a class="mural__item" href="./demos/nordica-cafe/index.html" target="_blank" rel="noopener"><img src="./images/work/nordica-cafe-cover.jpg" alt="Site da Nórdica Café" width="1440" height="900" loading="lazy" /><span>Nórdica Café · site</span></a>
+            </div>
+            <div class="mural__col" data-speed="1.8">
+              <a class="mural__item" href="./demos/crm/index.html" target="_blank" rel="noopener"><img src="./images/solutions/sistemas.jpg" alt="Pipeline do Dalas CRM" width="1600" height="1000" loading="lazy" /><span>Dalas CRM · pipeline</span></a>
+              <a class="mural__item" href="./demos/forja-box/index.html" target="_blank" rel="noopener"><img src="./images/work/forja-box-cover.jpg" alt="Site da Forja Box" width="1440" height="900" loading="lazy" /><span>Forja Box · site</span></a>
+              <a class="mural__item" href="./demos/crm/index.html" target="_blank" rel="noopener"><img src="./images/solutions/automacoes.jpg" alt="Automações do Dalas CRM" width="1600" height="1000" loading="lazy" /><span>Dalas CRM · automações</span></a>
+            </div>
+            <div class="mural__col" data-speed="0.6">
+              <a class="mural__item" href="./demos/vertice-arquitetura/index.html" target="_blank" rel="noopener"><img src="./images/work/vertice-arquitetura-cover.jpg" alt="Site da Vértice Arquitetura" width="1440" height="900" loading="lazy" /><span>Vértice Arquitetura · site</span></a>
+              <a class="mural__item" href="./demos/crm/index.html" target="_blank" rel="noopener"><img src="./images/solutions/trafego.jpg" alt="Campanhas no Dalas CRM" width="1600" height="1000" loading="lazy" /><span>Dalas CRM · campanhas</span></a>
+              <a class="mural__item" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener"><img src="./images/work/crm-cover.jpg" alt="Dalas CRM" width="1440" height="900" loading="lazy" /><span>Dalas CRM · conversas</span></a>
             </div>
           </div>
-          <article class="card card--gold" data-rise>
-            <header class="card__head"><span class="card__tag"><i></i>Site + anúncios</span><span class="card__num">01</span></header>
-            <div class="card__stage">
-              <p class="stage-chip" id="ad-chip"><svg><use href="#i-ig" /></svg><span>No Instagram, o cliente vê o seu anúncio</span></p>
-              <div class="phone phone--sm" id="ad-phone">
-                <div class="phone__notch"></div>
-                <div class="phone__screen">
-                  <!-- anúncio -->
-                  <div class="scr scr--ig is-on" data-scr="ig">
-                    <div class="ig__top"><i>Instagram</i><span><svg><use href="#i-heart" /></svg><svg><use href="#i-send" /></svg></span></div>
-                    <div class="ig__user"><b class="ig__av" data-brand-av>ÁO</b><p><b data-brand-name>Áurea Odonto</b><small>Patrocinado</small></p><svg><use href="#i-dots" /></svg></div>
-                    <div class="ig__creative" data-brand-creative>
-                      <span class="ig__badge" data-brand-badge>Agenda aberta</span>
-                      <b data-brand-title>Seu sorriso,<br />planejado.</b>
-                      <small data-brand-sub>Implantes, lentes e ortodontia invisível.</small>
-                      <i class="ig__art" data-brand-art></i>
-                    </div>
-                    <div class="ig__cta"><svg><use href="#i-wa" /></svg><span data-brand-cta>Saiba mais</span><svg class="ig__chev"><use href="#i-r" /></svg></div>
-                    <div class="ig__bar"><span><svg><use href="#i-heart" /></svg><svg><use href="#i-chat" /></svg><svg><use href="#i-send" /></svg></span><svg><use href="#i-bookmark" /></svg></div>
-                    <svg class="tap" id="ad-tap"><use href="#i-tap" /></svg>
-                  </div>
-                  <!-- site -->
-                  <div class="scr scr--site" data-scr="site">
-                    <img data-brand-site src="./images/phone/aurea.jpg" alt="" width="520" height="3600" loading="lazy" />
-                    <span class="site__wa"><svg><use href="#i-wa" /></svg></span>
-                  </div>
-                  <!-- abrindo o WhatsApp -->
-                  <div class="scr scr--splash" data-scr="splash"><span><svg><use href="#i-wa" /></svg></span></div>
-                  <!-- conversa -->
-                  <div class="scr scr--chat" data-scr="chat">
-                    <div class="wa__top"><svg><use href="#i-l" /></svg><b class="ig__av" data-brand-av>ÁO</b><p><b data-brand-name>Áurea Odonto</b><small id="wa-status">online</small></p></div>
-                    <div class="wa__body">
-                      <span class="wa__day">Hoje</span>
-                      <div class="wa__msg wa__msg--me" id="wa-m1">
-                        <div class="wa__ref"><i data-brand-thumb></i><p><b>Anúncio de <span data-brand-name>Áurea Odonto</span></b><small>via Instagram</small></p></div>
-                        <span data-brand-ask>Olá! Vi o anúncio. Como funciona a avaliação?</span><em>09:41 ✓✓</em>
-                      </div>
-                      <div class="wa__typing" id="wa-typing"><i></i><i></i><i></i></div>
-                      <div class="wa__msg" id="wa-m2"><span data-brand-reply>Oi! A avaliação é sem custo. Temos amanhã às 9h ou às 14h30, qual fica melhor?</span><em>09:41</em></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p class="fine">Exemplos ilustrativos, com marcas e dados fictícios.</p>
-            <h3 class="h3">Anúncios que levam ao lugar certo</h3>
-            <p class="card__p">Primeiro a mensagem: por que escolher você. Depois, o site ou a landing page e os anúncios no Instagram e no Google que levam o cliente até o seu WhatsApp.</p>
-            <ul class="checks">
-              <li><svg><use href="#i-check" /></svg>Mensagem definida com você antes do primeiro anúncio</li>
-              <li><svg><use href="#i-check" /></svg>Site ou landing page feita para virar conversa</li>
-              <li><svg><use href="#i-check" /></svg>Criativos todo mês e gestão diária das campanhas</li>
-              <li><svg><use href="#i-check" /></svg>Relatório de conversas e custo por cliente</li>
-            </ul>
-            <div class="card__actions">
-              <a class="btn btn--gold" href="#metodo">Ver como funciona<span class="btn__dot btn__dot--ink"><svg><use href="#i-r" /></svg></span></a>
-              <a class="link" href="#diagnostico" data-diag>ou faça o diagnóstico grátis</a>
-            </div>
-          </article>
+          <div class="mural__fade" aria-hidden="true"></div>
+        </div>
+        <div class="wrap mural__links" data-rise>
+          <a class="pill" href="./demos/aurea-odonto/index.html" target="_blank" rel="noopener">Áurea Odonto<svg><use href="#i-ur" /></svg></a>
+          <a class="pill" href="./demos/forja-box/index.html" target="_blank" rel="noopener">Forja Box<svg><use href="#i-ur" /></svg></a>
+          <a class="pill" href="./demos/vertice-arquitetura/index.html" target="_blank" rel="noopener">Vértice Arquitetura<svg><use href="#i-ur" /></svg></a>
+          <a class="pill" href="./demos/nordica-cafe/index.html" target="_blank" rel="noopener">Nórdica Café<svg><use href="#i-ur" /></svg></a>
+          <a class="pill pill--green" href="./demos/crm/index.html" target="_blank" rel="noopener">Dalas CRM<svg><use href="#i-ur" /></svg></a>
         </div>
       </section>
 
-      <!-- ================= ONDE A VENDA SE PERDE ================= -->
-      <section class="section problem" id="problema">
-        <div class="wrap">
-          <p class="eyebrow" data-rise>Onde a venda se perde</p>
-          <p class="problem__big" data-scrub-words>
-            A venda <b>não termina no clique.</b> Quem chama às 22h e só recebe resposta às 9h <b>já fechou com outro.</b>
-          </p>
-        </div>
-        <div class="lost" id="lost">
-          <div class="lost__pin">
-            <div class="wrap lost__in">
-              <h3 class="h2 h2--md" data-split>O cliente que <b>esfriou</b></h3>
-              <div class="lost__track" id="lost-track">
-                <div class="lost__line"><i class="lost__dash"></i><i class="lost__fill" id="lost-fill"></i></div>
-                <span class="lost__dot" style="--p: 0"></span>
-                <span class="lost__dot" style="--p: 0.42"></span>
-                <span class="lost__dot" style="--p: 0.9"></span>
-                <div class="bub bub--a" id="lost-1"><small>cliente · 22:07</small><p>Oi! Quanto fica a avaliação?</p></div>
-                <div class="lost__wait" id="lost-wait"><span class="lost__none"><svg><use href="#i-clock" /></svg>Ninguém respondeu.</span><small class="mono" id="lost-time">22:07 → 22:07</small><b id="lost-hours">0 min sem resposta</b></div>
-                <div class="bub bub--b" id="lost-2"><small>empresa · 09:14</small><p>Bom dia! A avaliação é sem custo. Quer agendar?</p></div>
-                <div class="bub bub--c" id="lost-3"><small>cliente · 09:31</small><p>Ah, já marquei em outro lugar. Obrigado!</p></div>
-              </div>
-              <p class="fine lost__cap">Uma história que se repete todo dia em muitas empresas.</p>
-            </div>
-          </div>
-        </div>
-        <div class="wrap problem__ask" data-rise>
-          <p>Isso acontece na sua empresa?</p>
-          <a class="btn btn--paper" href="#diagnostico" data-diag>Diagnóstico grátis<span class="btn__dot"><svg><use href="#i-ur" /></svg></span></a>
-        </div>
-      </section>
-
-      <!-- ================= O RELÓGIO ================= -->
-      <section class="watch" id="tempo">
-        <div class="watch__pin">
-          <div class="watch__ghost" aria-hidden="true"><span data-ghost="0">Tempo</span><span data-ghost="1">Segundos</span><span data-ghost="2">Minutos</span><span data-ghost="3">Dalas</span></div>
-          <div class="wrap watch__in">
-            <div class="watch__steps">
-              <div class="watch__rail" aria-hidden="true"><i class="watch__rail-fill" id="watch-rail"></i><b></b><b></b><b></b><b></b></div>
-              <div class="wstep is-on" data-wstep="0">
-                <h2 class="wstep__title wstep__title--md">Todo cliente decide no tempo dele.</h2>
-              </div>
-              <div class="wstep" data-wstep="1">
-                <h2 class="wstep__title">Segundos.</h2>
-                <p>É o tempo que o seu site tem para abrir e convencer antes de ele voltar e tocar no próximo.</p>
-              </div>
-              <div class="wstep" data-wstep="2">
-                <h2 class="wstep__title">Minutos.</h2>
-                <p>É o tempo que ele espera uma resposta antes de chamar o concorrente.</p>
-              </div>
-              <div class="wstep" data-wstep="3">
-                <h2 class="wstep__title wstep__title--md">A Dalas trabalha nesses segundos e minutos.</h2>
-                <p>Site rápido, anúncio certo e CRM respondendo na hora. Quando ele decidir, a escolha é você.</p>
-              </div>
-            </div>
-            <div class="watch__obj" aria-hidden="true">
-              <div class="watch__halo" id="watch-halo"></div>
-              <svg class="watch__svg" id="watch-svg" viewBox="0 0 400 560">
+      <!-- ================= FUNIL: DO CLIQUE À VENDA ================= -->
+      <section class="section funnel" id="funil">
+        <div class="wrap funnel__grid">
+          <div class="funnel__side">
+            <div class="funnel__sticky">
+              <p class="eyebrow eyebrow--dot">Criação de funil</p>
+              <h2 class="h2 h2--xl" data-split>Do clique <b>à venda.</b></h2>
+              <svg class="funnel__svg" id="funnel-svg" viewBox="0 0 400 540" aria-hidden="true">
                 <defs>
-                  <linearGradient id="wg-metal" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#f4f4f7" />
-                    <stop offset="0.35" stop-color="#9c9ca6" />
-                    <stop offset="0.55" stop-color="#e6e6ec" />
-                    <stop offset="0.8" stop-color="#6d6d76" />
-                    <stop offset="1" stop-color="#cfcfd6" />
-                  </linearGradient>
-                  <linearGradient id="wg-metal2" x1="1" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#dcdce2" />
-                    <stop offset="0.5" stop-color="#55555e" />
-                    <stop offset="1" stop-color="#b9b9c2" />
-                  </linearGradient>
-                  <radialGradient id="wg-dial" cx="0.5" cy="0.42" r="0.62">
-                    <stop offset="0" stop-color="#25252b" />
-                    <stop offset="0.7" stop-color="#121216" />
-                    <stop offset="1" stop-color="#08080a" />
-                  </radialGradient>
-                  <radialGradient id="wg-glass" cx="0.35" cy="0.25" r="0.7">
-                    <stop offset="0" stop-color="#fff" stop-opacity="0.16" />
-                    <stop offset="0.5" stop-color="#fff" stop-opacity="0.02" />
-                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
-                  </radialGradient>
+                  <linearGradient id="fg-gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1dca6" /><stop offset="1" stop-color="#b58c40" /></linearGradient>
+                  <linearGradient id="fg-green" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8ee6a8" /><stop offset="1" stop-color="#2f9a58" /></linearGradient>
                 </defs>
-                <g class="watch__swing" id="watch-swing">
-                  <!-- corrente -->
-                  <g id="watch-chain" fill="none" stroke="url(#wg-metal)" stroke-width="3"></g>
-                  <!-- argola e coroa -->
-                  <circle cx="200" cy="168" r="20" fill="none" stroke="url(#wg-metal)" stroke-width="7" />
-                  <rect x="187" y="186" width="26" height="22" rx="4" fill="url(#wg-metal2)" />
-                  <path d="M190 190v14M195 190v14M200 190v14M205 190v14M210 190v14" stroke="#3a3a42" stroke-width="1.2" />
-                  <rect x="193" y="206" width="14" height="10" rx="2" fill="url(#wg-metal)" />
-                  <!-- caixa -->
-                  <circle cx="200" cy="370" r="156" fill="url(#wg-metal)" />
-                  <circle cx="200" cy="370" r="146" fill="#1a1a1f" />
-                  <circle cx="200" cy="370" r="143" fill="none" stroke="url(#wg-metal2)" stroke-width="5" />
-                  <circle cx="200" cy="370" r="136" fill="url(#wg-dial)" />
-                  <!-- marcações -->
-                  <g id="watch-ticks" stroke="#d9d9e0"></g>
-                  <g id="watch-nums" fill="#e9e9ee" font-family="Georgia, 'Times New Roman', serif" font-size="17" text-anchor="middle" dominant-baseline="central"></g>
-                  <text x="200" y="300" fill="#9a9aa4" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" letter-spacing="4" text-anchor="middle">DALAS</text>
-                  <!-- engrenagens e subdial -->
-                  <g class="watch__gears" opacity="0.55" fill="none" stroke="#6b6b75" stroke-width="1.2">
-                    <circle cx="200" cy="370" r="44" stroke-dasharray="3 3" />
-                    <circle cx="183" cy="356" r="16" stroke-dasharray="2 2.4" />
-                    <circle cx="219" cy="388" r="12" stroke-dasharray="2 2.4" />
-                  </g>
-                  <circle cx="200" cy="432" r="24" fill="#0c0c0f" stroke="#55555e" stroke-width="1.2" />
-                  <g id="watch-subticks" stroke="#8a8a94"></g>
-                  <line id="watch-sub" x1="200" y1="432" x2="200" y2="414" stroke="#e8e8ee" stroke-width="1.4" stroke-linecap="round" />
-                  <!-- ponteiros -->
-                  <g id="watch-hour"><path d="M196.5 370 L198 300 Q200 292 202 300 L203.5 370 Z" fill="#f2f2f5" /><circle cx="200" cy="314" r="5" fill="none" stroke="#f2f2f5" stroke-width="2" /></g>
-                  <g id="watch-min"><path d="M197.5 370 L199 262 Q200 254 201 262 L202.5 370 Z" fill="#f2f2f5" /></g>
-                  <g id="watch-sec"><line x1="200" y1="392" x2="200" y2="250" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" /><circle cx="200" cy="384" r="3" fill="#fff" /></g>
-                  <circle cx="200" cy="370" r="7" fill="url(#wg-metal)" />
-                  <circle cx="200" cy="370" r="2.4" fill="#1a1a1f" />
-                  <!-- vidro -->
-                  <circle cx="200" cy="370" r="136" fill="url(#wg-glass)" />
-                </g>
+                <g class="funnel__bands" id="funnel-bands"></g>
+                <g class="funnel__flow" id="funnel-flow"></g>
+                <g class="funnel__labels" id="funnel-labels"></g>
               </svg>
             </div>
           </div>
+          <ol class="fsteps" id="fsteps">
+            <li class="fstep"><span class="fstep__n">01</span><div><h3>Anúncio</h3><p>O cliente certo vê o seu anúncio no Instagram ou no Google, com uma mensagem que diz por que você.</p></div></li>
+            <li class="fstep"><span class="fstep__n">02</span><div><h3>Site ou landing page</h3><p>Ele abre uma página que carrega rápido, confirma o que viu e mostra um próximo passo só.</p></div></li>
+            <li class="fstep"><span class="fstep__n">03</span><div><h3>WhatsApp</h3><p>Chama você com um clique. A conversa já começa com a origem do anúncio gravada.</p></div></li>
+            <li class="fstep"><span class="fstep__n">04</span><div><h3>CRM e automação</h3><p>O cliente entra no Dalas CRM e a automação responde na hora, mesmo às 22h. Se parar de responder, o follow-up lembra.</p></div></li>
+            <li class="fstep fstep--end"><span class="fstep__n">05</span><div><h3>Venda</h3><p>Você fecha. O painel mostra de onde veio a venda e quanto custou cada cliente, para investir no que funciona.</p></div></li>
+          </ol>
         </div>
       </section>
 
-      <!-- ================= 02 CRM + AUTOMAÇÕES ================= -->
-      <section class="section offer offer--rev" id="crm">
-        <div class="wrap offer__grid">
-          <article class="card card--green" data-rise>
-            <header class="card__head"><span class="card__tag"><i></i>CRM + automações · Dalas CRM</span><span class="card__num">02</span></header>
-            <div class="card__stage card__stage--win">
-              <div class="win">
-                <div class="win__bar"><span></span><span></span><span></span><em>crm.dalas · pipeline</em></div>
-                <div class="kb" id="kanban">
-                  <div class="kb__col"><p><i></i>Novo</p><div class="kb__card kb__card--ghost"><b>MR</b><span>Marina Rocha<small>Meta Ads</small></span></div><div class="kb__card kb__card--ghost"><b>JC</b><span>João Castro<small>Google Ads</small></span></div></div>
-                  <div class="kb__col"><p><i></i>Em conversa</p><div class="kb__card kb__card--ghost"><b>PH</b><span>Paulo Henrique<small>Site</small></span></div></div>
-                  <div class="kb__col kb__col--win"><p><i></i>Venda</p><span class="kb__ok" id="kb-ok"><svg><use href="#i-check" /></svg></span></div>
-                  <div class="kb__card kb__card--live" id="kb-live"><b>CL</b><span>Camila Lopes<small id="kb-live-src">Instagram · agora</small></span></div>
-                </div>
-                <p class="stage-chip stage-chip--b" id="kb-chip"><svg><use href="#i-ig" /></svg><span>Mensagem nova pelo Instagram</span></p>
-              </div>
-            </div>
-            <h3 class="h3">Tudo num lugar só</h3>
-            <p class="card__p">O Dalas CRM organiza cada conversa por etapa e as automações respondem na hora, mesmo quando você está ocupado. Você entra quando tiver tempo, com o cliente já aquecido.</p>
-            <ul class="checks">
-              <li><svg><use href="#i-check" /></svg>Cada cliente por etapa, do primeiro oi à venda</li>
-              <li><svg><use href="#i-check" /></svg>Resposta automática em segundos, de dia ou de noite</li>
-              <li><svg><use href="#i-check" /></svg>Retorno automático para quem parou de responder</li>
-              <li><svg><use href="#i-check" /></svg>Painel com a origem de cada venda: anúncio, site ou indicação</li>
-            </ul>
-            <div class="card__actions">
-              <a class="btn btn--green" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver o CRM ao vivo<span class="btn__dot btn__dot--ink"><svg><use href="#i-ur" /></svg></span></a>
-              <a class="link" href="#diagnostico" data-diag>ou faça o diagnóstico grátis</a>
-            </div>
-          </article>
-          <div class="offer__title">
-            <div class="offer__sticky">
-              <h2 class="h2 h2--xl" data-split>Nenhum cliente <b>sem resposta.</b></h2>
-              <p class="p-lead" data-rise>Você pode estar numa reunião ou dormindo: o CRM responde, organiza e deixa o cliente pronto para você.</p>
-            </div>
+      <!-- ================= CRM, AUTOMAÇÕES E PAINÉIS: TELAS EM 3D ================= -->
+      <section class="section crm" id="crm">
+        <div class="wrap crm__head">
+          <p class="eyebrow eyebrow--dot">CRM · Automações · Painéis</p>
+          <h2 class="h2 h2--xl" data-split>Nenhum cliente <b>sem resposta.</b></h2>
+          <p class="p-lead" data-rise>O Dalas CRM organiza cada conversa por etapa, as automações respondem na hora e o painel mostra o que traz venda. Você pode estar numa reunião ou dormindo: o cliente já está sendo atendido.</p>
+        </div>
+        <div class="stack" id="stack">
+          <figure class="stack__card"><img src="./images/solutions/sistemas.jpg" alt="Pipeline de vendas do Dalas CRM" width="1600" height="1000" loading="lazy" /><figcaption><small>Pipeline</small>Cada cliente por etapa, com a conversa ao lado</figcaption></figure>
+          <figure class="stack__card"><img src="./images/solutions/automacoes.jpg" alt="Automações do Dalas CRM" width="1600" height="1000" loading="lazy" /><figcaption><small>Automações</small>Resposta em segundos e follow-up sozinho</figcaption></figure>
+          <figure class="stack__card"><img src="./images/solutions/paineis.jpg" alt="Relatórios do Dalas CRM" width="1600" height="1000" loading="lazy" /><figcaption><small>Painéis</small>Origem de cada venda e custo por cliente</figcaption></figure>
+        </div>
+        <div class="wrap crm__foot" data-rise>
+          <ul class="checks checks--row">
+            <li><svg><use href="#i-check" /></svg>Resposta automática de dia ou de noite</li>
+            <li><svg><use href="#i-check" /></svg>Retorno para quem parou de responder</li>
+            <li><svg><use href="#i-check" /></svg>Origem gravada: anúncio, site ou indicação</li>
+            <li><svg><use href="#i-check" /></svg>Sistema e CRM no nome da sua empresa</li>
+          </ul>
+          <div class="crm__actions">
+            <a class="btn btn--green" href="./demos/crm/index.html" target="_blank" rel="noopener">Ver o CRM ao vivo<span class="btn__dot btn__dot--ink"><svg><use href="#i-ur" /></svg></span></a>
+            <a class="link" href="#diagnostico" data-diag>ou faça o diagnóstico grátis</a>
           </div>
         </div>
       </section>
 
-      <!-- ================= A TEMPESTADE ================= -->
-      <section class="storm" id="tempestade">
-        <canvas class="storm__rain" id="storm-rain" aria-hidden="true"></canvas>
-        <canvas class="storm__bolts" id="storm-bolts" aria-hidden="true"></canvas>
-        <div class="storm__flash" id="storm-flash" aria-hidden="true"></div>
-        <div class="storm__media" aria-hidden="true">
-          <video class="storm__video" id="storm-video" muted playsinline preload="none" poster="./media/wolf-poster.jpg"></video>
+      <!-- ================= AUDIOVISUAL E DESIGN: O FILME ================= -->
+      <section class="section reel" id="audiovisual">
+        <div class="wrap reel__head">
+          <p class="eyebrow eyebrow--dot">Audiovisual · Design</p>
+          <h2 class="h2 h2--lg" data-split>Quem cuida da imagem <b>cuida da venda.</b></h2>
         </div>
-        <div class="wrap storm__text">
-          <h2 class="h2 h2--xl" data-split>Quando a tempestade vem, <b>o lobo avança.</b></h2>
-          <div class="storm__p" data-rise>
-            <p>Quando o tempo fecha, muita gente recua e espera passar. O lobo não: ele usa a tempestade para chegar onde os outros não vão.</p>
-            <p>Mercado mudando, concorrência baixando preço, anúncio ficando mais caro. Para quem tem estratégia e estrutura, <b>a tempestade vira vantagem.</b></p>
+        <div class="reel__film" id="reel">
+          <div class="reel__holes" aria-hidden="true"></div>
+          <div class="reel__strip" id="reel-strip" aria-hidden="true"></div>
+          <div class="reel__holes reel__holes--b" aria-hidden="true"></div>
+          <div class="reel__leak" aria-hidden="true"></div>
+          <p class="reel__rec" aria-hidden="true"><i></i>REC · 4K · 24 fps</p>
+          <button class="reel__play" id="reel-play" type="button"><svg><use href="#i-play" /></svg>Ver em movimento</button>
+          <video class="reel__video" id="reel-video" muted playsinline loop preload="none" poster="./media/wolf-poster.jpg"></video>
+        </div>
+        <div class="wrap reel__cols">
+          <div class="reel__col" data-rise>
+            <h3><svg><use href="#i-film" /></svg>Audiovisual</h3>
+            <p>Roteiro, captação, edição e motion. Vídeos para anúncios, redes e apresentações, feitos para parar o dedo nos primeiros segundos.</p>
+            <ul class="tags"><li>Criativos para anúncio</li><li>Reels e Shorts</li><li>Institucional</li><li>Motion graphics</li></ul>
+          </div>
+          <div class="reel__col" data-rise>
+            <h3><svg><use href="#i-pen" /></svg>Design</h3>
+            <p>Identidade visual, peças para redes, apresentações e interfaces. Tudo no mesmo padrão, para a sua marca parecer o que ela entrega.</p>
+            <ul class="tags"><li>Identidade visual</li><li>Social media</li><li>Apresentações</li><li>UI de sites e sistemas</li></ul>
           </div>
         </div>
       </section>

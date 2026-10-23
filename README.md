@@ -16,18 +16,17 @@ npm run preview  # testa a build
 ## Seções
 
 1. **Abertura**: a asa da marca, DALAS letra por letra e um risco de luz (uma vez por visita).
-2. **Hero** "Do clique à venda.": constelação de pontos e uma órbita de luz que percorre a jornada do cliente (anúncio, site, WhatsApp, CRM, venda), acendendo cada etapa.
-3. **Faixa** com os canais e serviços.
-4. **Site comum x Site Dalas**: os três pontos acendem com o scroll e o celular troca de um site genérico para um site de verdade que rola sozinho.
-5. **01 Site + anúncios**: o celular mostra o anúncio no Instagram, o site e a conversa no WhatsApp, em loop, com duas marcas de exemplo.
-6. **Onde a venda se perde**: parágrafo que acende palavra por palavra e a história do cliente que esfriou, contada pelo scroll (22:07 até 09:14).
-7. **O relógio de bolso**: preso na tela em quatro momentos (tempo, segundos, minutos, Dalas); os ponteiros disparam e no fim se alinham no 12.
-8. **02 CRM + automações**: um cliente atravessa o funil do Dalas CRM (novo, em conversa, venda).
-9. **A tempestade**: o lobo correndo na chuva, com raios ao fundo.
-10. **Como a Dalas trabalha**: linha do tempo central que se preenche com o scroll.
-11. **Quem cuida da sua conta**: Ryan Dalatea (CEO da Dalas Marketing) e Gustavo Licks (Kairos Growth).
-12. **Dúvidas** e **chamada final** com fumaça sedosa em WebGL e mostradores girando.
-13. **Rodapé** com DALAS gigante, demonstrações e contato.
+2. **Hero com o lobo no scroll**: o vídeo do lobo vira uma sequência de quadros e o scroll é quem avança o filme. Enquanto ele corre passam "Design", "Tecnologia" e "Tráfego"; quando ele para e encara, "Do clique à venda". A palavra do título troca sozinha (sites, funis, CRMs, automações, sistemas, painéis, vídeos, marcas).
+3. **Faixa** com as oito frentes.
+4. **Serviços em rolagem horizontal**: a seção fica presa e o scroll empurra oito cartões para o lado, cada um com uma ilustração animada (site, funil, CRM, automações, sistemas, painéis, audiovisual, design). No celular desliza com o dedo.
+5. **Mural de projetos**: três colunas inclinadas com telas dos sites e do CRM, cada uma rolando numa velocidade. Tudo abre em nova aba.
+6. **Funil "Do clique à venda"**: um funil que se enche faixa por faixa conforme as cinco etapas passam, com uma gota de luz descendo com o scroll.
+7. **CRM, automações e painéis**: três telas reais do Dalas CRM empilhadas em perspectiva que se abrem lado a lado.
+8. **Audiovisual e design**: uma tira de filme com quadros do lobo que desliza com o scroll; o botão toca o vídeo de verdade.
+9. **Como a Dalas trabalha**: linha do tempo central que se preenche com o scroll.
+10. **Quem cuida da sua conta**: Ryan Dalatea (CEO da Dalas Marketing) e Gustavo Licks (Kairos Growth).
+11. **Dúvidas** e **chamada final** com fumaça sedosa em WebGL e mostradores girando (guardada em `secoes-salvas/`).
+12. **Rodapé** com DALAS gigante, demonstrações e contato.
 
 Extras: questionário "Diagnóstico grátis" (7 passos, termina com a mensagem pronta no WhatsApp), botão do WhatsApp que pode ser arrastado, cronômetro de voltar ao topo cujo ponteiro marca o quanto da página foi lido, grão de filme.
 
@@ -38,21 +37,22 @@ Extras: questionário "Diagnóstico grátis" (7 passos, termina com a mensagem p
 | WhatsApp, e-mail, Instagram, vídeo do lobo | `src/config.js` |
 | Textos de todas as seções | `index.html` |
 | Perguntas do diagnóstico | `src/modules/diag.js` (`STEPS`) |
-| Marcas e mensagens do celular do card 01 | `src/modules/ad-phone.js` (`BRANDS`) |
-| Clientes do kanban do card 02 | `src/modules/kanban.js` (`LEADS`) |
+| Quadros do lobo para o scroll | `public/images/seq/d/` (desktop, 70 quadros) e `public/images/seq/m/` (celular, 60); gerados do vídeo com ffmpeg |
+| Etapas do funil | `index.html` (lista `#fsteps`) e `src/modules/funnel.js` (`NAMES`) |
 | Cores, tipografia, espaçamentos | `src/styles/main.css` (bloco `:root`) |
 | Logo (asa) | `public/images/brand/` |
 | Fotos da equipe | `public/images/team/ryan.jpg` e `gustavo.jpg` (quadradas; sem a foto, aparecem as iniciais) |
-| Telas dos celulares | `public/images/phone/` |
+| Telas dos projetos e do CRM | `public/images/work/` e `public/images/solutions/` |
 | Sites de demonstração e CRM | `public/demos/<nome>/index.html` |
 | Favicon e imagem de compartilhamento | `public/favicon.png`, `public/og.jpg` |
 
 ## Performance
 
-Scroll nativo, canvases em resolução baixa e a 30 quadros por segundo no celular, tudo pausado fora da tela, vídeo carregado só quando a seção se aproxima, `prefers-reduced-motion` respeitado.
+Scroll nativo. Os quadros do lobo baixam em ordem, quatro por vez, com o pôster cobrindo a espera. Ilustrações dos serviços pausam fora da tela, a fumaça final roda em resolução baixa a 30 quadros por segundo, o vídeo do filme só baixa no clique. `prefers-reduced-motion` respeitado.
 
 ## Versões guardadas
 
+- `versao-kairos`: a primeira versão no estilo Kairos (site comum x site Dalas, relógio de bolso, cliente que esfriou, tempestade).
 - `versao-lobo`: o site anterior, com o lobo na abertura, CRM e sites de exemplo.
 - `versao-anterior`: a versão antes dessa.
 
